@@ -1,6 +1,8 @@
 ## Hort Farm Ecosystem Resilience Project ###
 # Code originally written by TJ Butts January 2022
 
+# Grace has entered the chat
+# This is a github connection test
 #============================================#
 # STEP 0: Clean Data 
 #============================================#
@@ -51,26 +53,26 @@ field_dat_clean = field_join2 %>%
          tn_flag = tn_detectlim, 
          nox_flag = nox_detectlim,
          nhx_flag = nhx_detectlim) %>% 
-  mutate(tp_flag = gsub('A', 'a', tp_flag), 
+  mutate(tp_flag = gsub('A', NA, tp_flag), 
          tp_flag = gsub('Z', 'b', tp_flag), 
-         srp_flag = gsub('A', 'a', srp_flag), 
+         srp_flag = gsub('A', NA, srp_flag), 
          srp_flag = gsub('Z', 'b', srp_flag),
-         tn_flag = gsub('A', 'a', tn_flag), 
+         tn_flag = gsub('A', NA, tn_flag), 
          tn_flag = gsub('Z', 'b', tn_flag),
-         nox_flag = gsub('A', 'a', nox_flag), 
+         nox_flag = gsub('A', NA, nox_flag), 
          nox_flag = gsub('Z', 'b', nox_flag),
-         nhx_flag = gsub('A', 'a', nhx_flag), 
+         nhx_flag = gsub('A', NA, nhx_flag), 
          nhx_flag = gsub('Z', 'b', nhx_flag))
 field_dat_clean
 
 is.nan.data.frame <- function(x) # function to turn NaN into 0
 do.call(cbind, lapply(x, is.nan)) # call to function 
-field_dat_clean[is.nan(field_dat_clean)] <- 0 # turn NaN into 0 
+field_dat_clean[is.nan(field_dat_clean)] <- 0.1 # turn NaN into 0 
 field_dat_clean
 
 # Make dataset # 
-setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
-# write_csv(field_dat_clean, 'hort20_surface_dat.csv')
+setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
+write_csv(field_dat_clean, 'hort20_surface_dat.csv')
 
 ## Metabolism data ## 
 setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment")
