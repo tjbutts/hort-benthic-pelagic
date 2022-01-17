@@ -1,0 +1,213 @@
+pond,doy,fish_id,length,weight,whirlpak,diet_id,abundance
+F,253,yep,187,94,13,cyclopoida,2
+F,253,yep,187,94,13,longleaf_pweed,1
+D,247,blg,175,140,43,diaphanosoma,1
+D,247,blg,175,140,43,invert head,1
+D,247,blg,156,92,45,copepod,2
+D,247,blg,156,92,45,nauplii,1
+D,247,blg,156,92,45,asplanchna,1
+D,247,blg,156,92,45,mosquito/phantom midge,2
+D,247,yep,212,102,42,mite,1
+D,247,yep,212,102,42,benthos,2
+D,247,yep,212,102,42,juv fish,2
+C,246,blg,171,128,25,physidae,6
+C,246,blg,171,128,25,cladoceran,2
+C,246,blg,171,128,25,ephemenoptera,2
+A,244,blg,160,84,3,copepod,1
+A,244,blg,160,84,3,plant chunks,7
+A,244,blg,160,84,3,chironomid,2
+A,244,blg,160,84,3,L. Frog egg tube tract,2
+D,247,lmb,368,980,41,mess of digested material,1
+D,247,lmb,368,980,41,lots of spirogyra,1
+D,247,lmb,368,980,41,chironomid,6
+A,244,yep,195,na,8,juv fish,2
+A,244,yep,195,na,8,benthos,3
+B,246,blg,175,128,19,plant material,1
+B,246,blg,175,128,19,frog eggs + tracts,1
+B,246,blg,175,128,19,pomph,2
+B,246,blg,175,128,19,Cladoceran,1
+B,246,blg,175,128,19,Keratella,1
+B,246,blg,175,128,19,Ostracods,2
+B,246,blg,175,128,19,benthos,1
+F,253,yep,180,78,15,plant material,1
+F,253,yep,180,78,15,benthos,1
+C,245,blg,165,106,20,cyclopoidalopoida,1
+C,245,blg,165,106,20,physidae,6
+C,245,blg,165,106,20,plant material,3
+E,252,yep,187,84,68,plant material,1
+E,252,yep,187,84,68,chironomid,1
+E,252,yep,187,84,68,oligochaete,1
+E,252,yep,187,84,68,benthos,1
+F,253,blg,179,136,47,phantom midge,28
+F,253,blg,179,136,47,plant material,2
+F,253,blg,179,136,47,cladoceran,3
+F,253,blg,179,136,47,copepod,1
+F,253,blg,179,136,47,rotifer,1
+E,252,yep,187,90,60,chironomid,1
+E,252,blg,186,182,63,physidae,1
+E,252,blg,186,182,63,plant material,1
+E,252,blg,186,182,63,frog eggs + tracts,1
+D,267,blg,175,128,53,physidae,1
+D,267,blg,175,128,53,plant material,3
+D,247,blg,162,103,42,plant material,2
+D,247,blg,162,103,42,chironomid,2
+B,246,blg,161,94,30,chironomid,26
+B,246,blg,161,94,30,benthos,2
+B,246,blg,161,94,30,plant material,2
+B,246,blg,161,94,30,rotifer,4
+B,246,blg,161,94,30,ostracods,1
+B,246,blg,161,94,30,cladoceran,1
+B,246,blg,161,94,30,unknown,1
+C,246,blg,166,88,26,physidae,1
+C,246,blg,166,88,26,chironomid,2
+C,246,blg,166,88,26,benthos,2
+C,246,blg,166,88,26,plant material,1
+C,246,blg,166,88,26,mite,1
+A,244,blg,155,88,4,chironomid,26
+A,244,blg,155,88,4,benthos,2
+A,244,blg,155,88,4,plant material,1
+A,244,blg,155,88,4,frog eggs + tracts,1
+A,244,blg,155,88,4,mosquito larvae,1
+A,244,blg,175,na,6,plant material,1
+A,244,blg,175,na,6,frog eggs + tracts,1
+A,244,blg,175,na,6,naucoridae,2
+E,252,yep,195,94,64,benthos,2
+E,252,yep,195,94,64,oligochaete,3
+F,253,blg,189,174,14,plant material,4
+F,253,blg,189,174,14,cladoceran,1
+F,253,blg,189,174,14,rotifer,1
+F,253,blg,189,174,14,chydorus,1
+C,246,lmb,380,872,23,benthos,1
+C,246,lmb,380,872,23,oligochaete,1
+C,245,yep,185,78,22,oligochaete,11
+C,245,yep,185,78,22,chironomid,1
+B,246,yep,185,106,17,juv fish,2
+B,246,yep,185,106,17,gammaridae,1
+B,246,yep,185,106,17,chironomid,1
+A,244,lmb,375,864,1,juv fish,2
+A,244,lmb,375,864,1,benthos,8
+A,244,lmb,375,864,1,chironomid,1
+A,244,lmb,375,864,1,oligochaete,1
+C,246,yep,191,89,27,benthos,4
+C,246,yep,191,89,27,oligochaete,1
+A,244,lmb,375,798,2,benthos,1
+A,244,lmb,375,798,2,juv fish,1
+C,245,blg,171,118,21,plant material,3
+C,245,blg,171,118,21,chironomid,15
+C,245,blg,171,118,21,benthos,1
+C,245,blg,171,118,21,keratella,1
+C,245,blg,171,118,21,leptodora,1
+C,245,blg,171,118,21,nauplii,1
+B,246,blg,179,184,39,chironomid,32
+B,246,blg,179,184,39,chydorus,3
+B,246,blg,179,184,39,plant material,3
+D,247,blg,156,92,45,chydorus,1
+D,247,blg,156,92,45,physidae,1
+F,253,yep,208,118,51,chironomid,1
+F,253,yep,208,118,51,phantom midge,1
+D,247,yep,231,158,46,planorbidae,2
+D,247,yep,231,158,46,benthos,1
+D,247,yep,231,158,46,chironomid,2
+D,247,yep,231,158,46,benthos,3
+D,247,blg,171,128,44,plant material,1
+D,247,blg,171,128,44,chironomid,1
+D,247,blg,171,128,44,nauplii,1
+D,247,blg,171,128,44,chydorus,1
+D,247,blg,171,128,44,ostracods,1
+B,246,yep,196,106,18,chironomid,1
+B,246,yep,196,106,18,juv fish,1
+B,246,yep,196,106,18,oligochaete,4
+B,246,yep,196,106,18,benthos,1
+D,247,lmb,150,182,40,benthos,5
+A,244,yep,190,na,12,benthos,5
+A,244,yep,190,na,12,mite,1
+F,156,yep,250,96,1,ephemenoptera,1
+F,156,yep,250,96,1,odonata,1
+F,156,yep,250,96,1,benthos,7
+F,156,yep,250,96,1,planorbidae,3
+F,156,yep,250,96,1,corixidae,2
+E,252,blg,187,160,69,physidae,1
+E,252,blg,187,160,69,mite,1
+E,252,blg,187,160,69,chironomid,2
+B,246,blg,185,168,33,plant material,1
+B,246,blg,185,168,33,ostracods,1
+B,246,blg,185,168,33,planorbidae,1
+B,246,blg,185,168,33,physidae,3
+B,246,blg,185,168,33,caddisfly,3
+B,246,blg,185,168,33,asplanchna,1
+E,252,lmb,322,982,71,planorbidae,2
+E,252,lmb,322,982,71,plant material,1
+E,252,lmb,322,982,71,oligochaete,1
+E,252,lmb,322,982,71,frog eggs + tracts,1
+E,252,lmb,322,982,71,fish digestive tracts - likely juv fish or FHM,1
+E,252,lmb,322,982,71,benthos,1
+E,252,yep,206,110,65,juv fish,1
+E,252,yep,206,110,65,fathead,1
+E,252,yep,206,110,65,benthos,5
+E,252,yep,206,110,65,oligochaete,1
+E,252,blg,168,106,62,plant material,3
+E,252,blg,168,106,62,filamentous algae,1
+E,252,blg,168,106,62,benthos,3
+E,252,blg,168,106,62,pompholyx,1
+B,246,blg,175,117,35,frog eggs + tracts,2
+B,246,blg,175,117,35,planorbidae,4
+B,246,blg,175,117,35,benthos,1
+B,246,blg,175,117,35,rotifer,2
+B,246,blg,175,117,35,ostracods,1
+B,246,blg,175,117,35,brachionus,1
+F,253,blg,189,170,50,phantom midge,12
+F,253,blg,189,170,50,calanoid,1
+F,253,blg,189,170,50,plant material,2
+F,253,blg,189,170,50,asplanchna,1
+A,244,yep,175,na,9,plant material,1
+A,244,yep,175,na,9,corixidae,1
+A,244,yep,175,na,9,oligochaete,1
+E,252,blg,186,182,70,benthos,5
+E,252,blg,186,182,70,chironomid,2
+E,252,blg,186,182,70,corixidae,1
+E,252,blg,186,182,70,planorbidae,1
+E,252,blg,186,182,70,plant material,2
+E,252,blg,186,182,70,chydorus,1
+E,252,blg,186,182,70,ostracods,1
+F,156,yep,230,40,2,benthos,6
+F,156,yep,230,40,2,caddisfly,3
+F,156,yep,230,40,2,insect heads,1
+F,156,yep,230,40,2,oligochaete,2
+A,244,yep,192,na,11,juv fish spine,1
+A,244,yep,192,na,11,flying insect,1
+A,244,yep,176,na,10,juv fish,2
+A,244,yep,176,na,10,benthos,1
+A,244,yep,176,na,10,oligochaete,1
+E,252,yep,210,96,61,juv fish or fathead,3
+E,252,yep,210,96,61,planorbidae,2
+E,252,yep,210,96,61,plant material,1
+E,252,yep,210,96,61,benthos,1
+A,244,blg,170,na,7,frog eggs + tracts,3
+A,244,blg,170,na,7,chironomid,5
+A,244,blg,170,na,7,planorbidae,2
+A,244,blg,170,na,7,physidae,3
+F,253,blg,165,102,19,phantom midge,1
+A,244,blg,170,104,5,chironomid,4
+A,244,blg,170,104,5,frog eggs + tracts,3
+A,244,blg,170,104,5,plant material,1
+A,244,blg,170,104,5,rotifer,1
+E,252,blg,180,144,4,ephemenoptera,1
+E,252,blg,180,144,4,corixidae,1
+E,252,blg,180,144,4,worm,2
+E,252,blg,180,144,4,physidae,2
+E,252,blg,180,144,4,plant material,2
+E,252,blg,180,144,4,benthos,2
+E,252,blg,180,144,4,cladoceran,1
+B,246,yep,173,78,31,juv fish,8
+B,246,yep,173,78,31,oligochaete,4
+B,246,yep,173,78,31,plant material,3
+B,246,yep,173,78,31,hirudinea,1
+B,246,yep,173,78,31,nemotoda,1
+B,246,yep,196,106,32,plant material,1
+B,246,yep,194,92,16,spider,1
+B,246,yep,194,92,16,plant material,2
+B,246,yep,194,92,16,hirudinea,1
+F,253,blg,181,140,48,worm,1
+F,253,blg,181,140,48,plant material,1
+C,246,blg,172,146,24,physidae,6
+C,246,blg,172,146,24,chironomid,5

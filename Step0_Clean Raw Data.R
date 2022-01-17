@@ -18,32 +18,7 @@ library(lubridate)
 # Set working directory as needed to location of cleaned data # 
 
 
-############# Data sets ############## 
-## Fish Data ## 
-# Body Size 
-fish_lw = read_csv('fish_length_weight.csv') # In project folder 
-
-# Gastric Lavage data 
-setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Fish Data/Diet Data")
-gaslav_spp = read_csv('gaslav_dat.csv') %>% rename(sampleid = organism)
-gaslav_spp
-gaslav_paklog = read_csv('gastric_lavage_log.csv')
-gaslav_paklog
-
-join_gaslav = left_join(gaslav_spp, gaslav_paklog, by='sampleid')
-join_gaslav 
-
-gaslav_dat = join_gaslav %>% 
-  rename(diet_id = spp.x, 
-         abundance = count, 
-         fish_id = spp.y,
-         doy = DOY) %>% 
-  select(!(sifted)) %>% # remove sifted column as all samples have been sifted 
-  select(pond, doy, fish_id, length, weight, whirlpak, diet_id, abundance)
-gaslav_dat
-
-# Set working directory to project folder #
-#write_csv(gaslav_dat, 'gaslav_clean.csv') # Run to create new .csv file 
+############# Field Data ############## 
 
 ## Field Data ## 
 # Get raw data # 
@@ -120,3 +95,76 @@ metab_join
 
 setwd("C:/Users/Owner/Box/Active/Active Hort/Tyler Hort Resilience")
 write_csv(metab_join, 'hort20_metab_dat.csv')
+
+## Food Web Data ##===============================
+
+## Fish Data ## 
+# Body Size 
+fish_lw = read_csv('fish_length_weight.csv') # In project folder 
+
+# Gastric Lavage data 
+setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Fish Data/Diet Data")
+gaslav_spp = read_csv('gaslav_dat.csv') %>% rename(sampleid = organism)
+gaslav_spp
+gaslav_paklog = read_csv('gastric_lavage_log.csv')
+gaslav_paklog
+
+join_gaslav = left_join(gaslav_spp, gaslav_paklog, by='sampleid')
+join_gaslav 
+
+gaslav_dat = join_gaslav %>% 
+  rename(diet_id = spp.x, 
+         abundance = count, 
+         fish_id = spp.y,
+         doy = DOY) %>% 
+  select(!(sifted)) %>% # remove sifted column as all samples have been sifted 
+  select(pond, doy, fish_id, length, weight, whirlpak, diet_id, abundance)
+gaslav_dat
+
+# Set working directory to project folder #
+#write_csv(gaslav_dat, 'gaslav_clean.csv') # Run to create new .csv file 
+
+## Periphyton ## 
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Periphyton")
+peri_dat = read_csv('periphyton_dat_full.csv')
+peri_dat_raw = peri_dat %>%
+  rename(launch = doy_launch, 
+         collect = doy_collect, 
+         bottle_dilution = dilution_l,
+         filtered_sample = filtered,
+         pond_id = pond, 
+         chl_rfu = chl) %>% 
+  mutate(plate_area = 57.76*3) %>% # area of the 3 plates of the periphyton samplers 
+  select(pond_id, collect, launch, bottle_dilution, filtered_sample, chl_rfu, biomass_ug_l, plate_area)
+
+periphy_clean = peri_dat_raw %>%
+  mutate(biomass_area = (biomass_ug_l*0.3)/plate_area) %>% # get biomass of periphyton per area 
+  select(pond_id, launch, collect, biomass_area)
+
+setwd("C:/Users/Tyler/Box Sync/Active/Active Hort/Tyler Hort Resilience")
+write_csv(periphy_clean, 'periphy_clean.csv')  
+
+## Macrophytes ## 
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Macrophytes")
+macrophy_clean = read_csv('Hort2020_Biomass_Compiled.csv') %>% 
+  rename(doy = DOY, 
+         pond_id = Pond, 
+         biomass = Biomass,
+         pot_fol = POT_FOL,
+         pot_nod = POT_NOD) %>%
+  select(pond_id, doy, pot_fol, pot_nod, biomass) 
+macrophy_clean
+
+setwd("C:/Users/Tyler/Box Sync/Active/Active Hort/Tyler Hort Resilience")
+write_csv(macrophy_clean, 'macrophy_clean.csv')
+
+## Zooplankton ## 
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Zooplankton")
+zp_raw = read_csv('2020_Hort_ZoopBiomass_clean.csv')
+zp_clean = zp_raw %>% select(!(X1)) %>% select(pond_id, treatment, period, doy, group, taxon, biomass)
+
+setwd("C:/Users/Tyler/Box Sync/Active/Active Hort/Tyler Hort Resilience")
+write_csv(zp_clean, 'hort_zp_clean_11622.csv')
+
+## Macroinvertebrates ## 
+# TBD
