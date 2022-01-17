@@ -16,7 +16,8 @@ if (!require(lubridate)) install.packages('lubridate')
 library(lubridate) 
 
 # Set working directory as needed to location of cleaned data # 
-
+## Throughout - setwd() will be used to pull raw data, clean it, and then write_csv() is used to place it the project folder 
+# Current write_csv() commands are commented out to avoid overwriting data now that it is included in the project folder
 
 ############# Field Data ############## 
 
@@ -68,7 +69,7 @@ field_dat_clean[is.nan(field_dat_clean)] <- 0 # turn NaN into 0
 field_dat_clean
 
 # Make dataset # 
-setwd("C:/Users/Owner/Box/Active/Active Hort/Tyler Hort Resilience")
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 # write_csv(field_dat_clean, 'hort20_surface_dat.csv')
 
 ## Metabolism data ## 
@@ -93,8 +94,8 @@ daily_do
 metab_join = left_join(metabolism_dat, daily_do, by = c('pond_id', 'doy'))
 metab_join
 
-setwd("C:/Users/Owner/Box/Active/Active Hort/Tyler Hort Resilience")
-write_csv(metab_join, 'hort20_metab_dat.csv')
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
+#write_csv(metab_join, 'hort20_metab_dat.csv')
 
 ## Food Web Data ##===============================
 
@@ -141,8 +142,8 @@ periphy_clean = peri_dat_raw %>%
   mutate(biomass_area = (biomass_ug_l*0.3)/plate_area) %>% # get biomass of periphyton per area 
   select(pond_id, launch, collect, biomass_area)
 
-setwd("C:/Users/Tyler/Box Sync/Active/Active Hort/Tyler Hort Resilience")
-write_csv(periphy_clean, 'periphy_clean.csv')  
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
+#write_csv(periphy_clean, 'periphy_clean.csv')  
 
 ## Macrophytes ## 
 setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Macrophytes")
@@ -155,16 +156,16 @@ macrophy_clean = read_csv('Hort2020_Biomass_Compiled.csv') %>%
   select(pond_id, doy, pot_fol, pot_nod, biomass) 
 macrophy_clean
 
-setwd("C:/Users/Tyler/Box Sync/Active/Active Hort/Tyler Hort Resilience")
-write_csv(macrophy_clean, 'macrophy_clean.csv')
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
+#write_csv(macrophy_clean, 'macrophy_clean.csv')
 
 ## Zooplankton ## 
 setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Zooplankton")
 zp_raw = read_csv('2020_Hort_ZoopBiomass_clean.csv')
 zp_clean = zp_raw %>% select(!(X1)) %>% select(pond_id, treatment, period, doy, group, taxon, biomass)
 
-setwd("C:/Users/Tyler/Box Sync/Active/Active Hort/Tyler Hort Resilience")
-write_csv(zp_clean, 'hort_zp_clean_11622.csv')
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
+#write_csv(zp_clean, 'hort_zp_clean_11622.csv')
 
 ## Macroinvertebrates ## 
 # TBD
