@@ -16,6 +16,8 @@ if (!require(magrittr)) install.packages('magrittr')
 library(magrittr)
 if (!require(lubridate)) install.packages('lubridate')
 library(lubridate) 
+if (!require(readr)) install.packages('readr')
+library(readr) 
 
 # Set working directory as needed to location of cleaned data # 
 ## Throughout - setwd() will be used to pull raw data, clean it, and then write_csv() is used to place it the project folder 
@@ -170,4 +172,19 @@ setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experim
 #write_csv(zp_clean, 'hort_zp_clean_11622.csv')
 
 ## Macroinvertebrates ## 
-# TBD
+# Combine .csv files into one file
+# Read in individual .csv into one .csv file 
+df <- list.files(path="C:/Users/Owner/Box/Iowa Data/Biology Data/Macroinvertebrates/2020 Hort Farm Macroinvertebrate Sheets", full.names = TRUE) %>% 
+  lapply(read_csv) %>% 
+  bind_rows 
+df 
+# Add in order taxonomic classification # 
+miv_taxa = read_csv('unique_miv_taxa.csv')
+miv_taxa %<>% rename(taxa = unique_taxa)
+
+miv_join = left_join(df, miv_taxa, by = 'taxa')
+miv_dat = miv_join %>%
+  select(sampleid, spelling_correct, order_class, count, gear) %>%
+  rename(taxa = spelling_correct)
+miv_dat
+
