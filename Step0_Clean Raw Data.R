@@ -174,13 +174,15 @@ setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experim
 ## Macroinvertebrates ## 
 # Combine .csv files into one file
 # Read in individual .csv into one .csv file 
-df <- list.files(path="C:/Users/Owner/Box/Iowa Data/Biology Data/Macroinvertebrates/2020 Hort Farm Macroinvertebrate Sheets", full.names = TRUE) %>% 
+df <- list.files(path="C:/Users/Tyler/Box Sync/Iowa Data/Biology Data/Macroinvertebrates/2020 Hort Farm Macroinvertebrate Sheets", full.names = TRUE) %>% 
   lapply(read_csv) %>% 
   bind_rows 
 df 
+
 # Add in order taxonomic classification # 
 miv_taxa = read_csv('unique_miv_taxa.csv')
 miv_taxa %<>% rename(taxa = unique_taxa)
+miv_taxa
 
 miv_join = left_join(df, miv_taxa, by = 'taxa')
 miv_dat = miv_join %>%
@@ -188,3 +190,23 @@ miv_dat = miv_join %>%
   rename(taxa = spelling_correct)
 miv_dat
 
+# Calculate Density based on gear # 
+# Hess Sampler = 0.0006 cubic meters 
+# Ponar Sampler = 0.0052 cubic meters 
+miv_dat2 = miv_dat %>% mutate(sample_area = case_when(
+    endsWith(gear, "D") ~ 0.0052, # Sample volume of the Ekman Dredge (was actually a ponar dredge)
+    endsWith(gear, "S") ~ 0.0006)) # Sample volume of the Modified Hess Sampler 
+miv_dat2
+
+hort_mivdensity = miv_dat2 %>%
+  mutate(density = count/sample_area) %>% # Number of individuals per sample area (m^3) 
+  mutate(pond_id = substr(sampleid, 4,4)) %>% 
+  mutate(doy = as.numeric(substr(sampleid, 5,7))) %>%
+  mutate(treatment = case_when(.$pond_id %in% c('A', 'B', 'C') ~ 'pulsed', 
+                               .$pond_id %in% c('D', 'E', 'F') ~ 'reference')) %>%
+  mutate(period = cut(doy, breaks=c(-Inf, 176, 212, Inf), labels=c("prepulse","postpulse1","postpulse2"))) %>%
+  select(sampleid, pond_id, doy, treatment, period, taxa, order_class, gear, density)
+hort_mivdensity
+
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
+#write_csv(hort_mivdensity, 'hort_mivdensity.csv')
