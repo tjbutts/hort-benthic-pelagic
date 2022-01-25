@@ -108,7 +108,7 @@ setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experim
 fish_lw = read_csv('fish_length_weight.csv') # In project folder 
 
 # Gastric Lavage data 
-setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Fish Data/Diet Data")
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Fish Data/Diet Data")
 gaslav_spp = read_csv('gaslav_dat.csv') %>% rename(sampleid = organism)
 gaslav_spp
 gaslav_paklog = read_csv('gastric_lavage_log.csv')
@@ -124,6 +124,15 @@ gaslav_dat = join_gaslav %>%
          doy = DOY) %>% 
   select(!(sifted)) %>% # remove sifted column as all samples have been sifted 
   select(pond, doy, fish_id, length, weight, whirlpak, diet_id, abundance)
+gaslav_dat
+
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
+gaslav_org = read_csv('unique_gaslav_taxa.csv')
+
+gaslav_dat = left_join(gaslav_dat, gaslav_org, by = 'diet_id') %>% 
+  mutate(treatment = case_when(.$pond %in% c('A', 'B', 'C') ~ 'pulsed', 
+                               .$pond %in% c('D', 'E', 'F') ~ 'reference')) %>%
+  select(pond, treatment, doy, fish_id, length, weight, diet_id, broad_taxa, abundance)
 gaslav_dat
 
 # Set working directory to project folder #
