@@ -86,57 +86,12 @@ xf = zoop_tot[zoop_tot$pond_id=='F', 'doy']
 yf = zoop_tot[zoop_tot$pond_id=='F', 'tot_biomass']
 
 
-plot(ya~xa, type='l', col=int_col, lwd=4,cex=2,cex.axis=1.5, ylim=c(0,900), xlim=c(140,245))
-lines(yd~xd, type='l', col=int_col_trans, lwd=4)
-lines(yb~xb, type='l', col=low_col, lwd=4)
-lines(yf~xf, type='l', col =low_col_trans, lwd=4)
-lines(yc~xc, type='l', col = high_col, lwd=4)
-lines(ye~xe, type='l', col = high_col_trans, lwd=4)
-
-plot(zoop_tot[zoop_tot$pond_id=="A", "doy"], 
-     zoop_tot[zoop_tot$pond_id=="A", "tot_biomass"], 
-     col = 'black', pch = 20, lwd = 6, type = "l",
-     ylim = c(0,900), xlim = c(140,245))
-mtext(side=2, line=4.5, expression(Zooplankton), cex=1.2)
-mtext(side=2, line=3, expression(Biomass~"("*mu*g~L^-1*")"), cex = 1.2)
-
-axis(side=2, 
-     at=c(log10(10), log10(20), log10(30), log10(40), log10(50), 
-          log10(60), log10(70), log10(80), log10(90), log10(100), 
-          log10(200), log10(300), log10(400), log10(500), 
-          log10(600), log10(700), log10(800), log10(900), log10(1000), 
-          log10(2000), log10(3000), log10(4000), log10(5000), 
-          log10(6000), log10(7000), log10(8000), log10(9000), log10(10000)),
-     labels = c("10", " ", " ", " ", " ", " ", " ", " ", " ", 
-                "100", " ", " ", " ", " ", " ", " ", " ", " ", 
-                "1000"," "," "," "," "," "," "," "," ","10000"), 
-     las=2, cex.axis = 1.2)
-
-polygon(c(115,123,123,115), c(log10(5000), log10(5000), log10(10000), log10(10000)), col="gray20") # Pre-Fish
-lines(c(122.9, 122.9), c(log10(5), log10(5000)), lwd=2, lty=3, col="gray20")
-text(119, log10(7500), "Pre Fish", col="white", font=2, cex = 1.2)
-lines(c(129.1, 129.1), c(log10(5), log10(6000)), lwd=2, lty=3, col="gray20")
-polygon(c(129,168,168,129), c(log10(5000), log10(5000), log10(10000), log10(10000)), col="gray20") # Second Fish
-text(148, log10(7500), "Post Fish Addition", col="white", font=2, cex = 1.2)
-
-points(bmb_zoop[bmb_zoop$pond=="F", "doy"], 
-       log10(bmb_zoop[bmb_zoop$pond=="F", "total_zoop"]), 
-       col=high2, pch=19, lwd=4, type="l")
-points(bmb_zoop[bmb_zoop$pond=="C", "doy"], 
-       log10(bmb_zoop[bmb_zoop$pond=="C", "total_zoop"]), 
-       col=low1, pch=19, lwd=6, type="l")
-points(bmb_zoop[bmb_zoop$pond=="E", "doy"], 
-       log10(bmb_zoop[bmb_zoop$pond=="E", "total_zoop"]), 
-       col=low2, pch=19, lwd=4, type="l")
-points(bmb_zoop[bmb_zoop$pond=="A", "doy"], 
-       log10(bmb_zoop[bmb_zoop$pond=="A", "total_zoop"]), 
-       col=no1, pch=19, lwd=6, type="l")
-points(bmb_zoop[bmb_zoop$pond=="D", "doy"], 
-       log10(bmb_zoop[bmb_zoop$pond=="D", "total_zoop"]), 
-       col=no2, pch=19, lwd=4, type="l")
-
-
-
-
+plot(ya~xa, type='o', col=int_col, lwd=4,cex=2,cex.axis=1.5, ylim=c(0,900), xlim=c(140,245))
+lines(yd~xd, type='o', col=int_col_trans, lwd=4)
+lines(yb~xb, type='o', col=low_col, lwd=4)
+lines(yf~xf, type='o', col =low_col_trans, lwd=4)
+lines(yc~xc, type='o', col = high_col, lwd=4)
+lines(ye~xe, type='o', col = high_col_trans, lwd=4)
+legend('topright', legend=c('low', 'int', 'high'), col=c(low_col, int_col, high_col), pch=20)
 
 # Macroinvertebrate density time series 
