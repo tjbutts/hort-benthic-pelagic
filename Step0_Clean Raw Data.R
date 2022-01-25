@@ -27,11 +27,11 @@ library(readr)
 
 ## Field Data ## 
 # Get raw data # 
-setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment")
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment")
 gapfilled_dat = read_csv('daily-sonde-profiles_mean-values_10-30cm_gapfilled.csv')
 treatment_column = read_csv('ghg-model-dataset.csv') %>% select(treatment, doy, pond_id)
 gapfilled_dat
-setwd("C:/Users/Owner/Box/Iowa Data/Field Data/Hort Farm Field Data/2020 Hort Farm Field Data")
+setwd("C:/Users/Tyler/Box Sync/Iowa Data/Field Data/Hort Farm Field Data/2020 Hort Farm Field Data")
 field_dat = read_csv('hort_fielddata_20.csv') 
 field_dat_select = field_dat %>% 
   select(period, pond, doy, tp, tp_detectlim, tn, tn_detectlim, srp, srp_detectlim, nox, nox_detectlim, nhx, nhx_detectlim) %>%
@@ -74,7 +74,7 @@ field_dat_clean
 
 # Make dataset # 
 setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
-write_csv(field_dat_clean, 'hort20_surface_dat.csv')
+#write_csv(field_dat_clean, 'hort20_surface_dat.csv')
 
 ## Metabolism data ## 
 setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment")
