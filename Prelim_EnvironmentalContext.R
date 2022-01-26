@@ -10,6 +10,9 @@ periphy
 low_col = "#7fcdbb" # BF
 int_col ="#2c7fb8" # AD
 high_col = "#081d58" # CE
+low_col_trans = rgb(red=127, green=205, blue=187, alpha=75, maxColorValue = 255) #BF
+int_col_trans = rgb(44,127,184, alpha = 75, maxColorValue = 255) #AD
+high_col_trans = rgb(8,29,88, alpha = 75, maxColorValue = 255) # CE
 
 # striplot # 
 stripchart(biomass_area ~ pond_id, data = periphy, 
@@ -38,9 +41,6 @@ fish_size = read_csv('fish_length_weight.csv')
 fish_size
 
 # stripplot #
-low_col_trans = rgb(red=127, green=205, blue=187, alpha=75, maxColorValue = 255) #BF
-int_col_trans = rgb(44,127,184, alpha = 75, maxColorValue = 255) #AD
-high_col_trans = rgb(8,29,88, alpha = 75, maxColorValue = 255) # CE
 
 fs_pre_lmb = fish_size %>% filter(experiment == 'pre' & spp == 'LMB')
 fs_post_lmb = fish_size %>% filter(experiment == 'post' & spp == 'LMB')
@@ -118,7 +118,95 @@ axis(side=2,
 
 
 # Macroinvertebrate density time series #================= 
+hort_mivdensity 
 
+# total density 
+miv_tot = hort_mivdensity %>%
+  group_by(pond_id, doy, treatment, period, gear) %>%
+  summarise(density = sum(density)) %>%
+  ungroup() 
+miv_tot 
+
+# Filter by gear 
+miv_tot_hs = miv_tot %>% filter(gear == 'HS')
+miv_tot_hs = as.data.frame(miv_tot_hs) #undo tibble for plotting
+miv_tot_ed = miv_tot %>% filter(gear == 'ED')
+miv_tot_ed = as.data.frame(miv_tot_ed) #undo tibble for plotting
+
+# Ekman
+xa = miv_tot_ed[miv_tot_ed$pond_id=='A', 'doy'] # No data so far
+ya = miv_tot_ed[miv_tot_ed$pond_id=='A', 'density'] # No data so far
+xb = miv_tot_ed[miv_tot_ed$pond_id=='B', 'doy']
+yb = miv_tot_ed[miv_tot_ed$pond_id=='B', 'density']
+xc = miv_tot_ed[miv_tot_ed$pond_id=='C', 'doy']
+yc = miv_tot_ed[miv_tot_ed$pond_id=='C', 'density']
+xd = miv_tot_ed[miv_tot_ed$pond_id=='D', 'doy'] # No data so far
+yd = miv_tot_ed[miv_tot_ed$pond_id=='D', 'density'] # No data so far 
+xe = miv_tot_ed[miv_tot_ed$pond_id=='E', 'doy']
+ye = miv_tot_ed[miv_tot_ed$pond_id=='E', 'density']
+xf = miv_tot_ed[miv_tot_ed$pond_id=='F', 'doy']
+yf = miv_tot_ed[miv_tot_ed$pond_id=='F', 'density']
+
+par(mai=c(0.9,1.2,0.6,0.6))
+max(miv_tot_ed$density) # 41153.85
+min(miv_tot_ed$density) # 6730.769
+plot(yb~xb, type='o', col=low_col, lwd=4,cex=2,cex.axis=1.5, ylim=c(6000,45000), xlim=c(140,245), ylab='',xlab='')
+mtext(side=2, 'macroinvertebrate density (ED)', line=3, cex=2)
+mtext(side=1, 'Day of Year, 2020', line=3, cex=2)
+lines(yf~xf, type='o', col =low_col_trans, lwd=4)
+lines(yc~xc, type='o', col = high_col, lwd=4)
+lines(ye~xe, type='o', col = high_col_trans, lwd=4)
+legend('topright', legend=c('low', 'int', 'high'), col=c(low_col, int_col, high_col), pch=20)
+
+# Hess 
+xa = miv_tot_hs[miv_tot_hs$pond_id=='A', 'doy'] # No data so far
+ya = miv_tot_hs[miv_tot_hs$pond_id=='A', 'density'] # No data so far
+xb = miv_tot_hs[miv_tot_hs$pond_id=='B', 'doy']
+yb = miv_tot_hs[miv_tot_hs$pond_id=='B', 'density']
+xc = miv_tot_hs[miv_tot_hs$pond_id=='C', 'doy']
+yc = miv_tot_hs[miv_tot_hs$pond_id=='C', 'density']
+xd = miv_tot_hs[miv_tot_hs$pond_id=='D', 'doy'] # No data so far
+yd = miv_tot_hs[miv_tot_hs$pond_id=='D', 'density'] # No data so far 
+xe = miv_tot_hs[miv_tot_hs$pond_id=='E', 'doy']
+ye = miv_tot_hs[miv_tot_hs$pond_id=='E', 'density']
+xf = miv_tot_hs[miv_tot_hs$pond_id=='F', 'doy']
+yf = miv_tot_hs[miv_tot_hs$pond_id=='F', 'density']
+
+par(mai=c(0.9,1.2,0.6,0.6))
+max(miv_tot_hs$density) # 2690.141
+min(miv_tot_hs$density) # 408.4507
+plot(yb~xb, type='o', col=low_col, lwd=4,cex=2,cex.axis=1.5, ylim=c(400,3000), xlim=c(140,245), ylab='',xlab='')
+mtext(side=2, 'macroinvertebrate density (HS)', line=3, cex=2)
+mtext(side=1, 'Day of Year, 2020', line=3, cex=2)
+lines(yf~xf, type='o', col =low_col_trans, lwd=4)
+lines(yc~xc, type='o', col = high_col, lwd=4)
+lines(ye~xe, type='o', col = high_col_trans, lwd=4)
+legend('topright', legend=c('low', 'int', 'high'), col=c(low_col, int_col, high_col), pch=20)
+
+# Two panel plot (2 rows, since y-axes will be different) 
+
+# Taxa richness # 
 
 # Gastric Lavage Diet Fraction #=================
+hort_fish_gaslav
 
+# Use broad taxa 
+yep_diet = hort_fish_gaslav %>% filter(fish_id == 'yep') %>%
+  group_by(pond, treatment, broad_taxa) %>%
+  summarise(abundance = sum(abundance)) %>%
+  ungroup()
+yep_diet
+
+blg_diet = hort_fish_gaslav %>% filter(fish_id == 'blg') %>%
+  group_by(pond, treatment, broad_taxa) %>%
+  summarise(abundance = sum(abundance)) %>%
+  ungroup()
+blg_diet 
+
+lmb_diet = hort_fish_gaslav %>% filter(fish_id == 'lmb') %>%
+  group_by(pond, treatment, broad_taxa) %>%
+  summarise(abundance = sum(abundance)) %>% 
+  ungroup()
+lmb_diet
+
+# Some kind of stacked graph 

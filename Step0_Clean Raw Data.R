@@ -136,6 +136,7 @@ gaslav_dat = left_join(gaslav_dat, gaslav_org, by = 'diet_id') %>%
 gaslav_dat
 
 # Set working directory to project folder #
+setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 #write_csv(gaslav_dat, 'gaslav_clean.csv') # Run to create new .csv file 
 
 ## Periphyton ## 
@@ -204,7 +205,7 @@ miv_dat
 # Ponar Sampler = 0.0052 cubic meters 
 miv_dat2 = miv_dat %>% mutate(sample_area = case_when(
     endsWith(gear, "D") ~ 0.0052, # Sample volume of the Ekman Dredge (was actually a ponar dredge)
-    endsWith(gear, "S") ~ 0.0006)) # Sample volume of the Modified Hess Sampler 
+    endsWith(gear, "S") ~ 0.0710)) # Sample volume of the Modified Hess Sampler (diameter 0.3 m, surface area = 0.071 m^2) 
 miv_dat2
 
 hort_mivdensity = miv_dat2 %>%
