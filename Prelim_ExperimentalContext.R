@@ -206,3 +206,5 @@ polygon(c(176,211,211,176), c(-10,-10,200,200), col = "gray90", border= NA)
 polygon(c(211,239,239,211), c(-10,-10,200,200), col = "gray75", border= NA)
 lines(fieldC$doy, fieldC$nox_diff, col = high_col, lwd = 2, lty = 1)
 lines(fieldE$doy, fieldE$nox_diff, col = high_col, lwd = 2, lty = 3); box()
+
+

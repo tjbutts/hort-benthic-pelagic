@@ -188,7 +188,7 @@ lines(yf~xf, type='o', col =low_col_trans, lwd=4)
 lines(yc~xc, type='o', col = high_col, lwd=4)
 lines(ye~xe, type='o', col = high_col_trans, lwd=4)
 legend('topright', legend=c('low', 'int', 'high'), col=c(low_col, int_col, high_col), pch=20, cex=1.5)
-
+graphics.off()
 
 # Gastric Lavage Diet Fraction #=================
 hort_fish_gaslav 
