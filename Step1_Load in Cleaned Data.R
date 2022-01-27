@@ -14,6 +14,8 @@ if (!require(magrittr)) install.packages('magrittr')
 library(magrittr)
 if (!require(lubridate)) install.packages('lubridate')
 library(lubridate) 
+if (!require(readr)) install.packages('readr')
+library(readr) 
 
 # Set working directory to the R Project folder 
 
