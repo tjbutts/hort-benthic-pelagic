@@ -200,31 +200,55 @@ fish_diet
 
 diet_benthos_lmb = fish_diet %>% filter(broad_taxa == 'benthos' & fish_id == 'lmb') %>%
   unite('fish_diet', fish_id:broad_taxa)
+diet_fish_lmb = fish_diet %>% filter(broad_taxa == 'fish' & fish_id == 'lmb') %>%
+  unite('fish_diet', fish_id:broad_taxa)
 diet_zoop_lmb = fish_diet %>% filter(broad_taxa == 'zoop' & fish_id == 'lmb') %>%
   unite('fish_diet', fish_id:broad_taxa)
 diet_benthos_blg = fish_diet %>% filter(broad_taxa == 'benthos' & fish_id == 'blg') %>%
   unite('fish_diet', fish_id:broad_taxa)
 diet_zoop_blg = fish_diet %>% filter(broad_taxa == 'zoop' & fish_id == 'blg') %>%
   unite('fish_diet', fish_id:broad_taxa)
+diet_fish_blg = fish_diet %>% filter(broad_taxa == 'fish' & fish_id == 'blg') %>%
+  unite('fish_diet', fish_id:broad_taxa)
 diet_benthos_yep = fish_diet %>% filter(broad_taxa == 'benthos' & fish_id == 'yep') %>%
   unite('fish_diet', fish_id:broad_taxa)
 diet_zoop_yep = fish_diet %>% filter(broad_taxa == 'zoop' & fish_id == 'yep') %>%
   unite('fish_diet', fish_id:broad_taxa)
+diet_fish_yep = fish_diet %>% filter(broad_taxa == 'fish' & fish_id == 'yep') %>%
+  unite('fish_diet', fish_id:broad_taxa)
 
-diet_consolidate = rbind(diet_benthos_lmb, diet_zoop_lmb, diet_benthos_blg, 
-                         diet_zoop_blg, diet_benthos_yep, diet_zoop_yep)
+diet_consolidate = rbind(diet_benthos_lmb, diet_zoop_lmb, diet_fish_lmb, diet_benthos_blg, 
+                         diet_zoop_blg, diet_benthos_yep, diet_zoop_yep, diet_fish_yep)
 diet_consolidate
 windows(height=6, width=8)
 par(mai=c(0.9,1.2,0.6,0.6))
-stripchart(abundance ~ fish_diet, data = diet_consolidate, col='white', xaxt='n', yaxt='n', 
-           xlab='Organism Abundance', cex.axis=2)
-axis(1, las=1)
-axis(2, at=c(1,2,3,4,5), labels=c('blg_benthos', 'blg_zoop', 'lmb_benthos', 'yep_benthos', 'yep_zoop'), las=2)
-high = diet_consolidate$pond == 'C' | diet_consolidate$pond == 'E'
-stripchart(abundance ~fish_diet, data = diet_consolidate[high,], col=high_col, add=T, pch=20, cex=3)
-int = diet_consolidate$pond == 'A' | diet_consolidate$pond == 'D'
-stripchart(abundance ~fish_diet, data = diet_consolidate[int,], col=int_col, add=T, pch=20, cex=3)
-low = diet_consolidate$pond == 'B' | diet_consolidate$pond == 'F'
-stripchart(abundance ~fish_diet, data = diet_consolidate[low,], col=low_col, add=T, pch=20, cex=3)
-legend('topright', legend=c('low', 'int', 'high'), col=c(low_col, int_col, high_col), pch=20, cex=2)
+diet_consolidate =  diet_consolidate %>% mutate(type = case_when(
+  pond == 'B' ~ 'low', 
+  pond == 'F' ~ 'low', 
+  pond == 'A' ~ 'int', 
+  pond == 'D' ~ 'int', 
+  pond == 'C' ~ 'high', 
+  pond == 'E' ~ 'high')) %>% 
+  mutate(type = as.factor(type)) %>%
+  mutate(val = case_when(
+    type == 'low' ~ 1, 
+    type == 'int' ~ 2, 
+    type == 'high' ~ 3
+  )) %>%
+  mutate(type = fct_reorder(type, val)) %>%
+  mutate(fish_diet = factor(fish_diet, levels=c('blg_benthos', 
+                                                   'yep_benthos' , 
+                                                   'lmb_benthos', 
+                                                  'blg_zoop', 
+                                                'yep_zoop' , 
+                                                   'yep_fish', 
+                                                   'lmb_fish')))
+diet_consolidate
 
+ggplot(diet_consolidate, aes(x=fish_diet, y=abundance, fill=type)) + 
+  geom_boxplot(outlier.size=0) +
+  scale_fill_manual(values=c(low_col, int_col, high_col)) + 
+  scale_alpha_manual(values=c(1,0.5)) +
+  geom_point(pch=21, size=3, position = position_jitterdodge(jitter.width = 0.1)) + 
+  theme_bw() + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())

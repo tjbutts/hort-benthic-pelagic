@@ -16,6 +16,8 @@ if (!require(lubridate)) install.packages('lubridate')
 library(lubridate) 
 if (!require(readr)) install.packages('readr')
 library(readr) 
+if (!require(ggplot2)) install.packages('ggplot2')
+library(ggplot2) 
 
 # Set working directory to the R Project folder 
 
