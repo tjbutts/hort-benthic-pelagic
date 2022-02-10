@@ -15,9 +15,12 @@ library(magrittr)
 if (!require(lubridate)) install.packages('lubridate')
 library(lubridate) 
 if (!require(readr)) install.packages('readr')
-library(readr) 
+library(readr)
+# Visualization
 if (!require(ggplot2)) install.packages('ggplot2')
 library(ggplot2) 
+if (!require(scales)) install.packages('scales')
+library(scales) 
 
 # Set working directory to the R Project folder 
 

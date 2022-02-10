@@ -24,6 +24,45 @@ stripchart(biomass_area ~ pond_id, data = periphy,
 legend('topright', legend = c('low B-P', 'int B-P', 'high B-P'), col= c(low_col, int_col, high_col), pch = 16,
        cex=1.5)
 
+# Time series # 
+peri_tot = periphy %>%
+  select(pond_id, collect, biomass_area) %>%
+  rename(doy = collect) %>% 
+  as.data.frame()
+peri_tot
+
+# Ekman
+xa = peri_tot[peri_tot$pond_id=='A', 'doy'] # No data so far
+ya = peri_tot[peri_tot$pond_id=='A', 'biomass_area'] # No data so far
+xb = peri_tot[peri_tot$pond_id=='B', 'doy']
+yb = peri_tot[peri_tot$pond_id=='B', 'biomass_area']
+xc = peri_tot[peri_tot$pond_id=='C', 'doy']
+yc = peri_tot[peri_tot$pond_id=='C', 'biomass_area']
+xd = peri_tot[peri_tot$pond_id=='D', 'doy'] # No data so far
+yd = peri_tot[peri_tot$pond_id=='D', 'biomass_area'] # No data so far 
+xe = peri_tot[peri_tot$pond_id=='E', 'doy']
+ye = peri_tot[peri_tot$pond_id=='E', 'biomass_area']
+xf = peri_tot[peri_tot$pond_id=='F', 'doy']
+yf = peri_tot[peri_tot$pond_id=='F', 'biomass_area']
+
+windows(height=6, width=8)
+par(mai=c(0.9,1.2,0.6,0.6))
+max(peri_tot$biomass_area) # 8
+min(peri_tot$biomass_area) # 0.224
+plot(yb~xb, type='o', col=low_col, lwd=4,cex=1.5,cex.axis=1, ylim=c(0,8), xlim=c(140,245), ylab='',xlab='')
+mtext(side=2, 'Periphyton biomass area', line=3, cex=1.5)
+mtext(side=1, 'Day of Year, 2020', line=3, cex=1.5)
+lines(yf~xf, type='o', col =low_col_trans, lwd=4)
+lines(yc~xc, type='o', col = high_col, lwd=4)
+lines(ye~xe, type='o', col = high_col_trans, lwd=4)
+lines(ya~xa, type='o', col = int_col, lwd=4)
+lines(yd~xd, type='o', col = int_col_trans, lwd=4)
+legend('topright', legend=c('low', 'int', 'high'), col=c(low_col, int_col, high_col), pch=20, cex=1.5)
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,100), lty = 3)
+lines(c(211,211), c(-10,100), lty = 3)
+lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
+
 # Macrophytes #==================
 macrophy = read_csv('macrophy_clean.csv') 
 macrophy
@@ -248,7 +287,6 @@ diet_consolidate
 ggplot(diet_consolidate, aes(x=fish_diet, y=abundance, fill=type)) + 
   geom_boxplot(outlier.size=0) +
   scale_fill_manual(values=c(low_col, int_col, high_col)) + 
-  scale_alpha_manual(values=c(1,0.5)) +
   geom_point(pch=21, size=3, position = position_jitterdodge(jitter.width = 0.1)) + 
   theme_bw() + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
