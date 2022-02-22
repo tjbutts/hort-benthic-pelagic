@@ -98,29 +98,36 @@ zp_F_gam <- gam(tot_biomass~ s(doy, k = 17),data = zoopF, method = 'REML')
 summary(zp_F_gam) # gam.check(zp_F_gam)
 
 # Log Scale # 
-# Low Coupling Treatment LOG ===========
+# Intermediate Coupling Treatment===========
 #Total P GAM - Pond A
-zp_A_gam2 <- gam(log(tot_biomass)~ s(doy, k = 17),data = zoopA, method = 'REML')
-summary(zp_A_gam2) # gam.check(zp_A_gam2)
+zp_A_gam2 <- gam(tot_biomass~ s(doy, k = 17),Gamma(link = 'log') ,data = zoopA, method = 'REML')
+summary(zp_A_gam2) 
+gam.check(zp_A_gam2)
 #Total P GAM - Pond D
-zp_D_gam2 <- gam(log(tot_biomass)~ s(doy, k = 16),data = zoopD, method = 'REML')
-summary(zp_D_gam2) # gam.check(zp_D_gam2)
+zp_D_gam2 <- gam(tot_biomass~ s(doy, k = 16), Gamma(link = 'log') ,data = zoopD, method = 'REML')
+summary(zp_D_gam2) 
+gam.check(zp_D_gam2)
 
-# Intermediate Coupling Treatment LOG ===========
+# High Coupling Treatment===========
 #Total P GAM - Pond C
-zp_C_gam2 <- gam(log(tot_biomass)~ s(doy, k = 17),data = zoopC, method = 'REML')
-summary(zp_C_gam2) # gam.check(zp_C_gam2)
+zp_C_gam2 <- gam(tot_biomass~ s(doy, k = 17), Gamma(link = 'log') ,data = zoopC, method = 'REML')
+summary(zp_C_gam2) 
+gam.check(zp_C_gam2)
 #Total P GAM - Pond E
-zp_E_gam2 <- gam(log(tot_biomass)~ s(doy, k = 17),data = zoopE, method = 'REML')
-summary(zp_E_gam2) # gam.check(zp_E_gam2)
+zp_E_gam2 <- gam(tot_biomass~ s(doy, k = 17), Gamma(link = 'log') ,data = zoopE, method = 'REML')
+summary(zp_E_gam2) 
+gam.check(zp_E_gam2)
 
-# High Coupling Treatment LOG ===========
+# Low Coupling Treatment===========
 #Total P GAM - Pond B
-zp_B_gam2 <- gam(log(tot_biomass)~ s(doy, k = 17),data = zoopB, method = 'REML')
-summary(zp_B_gam2) # gam.check(zp_B_gam2)
+zp_B_gam2 <- gam(tot_biomass~ s(doy, k = 17), Gamma(link = 'log') ,data = zoopB, method = 'REML')
+summary(zp_B_gam2) 
+gam.check(zp_B_gam2)
 #Total P GAM - Pond F
-zp_F_gam2 <- gam(log(tot_biomass)~ s(doy, k = 17),data = zoopF, method = 'REML')
-summary(zp_F_gam2) # gam.check(zp_F_gam2)
+zp_F_gam2 <- gam(tot_biomass~ s(doy, k = 17),Gamma(link = 'log') ,data = zoopF, method = 'REML')
+summary(zp_F_gam2) 
+gam.check(zp_F_gam2)
+
 
 #Plotting Colors
 #Colors for data visualization

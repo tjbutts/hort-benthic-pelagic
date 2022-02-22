@@ -27,11 +27,11 @@ library(readr)
 
 ## Field Data ## 
 # Get raw data # 
-setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment")
-gapfilled_dat = read_csv('daily-sonde-profiles_mean-values_10-30cm_gapfilled.csv')
+setwd("J:/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment")
+profile_dat = read_csv('daily-sonde-profiles_mean-values_10-30cm.csv')
 treatment_column = read_csv('ghg-model-dataset.csv') %>% select(treatment, doy, pond_id)
-gapfilled_dat
-setwd("C:/Users/Tyler/Box Sync/Iowa Data/Field Data/Hort Farm Field Data/2020 Hort Farm Field Data")
+profile_dat
+setwd("J:/Box Sync/Iowa Data/Field Data/Hort Farm Field Data/2020 Hort Farm Field Data")
 field_dat = read_csv('hort_fielddata_20.csv') 
 field_dat_select = field_dat %>% 
   select(period, pond, doy, tp, tp_detectlim, tn, tn_detectlim, srp, srp_detectlim, nox, nox_detectlim, nhx, nhx_detectlim) %>%
@@ -39,8 +39,8 @@ field_dat_select = field_dat %>%
   arrange(doy)
 field_dat_select
 
-# Join data to get surface water data - base is the gapfilled data # 
-field_join = left_join(gapfilled_dat, field_dat_select, by = c('pond_id', 'doy'))
+# Join data to get surface water data - base is the sonde profile data # 
+field_join = left_join(profile_dat, field_dat_select, by = c('pond_id', 'doy'))
 field_join 
 field_join2 = left_join(field_join, treatment_column, by = c('pond_id', 'doy'))
 field_join2
@@ -74,7 +74,7 @@ field_dat_clean
 
 # Make dataset # 
 setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
-#write_csv(field_dat_clean, 'hort20_surface_dat.csv')
+write_csv(field_dat_clean, 'hort20_surface_dat.csv')
 
 ## Metabolism data ## 
 setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment")
@@ -166,8 +166,9 @@ macrophy_clean = read_csv('Hort2020_Biomass_Compiled.csv') %>%
          pond_id = Pond, 
          biomass = Biomass,
          pot_fol = POT_FOL,
-         pot_nod = POT_NOD) %>%
-  select(pond_id, doy, pot_fol, pot_nod, biomass) 
+         pot_nod = POT_NOD) %>% 
+  mutate(areal_biomass = biomass/0.4) %>% #divided by the area of the rake pull (0.4 m^2)
+  select(pond_id, doy, pot_fol, pot_nod, biomass, areal_biomass)
 macrophy_clean
 
 setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
