@@ -149,12 +149,16 @@ peri_dat_raw = peri_dat %>%
          filtered_sample = filtered,
          pond_id = pond, 
          chl_rfu = chl) %>% 
-  mutate(plate_area = 57.76*3) %>% # area of the 3 plates of the periphyton samplers 
-  select(pond_id, collect, launch, bottle_dilution, filtered_sample, chl_rfu, biomass_ug_l, plate_area)
+  mutate(plate_area_m = 0.1*3) %>% # area of the 3 plates (m^2) of the periphyton samplers (Envco Hester Dendy Sampler) 
+  mutate(plate_area_cm = 1000*3) %>%
+  select(pond_id, collect, launch, bottle_dilution, filtered_sample, chl_rfu, biomass_ug_l, plate_area_m, plate_area_cm)
+peri_dat_raw
 
 periphy_clean = peri_dat_raw %>%
-  mutate(biomass_area = (biomass_ug_l*0.3)/plate_area) %>% # get biomass of periphyton per area 
-  select(pond_id, launch, collect, biomass_area)
+  mutate(biomass_area_m2 = (biomass_ug_l*bottle_dilution)/plate_area_m) %>% # get biomass of periphyton per area (ug/m^2)
+  mutate(biomass_area_cm2 = (biomass_ug_l*bottle_dilution)/plate_area_m) %>% # get biomass of periphyton per area (ug/cm^2)
+  select(pond_id, launch, collect, biomass_area_m2, biomass_area_cm2)
+periphy_clean
 
 setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 #write_csv(periphy_clean, 'periphy_clean.csv')  
@@ -185,12 +189,13 @@ setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experim
 ## Macroinvertebrates ## 
 # Combine .csv files into one file
 # Read in individual .csv into one .csv file 
-df <- list.files(path="C:/Users/Tyler/Box Sync/Iowa Data/Biology Data/Macroinvertebrates/2020 Hort Farm Macroinvertebrate Sheets", full.names = TRUE) %>% 
+df <- list.files(path="J:/Box Sync/Iowa Data/Biology Data/Macroinvertebrates/2020 Hort Farm Macroinvertebrate Sheets", full.names = TRUE) %>% 
   lapply(read_csv) %>% 
   bind_rows 
 df 
 
-# Add in order taxonomic classification # 
+# Add in order taxonomic classification #
+setwd("J:/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 miv_taxa = read_csv('unique_miv_taxa.csv')
 miv_taxa %<>% rename(taxa = unique_taxa)
 miv_taxa
@@ -205,12 +210,12 @@ miv_dat
 # Hess Sampler = 0.0006 cubic meters 
 # Ponar Sampler = 0.0052 cubic meters 
 miv_dat2 = miv_dat %>% mutate(sample_area = case_when(
-    endsWith(gear, "D") ~ 0.0052, # Sample volume of the Ekman Dredge (was actually a ponar dredge)
+    endsWith(gear, "D") ~ 0.0232, # Sample area of the Ekman Dredge (was actually a ponar dredge)
     endsWith(gear, "S") ~ 0.0710)) # Sample volume of the Modified Hess Sampler (diameter 0.3 m, surface area = 0.071 m^2) 
 miv_dat2
 
 hort_mivdensity = miv_dat2 %>%
-  mutate(density = count/sample_area) %>% # Number of individuals per sample area (m^3) 
+  mutate(density = count/sample_area) %>% # Number of individuals per sample area (m^2) 
   mutate(pond_id = substr(sampleid, 4,4)) %>% 
   mutate(doy = as.numeric(substr(sampleid, 5,7))) %>%
   mutate(treatment = case_when(.$pond_id %in% c('A', 'B', 'C') ~ 'pulsed', 

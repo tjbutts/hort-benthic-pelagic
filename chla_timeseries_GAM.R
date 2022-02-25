@@ -41,7 +41,7 @@ algF = chl %>% #ref, low
 # GAM-ing the chlorophyll for pattern - not analysis...
 #=============================================================
 
-# Low Coupling Treatment===========
+# Int Coupling Treatment===========
 #Total P GAM - Pond A
 alg_A_gam <- gam(chla~ s(doy, k = 50),data = algA, method = 'REML')
 summary(alg_A_gam) # gam.check(alg_A_gam)
@@ -49,7 +49,7 @@ summary(alg_A_gam) # gam.check(alg_A_gam)
 alg_D_gam <- gam(chla~ s(doy, k = 50),data = algD, method = 'REML')
 summary(alg_D_gam) # gam.check(alg_D_gam)
 
-# Intermediate Coupling Treatment===========
+# High Coupling Treatment===========
 #Total P GAM - Pond C
 alg_C_gam <- gam(chla~ s(doy, k = 50),data = algC, method = 'REML')
 summary(alg_C_gam) # gam.check(alg_C_gam)
@@ -57,7 +57,7 @@ summary(alg_C_gam) # gam.check(alg_C_gam)
 alg_E_gam <- gam(chla~ s(doy, k = 50),data = algE, method = 'REML')
 summary(alg_E_gam) # gam.check(alg_E_gam)
 
-# High Coupling Treatment===========
+# Low Coupling Treatment===========
 #Total P GAM - Pond B
 alg_B_gam <- gam(chla~ s(doy, k = 50),data = algB, method = 'REML')
 summary(alg_B_gam) # gam.check(alg_B_gam)
