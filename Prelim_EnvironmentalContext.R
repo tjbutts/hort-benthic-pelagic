@@ -82,25 +82,124 @@ fish_size = read_csv('fish_length_weight.csv')
 fish_size
 
 # stripplot #
+# LMB
+fs_pre_lmb_a = fish_size %>% filter(pond == 'A' & experiment == 'pre' & spp == 'LMB')
+fs_pre_lmb_d = fish_size %>% filter(pond == 'D' & experiment == 'pre' & spp == 'LMB')
+fs_pre_lmb_c = fish_size %>% filter(pond == 'C' & experiment == 'pre' & spp == 'LMB')
+fs_pre_lmb_e = fish_size %>% filter(pond == 'E' & experiment == 'pre' & spp == 'LMB')
+fs_post_lmb_a = fish_size %>% filter(pond == 'A' &experiment == 'post' & spp == 'LMB')
+fs_post_lmb_d = fish_size %>% filter(pond == 'D' & experiment == 'post' & spp == 'LMB')
+fs_post_lmb_c = fish_size %>% filter(pond == 'C' & experiment == 'post' & spp == 'LMB')
+fs_post_lmb_e = fish_size %>% filter(pond == 'E' & experiment == 'post' & spp == 'LMB')
 
-fs_pre_lmb = fish_size %>% filter(experiment == 'pre' & spp == 'LMB')
-fs_post_lmb = fish_size %>% filter(experiment == 'post' & spp == 'LMB')
-fs_pre_blg = fish_size %>% filter(experiment == 'pre' & spp == 'BLG')
-fs_post_blg = fish_size %>% filter(experiment == 'post' & spp == 'BLG')
-fs_pre_yep = fish_size %>% filter(experiment == 'pre' & spp == 'YEP')
-fs_post_yep = fish_size %>% filter(experiment == 'post' & spp == 'YEP')
-
-x <- list('lmb_pre' = fs_pre_lmb$length, 'lmb_post' = fs_post_lmb$length, 
-          'blg_pre' = fs_pre_blg$length, 'blg_post' = fs_post_blg$length,
-          'yep_pre' = fs_pre_yep$length, 'yep_post' = fs_post_yep$length)
+x <- list('lmb_pre_a' = fs_pre_lmb_a$length, 'lmb_post_a' = fs_post_lmb_a$length, 
+          'lmb_pre_d' = fs_pre_lmb_d$length, 'lmb_post_d' = fs_post_lmb_d$length,
+          'lmb_pre_c' = fs_pre_lmb_c$length, 'lmb_post_c' = fs_post_lmb_c$length,
+          'lmb_pre_e' = fs_pre_lmb_e$length, 'lmb_post_e' = fs_post_lmb_e$length)
 
 windows(height=6, width=8)
 par(mai=c(0.6,1.2,0.6,0.6))
 stripchart(x, pch=16, cex=1.5, 
-           frame=F, vertical=F, method='jitter', jitter=0.3,
-           col=c(high_col_trans, high_col, int_col_trans, int_col, low_col_trans, low_col),
+           frame=F, vertical=F, method='jitter', jitter=0.3, 
+           col=c(int_col_trans, int_col, int_col_trans, int_col, high_col_trans, high_col, high_col_trans),
            xlab = 'Fish total length (mm)', 
-           xlim= c(50,500),
+           xlim= c(50,900),
+           las=2)
+
+# BLG
+fs_pre_blg_a = fish_size %>% filter(pond == 'A' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_d = fish_size %>% filter(pond == 'D' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_c = fish_size %>% filter(pond == 'C' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_e = fish_size %>% filter(pond == 'E' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_b = fish_size %>% filter(pond == 'B' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_f = fish_size %>% filter(pond == 'F' & experiment == 'pre' & spp == 'BLG')
+fs_post_blg_a = fish_size %>% filter(pond == 'A' &experiment == 'post' & spp == 'BLG')
+fs_post_blg_d = fish_size %>% filter(pond == 'D' & experiment == 'post' & spp == 'BLG')
+fs_post_blg_c = fish_size %>% filter(pond == 'C' & experiment == 'post' & spp == 'BLG')
+fs_post_blg_e = fish_size %>% filter(pond == 'E' & experiment == 'post' & spp == 'BLG')
+fs_post_blg_b = fish_size %>% filter(pond == 'B' & experiment == 'post' & spp == 'BLG')
+fs_post_blg_f = fish_size %>% filter(pond == 'F' & experiment == 'post' & spp == 'BLG')
+
+x2 <- list('blg_pre_a' = fs_pre_blg_a$length, 'blg_post_a' = fs_post_blg_a$length, 
+          'blg_pre_d' = fs_pre_blg_d$length, 'blg_post_d' = fs_post_blg_d$length,
+          'blg_pre_c' = fs_pre_blg_c$length, 'blg_post_c' = fs_post_blg_c$length,
+          'blg_pre_e' = fs_pre_blg_e$length, 'blg_post_e' = fs_post_blg_e$length,
+          'blg_pre_b' = fs_pre_blg_c$length, 'blg_post_b' = fs_post_blg_c$length,
+          'blg_pre_f' = fs_pre_blg_e$length, 'blg_post_f' = fs_post_blg_e$length)
+
+windows(height=6, width=8)
+par(mai=c(0.6,1.2,0.6,0.6))
+stripchart(x2, pch=16, cex=1.5, 
+           frame=F, vertical=F, method='jitter', jitter=0.3, 
+           col=c(int_col_trans, int_col, int_col_trans, int_col, 
+                 high_col_trans, high_col, high_col_trans, high_col,
+                 low_col_trans, low_col, low_col_trans,low_col),
+           xlab = 'Fish total length (mm)', 
+           xlim= c(50,250),
+           las=2) 
+
+# BLG
+fs_pre_blg_a = fish_size %>% filter(pond == 'A' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_d = fish_size %>% filter(pond == 'D' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_c = fish_size %>% filter(pond == 'C' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_e = fish_size %>% filter(pond == 'E' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_b = fish_size %>% filter(pond == 'B' & experiment == 'pre' & spp == 'BLG')
+fs_pre_blg_f = fish_size %>% filter(pond == 'F' & experiment == 'pre' & spp == 'BLG')
+fs_post_blg_a = fish_size %>% filter(pond == 'A' &experiment == 'post' & spp == 'BLG')
+fs_post_blg_d = fish_size %>% filter(pond == 'D' & experiment == 'post' & spp == 'BLG')
+fs_post_blg_c = fish_size %>% filter(pond == 'C' & experiment == 'post' & spp == 'BLG')
+fs_post_blg_e = fish_size %>% filter(pond == 'E' & experiment == 'post' & spp == 'BLG')
+fs_post_blg_b = fish_size %>% filter(pond == 'B' & experiment == 'post' & spp == 'BLG')
+fs_post_blg_f = fish_size %>% filter(pond == 'F' & experiment == 'post' & spp == 'BLG')
+
+x2 <- list('blg_pre_a' = fs_pre_blg_a$length, 'blg_post_a' = fs_post_blg_a$length, 
+           'blg_pre_d' = fs_pre_blg_d$length, 'blg_post_d' = fs_post_blg_d$length,
+           'blg_pre_c' = fs_pre_blg_c$length, 'blg_post_c' = fs_post_blg_c$length,
+           'blg_pre_e' = fs_pre_blg_e$length, 'blg_post_e' = fs_post_blg_e$length,
+           'blg_pre_b' = fs_pre_blg_b$length, 'blg_post_b' = fs_post_blg_b$length,
+           'blg_pre_f' = fs_pre_blg_f$length, 'blg_post_f' = fs_post_blg_f$length)
+
+windows(height=6, width=8)
+par(mai=c(0.6,1.2,0.6,0.6))
+stripchart(x2, pch=16, cex=1.5, 
+           frame=F, vertical=F, method='jitter', jitter=0.3, 
+           col=c(int_col_trans, int_col, int_col_trans, int_col, 
+                 high_col_trans, high_col, high_col_trans, high_col,
+                 low_col_trans, low_col, low_col_trans,low_col),
+           xlab = 'Fish total length (mm)', 
+           xlim= c(50,250),
+           las=2)
+
+# YEP
+fs_pre_yep_a = fish_size %>% filter(pond == 'A' & experiment == 'pre' & spp == 'YEP')
+fs_pre_yep_d = fish_size %>% filter(pond == 'D' & experiment == 'pre' & spp == 'YEP')
+fs_pre_yep_c = fish_size %>% filter(pond == 'C' & experiment == 'pre' & spp == 'YEP')
+fs_pre_yep_e = fish_size %>% filter(pond == 'E' & experiment == 'pre' & spp == 'YEP')
+fs_pre_yep_b = fish_size %>% filter(pond == 'B' & experiment == 'pre' & spp == 'YEP')
+fs_pre_yep_f = fish_size %>% filter(pond == 'F' & experiment == 'pre' & spp == 'YEP')
+fs_post_yep_a = fish_size %>% filter(pond == 'A' &experiment == 'post' & spp == 'YEP')
+fs_post_yep_d = fish_size %>% filter(pond == 'D' & experiment == 'post' & spp == 'YEP')
+fs_post_yep_c = fish_size %>% filter(pond == 'C' & experiment == 'post' & spp == 'YEP')
+fs_post_yep_e = fish_size %>% filter(pond == 'E' & experiment == 'post' & spp == 'YEP')
+fs_post_yep_b = fish_size %>% filter(pond == 'B' & experiment == 'post' & spp == 'YEP')
+fs_post_yep_f = fish_size %>% filter(pond == 'F' & experiment == 'post' & spp == 'YEP')
+
+x3 <- list('yep_pre_a' = fs_pre_yep_a$length, 'yep_post_a' = fs_post_yep_a$length, 
+           'yep_pre_d' = fs_pre_yep_d$length, 'yep_post_d' = fs_post_yep_d$length,
+           'yep_pre_c' = fs_pre_yep_c$length, 'yep_post_c' = fs_post_yep_c$length,
+           'yep_pre_e' = fs_pre_yep_e$length, 'yep_post_e' = fs_post_yep_e$length,
+           'yep_pre_b' = fs_pre_yep_b$length, 'yep_post_b' = fs_post_yep_b$length,
+           'yep_pre_f' = fs_pre_yep_f$length, 'yep_post_f' = fs_post_yep_f$length)
+
+windows(height=6, width=8)
+par(mai=c(0.6,1.2,0.6,0.6))
+stripchart(x3, pch=16, cex=1.5, 
+           frame=F, vertical=F, method='jitter', jitter=0.3, 
+           col=c(int_col_trans, int_col, int_col_trans, int_col, 
+                 high_col_trans, high_col, high_col_trans, high_col,
+                 low_col_trans, low_col, low_col_trans,low_col),
+           xlab = 'Fish total length (mm)', 
+           xlim= c(50,250),
            las=2)
 
 # Zooplankton biomass time series #=========================
