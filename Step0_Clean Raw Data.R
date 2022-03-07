@@ -194,6 +194,8 @@ df <- list.files(path="J:/Box Sync/Iowa Data/Biology Data/Macroinvertebrates/202
   bind_rows 
 df 
 
+unique(df$taxa) # Add to 'unique_miv_taxa' dataset key 
+
 # Add in order taxonomic classification #
 setwd("J:/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 miv_taxa = read_csv('unique_miv_taxa.csv')
@@ -203,7 +205,8 @@ miv_taxa
 miv_join = left_join(df, miv_taxa, by = 'taxa')
 miv_dat = miv_join %>%
   select(sampleid, spelling_correct, order_class, count, gear) %>%
-  rename(taxa = spelling_correct)
+  rename(taxa = spelling_correct) %>% 
+  drop_na()
 miv_dat
 
 # Calculate Density based on gear # 

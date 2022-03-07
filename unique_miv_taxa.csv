@@ -22,7 +22,7 @@ Amphipoda,amphipoda,amphipoda
 Odonata,odonata,odonata
 Pleidae,pleidae,hemiptera
 1 unknown large worm,oligochaeta,oligochaeta
-Coeloptera,coeloptera,lepidoptera
+Coeloptera,coeloptera,coeloptera
 Amiphipoda,amphipoda,amphipoda
 Chironomid,chironomidae,diptera
 Corixidae,corixidae,hemiptera
@@ -40,3 +40,14 @@ Dytiscidae,dytiscidae,coleoptera
 Pleidae or Veliidae,pleidae,hemiptera
 Odonata/UNSURE,odonata,odonata
 Baetidae,baetidae,ephemeroptera
+Unknown,unknown,unknown
+NA,NA,NA
+Diptera,diptera,diptera
+Olligochaeta,oligochaeta,oligochaeta
+Trichoptera,trichoptera,trichoptera
+hydrophilidae,hydropohilidae,coleoptera
+Leech,hirudinea,hirudinea
+Chironomis,chironomidae,diptera
+panorbidae,planorbidae,hygrophila
+coleoptera,coleoptera,coleoptera
+Belostomaridae,belostomatidae,hemiptera
