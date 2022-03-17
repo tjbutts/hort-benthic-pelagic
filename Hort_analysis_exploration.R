@@ -17,8 +17,8 @@ library(disturbhf)
 hort_field
 col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
 
-# first run with Sonde profile data (chla - average between 10 -30 cm) #======================
-# Low Coupling - Sonde #======================= 
+# first run with Sonde profile data (chla - average between 10 -30 cm) #
+# Low Coupling - Sonde #
 testy_low = hort_field %>%
   select(pond_id, doy, chla) %>% 
   filter(pond_id == 'B') %>%
@@ -43,9 +43,9 @@ lines(c(211,211), c(-10,20000), lty = 3)
 lines(c(223,223), c(-10,20000), lty = 2, lwd = 2)
 abline(h=2) 
 abline(h=0.5)
-rect(180,-2,195,15, col=col, border=NA)
+rect(185,-2,190,15, col=col, border=NA)
 
-# Int Coupling - Sonde #========================= 
+# Int Coupling - Sonde #
 testy_int = hort_field %>%
   select(pond_id, doy, chla) %>% 
   filter(pond_id == 'A') %>%
@@ -71,10 +71,10 @@ lines(c(211,211), c(-10,20000), lty = 3)
 lines(c(223,223), c(-10,20000), lty = 2, lwd = 2)
 abline(h=2) 
 abline(h=0.5)
-rect(180,-2,195,15, col=col, border=NA)
+rect(185,-2,190,15, col=col, border=NA)
 
 
-# High Coupling - Sonde #==========================
+# High Coupling - Sonde #
 testy_high = hort_field %>%
   select(pond_id, doy, chla) %>% 
   filter(pond_id == 'C') %>%
@@ -125,7 +125,7 @@ windows(height = 3, width = 6.5)
 par(mfrow =c(1,3),omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
 
 mwd2_lo = mwdistdiffz(testy = testy_low, refy = refy_low,wwidth = 7, ddiff_method = 'integral')
-plot(zz~wright, type='o', xlim=c(140,245), ylim=c(-2,6), 
+plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
      cex.axis=1.2, cex=0.75, ylab = '', xlab = '',
      lwd=4, col=low_col, data=mwd2_lo)
 #Add in the nutrient pulse dates to the graph
@@ -135,7 +135,7 @@ lines(c(223,223), c(-10,20000), lty = 2, lwd = 2)
 abline(h=2, lwd=2) 
 abline(h=0.5) 
 col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
-rect(180,-4,195,15, col=col, border = NA)
+rect(185,-4,190,15, col=col, border = NA)
 mtext(side = 2, line = 3, "Z-scores", cex = 1.25)
 
 mwd2_int = mwdistdiffz(testy = testy_int, refy = refy_int, wwidth = 7, ddiff_method = 'integral')
@@ -148,7 +148,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 lines(c(223,223), c(-10,20000), lty = 2, lwd = 2)
 abline(h=2, lwd=2) 
 abline(h=0.5)
-rect(180,-4,195,15, col=col, border=NA)
+rect(185,-4,190,15, col=col, border=NA)
 mtext(side = 1, line = 3, "Day of Year, 2020", cex = 1.25)
 
 mwd2_hi = mwdistdiffz(testy = testy_high, refy = refy_high, wwidth = 7, ddiff_method = 'integral')
@@ -161,12 +161,12 @@ lines(c(211,211), c(-10,20000), lty = 3)
 lines(c(223,223), c(-10,20000), lty = 2, lwd = 2)
 abline(h=2, lwd=2) 
 abline(h=0.5)
-rect(180,-4,195,15, col=col, border=NA)
+rect(185,-4,190,15, col=col, border=NA)
 
-# first run with NEP data #==============================
+# first run with NEP data #
 hort_metabolism 
 
-# Low Coupling - NEP #======================= 
+# Low Coupling - NEP # 
 testy_low = hort_metabolism %>%
   select(pond_id, doy, NEP) %>% 
   filter(pond_id == 'B') %>%
@@ -192,7 +192,7 @@ lines(c(223,223), c(-10,20000), lty = 2, lwd = 2)
 abline(h=2) 
 abline(h=0.5)
 
-# Int Coupling - NEP #========================= 
+# Int Coupling - NEP # 
 testy_int = hort_metabolism %>%
   select(pond_id, doy, NEP) %>% 
   filter(pond_id == 'A') %>%
@@ -219,7 +219,7 @@ lines(c(223,223), c(-10,20000), lty = 2, lwd = 2)
 abline(h=2) 
 abline(h=0.5)
 
-# High Coupling - NEP #==========================
+# High Coupling - NEP #
 testy_high = hort_metabolism %>%
   select(pond_id, doy, NEP) %>% 
   filter(pond_id == 'C') %>%
@@ -317,3 +317,20 @@ lines(c(223,223), c(-10,20000), lty = 2, lwd = 2)
 abline(h=1.5) 
 abline(h=0)
 abline(h=-1.5) 
+
+# Gephart - Shock Detection #==========================
+# Steps: 
+## 1. Fit a lowess regression to time series data of the response variable 
+## 2. Plot residuals against the time-lagged residuals 
+## 3. Use Cook's D to ID extreme points in the regression of residuals versus time-lagged residuals 
+hort_field
+col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
+
+## Low coupling ## 
+low_pulse = hort_field %>%
+  filter(pond_id == 'B') %>%
+  select(pond_id, doy, chla) %>% 
+  as.data.frame()
+
+low_loess = loess(chla~doy, data=low_pulse)
+predict(low_loess)

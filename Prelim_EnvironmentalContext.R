@@ -277,14 +277,14 @@ miv_tot_ed = as.data.frame(miv_tot_ed) #undo tibble for plotting
 
 windows(height=8, width =8)
 # Ekman
-xa = miv_tot_ed[miv_tot_ed$pond_id=='A', 'doy'] # No data so far
-ya = miv_tot_ed[miv_tot_ed$pond_id=='A', 'density'] # No data so far
+xa = miv_tot_ed[miv_tot_ed$pond_id=='A', 'doy'] 
+ya = miv_tot_ed[miv_tot_ed$pond_id=='A', 'density'] 
 xb = miv_tot_ed[miv_tot_ed$pond_id=='B', 'doy']
 yb = miv_tot_ed[miv_tot_ed$pond_id=='B', 'density']
 xc = miv_tot_ed[miv_tot_ed$pond_id=='C', 'doy']
 yc = miv_tot_ed[miv_tot_ed$pond_id=='C', 'density']
-xd = miv_tot_ed[miv_tot_ed$pond_id=='D', 'doy'] # No data so far
-yd = miv_tot_ed[miv_tot_ed$pond_id=='D', 'density'] # No data so far 
+xd = miv_tot_ed[miv_tot_ed$pond_id=='D', 'doy'] 
+yd = miv_tot_ed[miv_tot_ed$pond_id=='D', 'density']  
 xe = miv_tot_ed[miv_tot_ed$pond_id=='E', 'doy']
 ye = miv_tot_ed[miv_tot_ed$pond_id=='E', 'density']
 xf = miv_tot_ed[miv_tot_ed$pond_id=='F', 'doy']
@@ -292,41 +292,45 @@ yf = miv_tot_ed[miv_tot_ed$pond_id=='F', 'density']
 
 
 par(mai=c(0.9,1.2,0.6,0.6), mfrow=c(2,1))
-max(miv_tot_ed$density) # 41153.85
-min(miv_tot_ed$density) # 6730.769
-plot(yb~xb, type='o', col=low_col, lwd=4,cex=1.5,cex.axis=1, ylim=c(6000,45000), xlim=c(140,245), ylab='',xlab='')
+max(miv_tot_ed$density) # 9224.138
+min(miv_tot_ed$density) # 301.7241
+plot(yb~xb, type='o', col=low_col, lwd=4,cex=1.5,cex.axis=1, ylim=c(0,10000), xlim=c(140,245), ylab='',xlab='')
 mtext(side=2, 'macroinvertebrate density (ED)', line=3, cex=1.5)
 mtext(side=1, 'Day of Year, 2020', line=3, cex=1.5)
 lines(yf~xf, type='o', col =low_col_trans, lwd=4)
 lines(yc~xc, type='o', col = high_col, lwd=4)
 lines(ye~xe, type='o', col = high_col_trans, lwd=4)
+lines(ya~xa, type='o', col = int_col, lwd=4)
+lines(yd~xd, type='o', col = int_col_trans, lwd=4)
 legend('topright', legend=c('low', 'int', 'high'), col=c(low_col, int_col, high_col), pch=20, cex=1.5)
 
 # Hess 
-xa = miv_tot_hs[miv_tot_hs$pond_id=='A', 'doy'] # No data so far
-ya = miv_tot_hs[miv_tot_hs$pond_id=='A', 'density'] # No data so far
+xa = miv_tot_hs[miv_tot_hs$pond_id=='A', 'doy'] 
+ya = miv_tot_hs[miv_tot_hs$pond_id=='A', 'density'] 
 xb = miv_tot_hs[miv_tot_hs$pond_id=='B', 'doy']
 yb = miv_tot_hs[miv_tot_hs$pond_id=='B', 'density']
 xc = miv_tot_hs[miv_tot_hs$pond_id=='C', 'doy']
 yc = miv_tot_hs[miv_tot_hs$pond_id=='C', 'density']
-xd = miv_tot_hs[miv_tot_hs$pond_id=='D', 'doy'] # No data so far
-yd = miv_tot_hs[miv_tot_hs$pond_id=='D', 'density'] # No data so far 
+xd = miv_tot_hs[miv_tot_hs$pond_id=='D', 'doy'] 
+yd = miv_tot_hs[miv_tot_hs$pond_id=='D', 'density'] 
 xe = miv_tot_hs[miv_tot_hs$pond_id=='E', 'doy']
 ye = miv_tot_hs[miv_tot_hs$pond_id=='E', 'density']
 xf = miv_tot_hs[miv_tot_hs$pond_id=='F', 'doy']
 yf = miv_tot_hs[miv_tot_hs$pond_id=='F', 'density']
 
 par(mai=c(0.9,1.2,0.6,0.6))
-max(miv_tot_hs$density) # 2690.141
+max(miv_tot_hs$density) # 7774.648
 min(miv_tot_hs$density) # 408.4507
-plot(yb~xb, type='o', col=low_col, lwd=4,cex=1.5,cex.axis=1, ylim=c(400,3000), xlim=c(140,245), ylab='',xlab='')
+plot(yb~xb, type='o', col=low_col, lwd=4,cex=1.5,cex.axis=1, ylim=c(0,10000), xlim=c(140,245), ylab='',xlab='')
 mtext(side=2, 'macroinvertebrate density (HS)', line=3, cex=1.5)
 mtext(side=1, 'Day of Year, 2020', line=3, cex=1.5)
 lines(yf~xf, type='o', col =low_col_trans, lwd=4)
 lines(yc~xc, type='o', col = high_col, lwd=4)
 lines(ye~xe, type='o', col = high_col_trans, lwd=4)
+lines(ya~xa, type='o', col = int_col, lwd=4)
+lines(yd~xd, type='o', col = int_col_trans, lwd=4)
 legend('topright', legend=c('low', 'int', 'high'), col=c(low_col, int_col, high_col), pch=20, cex=1.5)
-graphics.off()
+
 
 # Gastric Lavage Diet Fraction #=================
 hort_fish_gaslav 

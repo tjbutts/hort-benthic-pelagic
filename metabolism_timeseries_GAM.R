@@ -10,10 +10,10 @@ library(mgcv)
 if (!require(tidyverse)) install.packages('tidyverse')
 library(tidyverse)
 
-hort_metabolism
+hort_metabolism_clean
 
 ## Separate by grouping - total biomass, cladocerans, copepods, rotifers ## 
-nep = hort_metabolism %>% 
+nep = hort_metabolism_clean %>% 
   select(pond_id, doy, NEP)
 nep
 
@@ -43,27 +43,27 @@ nepF = nep %>% #ref, low
 
 # Int Coupling Treatment===========
 #Total P GAM - Pond A
-nep_A_gam <- gam(NEP~ s(doy, k = 90),data = nepA, method = 'REML')
+nep_A_gam <- gam(NEP~ s(doy, k = 75),data = nepA, method = 'REML')
 summary(nep_A_gam) 
 gam.check(nep_A_gam)
 #Total P GAM - Pond D
-nep_D_gam <- gam(NEP~ s(doy, k = 90),data = nepD, method = 'REML')
+nep_D_gam <- gam(NEP~ s(doy, k = 75),data = nepD, method = 'REML')
 summary(nep_D_gam) # gam.check(nep_D_gam)
 
 # High Coupling Treatment===========
 #Total P GAM - Pond C
-nep_C_gam <- gam(NEP~ s(doy, k = 90),data = nepC, method = 'REML')
+nep_C_gam <- gam(NEP~ s(doy, k = 75),data = nepC, method = 'REML')
 summary(nep_C_gam) # gam.check(nep_C_gam)
 #Total P GAM - Pond E
-nep_E_gam <- gam(NEP~ s(doy, k = 90),data = nepE, method = 'REML')
+nep_E_gam <- gam(NEP~ s(doy, k = 75),data = nepE, method = 'REML')
 summary(nep_E_gam) # gam.check(nep_E_gam)
 
 # Low Coupling Treatment===========
 #Total P GAM - Pond B
-nep_B_gam <- gam(NEP~ s(doy, k = 90),data = nepB, method = 'REML')
+nep_B_gam <- gam(NEP~ s(doy, k = 75),data = nepB, method = 'REML')
 summary(nep_B_gam) # gam.check(nep_B_gam)
 #Total P GAM - Pond F
-nep_F_gam <- gam(NEP~ s(doy, k = 90),data = nepF, method = 'REML')
+nep_F_gam <- gam(NEP~ s(doy, k = 75),data = nepF, method = 'REML')
 summary(nep_F_gam) # gam.check(nep_F_gam)
 
 # Log Scale #
@@ -186,13 +186,13 @@ mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25)
 
 
 # Respiration #=======================
-hort_metabolism
+hort_metabolism_clean
 
 ## Separate by grouping - total biomass, cladocerans, copepods, rotifers ## 
-resp = hort_metabolism %>% 
+resp = hort_metabolism_clean %>% 
   select(pond_id, doy, R)
 resp
-max(resp$R) #42
+max(resp$R) #-0.041
 min(resp$R) #-22
 
 
@@ -220,27 +220,27 @@ respF = resp %>% #ref, low
 
 # Int Coupling Treatment===========
 #Total P GAM - Pond A
-resp_A_gam <- gam(R~ s(doy, k = 90),data = respA, method = 'REML')
+resp_A_gam <- gam(R~ s(doy, k = 75),data = respA, method = 'REML')
 summary(resp_A_gam) 
 gam.check(resp_A_gam)
 #Total P GAM - Pond D
-resp_D_gam <- gam(R~ s(doy, k = 90),data = respD, method = 'REML')
+resp_D_gam <- gam(R~ s(doy, k = 75),data = respD, method = 'REML')
 summary(resp_D_gam) # gam.check(resp_D_gam)
 
 # High Coupling Treatment===========
 #Total P GAM - Pond C
-resp_C_gam <- gam(R~ s(doy, k = 90),data = respC, method = 'REML')
+resp_C_gam <- gam(R~ s(doy, k = 75),data = respC, method = 'REML')
 summary(resp_C_gam) # gam.check(resp_C_gam)
 #Total P GAM - Pond E
-resp_E_gam <- gam(R~ s(doy, k = 90),data = respE, method = 'REML')
+resp_E_gam <- gam(R~ s(doy, k = 75),data = respE, method = 'REML')
 summary(resp_E_gam) # gam.check(resp_E_gam)
 
 # Low Coupling Treatment===========
 #Total P GAM - Pond B
-resp_B_gam <- gam(R~ s(doy, k = 90),data = respB, method = 'REML')
+resp_B_gam <- gam(R~ s(doy, k = 75),data = respB, method = 'REML')
 summary(resp_B_gam) # gam.check(resp_B_gam)
 #Total P GAM - Pond F
-resp_F_gam <- gam(R~ s(doy, k = 90),data = respF, method = 'REML')
+resp_F_gam <- gam(R~ s(doy, k = 75),data = respF, method = 'REML')
 summary(resp_F_gam) # gam.check(resp_F_gam)
 
 # Log Scale # 
@@ -294,7 +294,7 @@ par(mfrow =c(1,3),omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
 plot(resp_B_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_B_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_B, ylim=c(-24,44), xlim=c(140, 245),
+     shade.col = low_col_B, ylim=c(-24,0), xlim=c(140, 245),
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = low_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -308,7 +308,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(resp_F_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_F_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(-24,44),
+     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(-24,0),
      cex = 1, pch = 17, lwd = 2, lty = 1, col = low_col_F,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 2, line = 3, "resp", cex = 1.25)
@@ -319,7 +319,7 @@ mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
 plot(resp_A_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_A_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_A, ylim=c(-24,44), xlim = c(140,245),
+     shade.col = int_col_A, ylim=c(-24,0), xlim = c(140,245),
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = int_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -333,7 +333,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(resp_D_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_D_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(-24,44), 
+     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(-24,0), 
      cex = 1, pch = 17, lwd = 2, lty = 1, col = int_col_D,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
@@ -343,7 +343,7 @@ mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
 plot(resp_C_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_C_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_C,  ylim=c(-24,44), xlim=c(140, 245), 
+     shade.col = high_col_C,  ylim=c(-24,0), xlim=c(140, 245), 
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = high_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -357,20 +357,20 @@ par(new = TRUE) #add new smooth to the same plot
 plot(resp_E_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_E_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_E, yaxt = "n", ylim=c(-24,44), xlim=c(140,245),
+     shade.col = high_col_E, yaxt = "n", ylim=c(-24,0), xlim=c(140,245),
      cex = 1, pch = 17, lwd = 2, lty = 1, col = high_col_E,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25) 
 
 # Gross Primary Production #=======================
-hort_metabolism
+hort_metabolism_clean
 
 ## Separate by grouping - total biomass, cladocerans, copepods, rotifers ## 
-gpp = hort_metabolism %>% 
+gpp = hort_metabolism_clean %>% 
   select(pond_id, doy, GPP)
 gpp
 max(gpp$GPP) #22
-min(gpp$GPP) #-30
+min(gpp$GPP) #0
 
 ## nep by pond## ===========================
 
@@ -398,27 +398,27 @@ gppF = gpp %>% #ref, low
 
 # Int Coupling Treatment===========
 #Total P GAM - Pond A
-gpp_A_gam <- gam(GPP~ s(doy, k = 90),data = gppA, method = 'REML')
+gpp_A_gam <- gam(GPP~ s(doy, k = 75),data = gppA, method = 'REML')
 summary(gpp_A_gam) 
 gam.check(gpp_A_gam)
 #Total P GAM - Pond D
-gpp_D_gam <- gam(GPP~ s(doy, k = 90),data = gppD, method = 'REML')
+gpp_D_gam <- gam(GPP~ s(doy, k = 75),data = gppD, method = 'REML')
 summary(gpp_D_gam) # gam.check(gpp_D_gam)
 
 # High Coupling Treatment===========
 #Total P GAM - Pond C
-gpp_C_gam <- gam(GPP~ s(doy, k = 90),data = gppC, method = 'REML')
+gpp_C_gam <- gam(GPP~ s(doy, k = 75),data = gppC, method = 'REML')
 summary(gpp_C_gam) # gam.check(gpp_C_gam)
 #Total P GAM - Pond E
-gpp_E_gam <- gam(GPP~ s(doy, k = 90),data = gppE, method = 'REML')
+gpp_E_gam <- gam(GPP~ s(doy, k = 75),data = gppE, method = 'REML')
 summary(gpp_E_gam) # gam.check(gpp_E_gam)
 
 # Low Coupling Treatment===========
 #Total P GAM - Pond B
-gpp_B_gam <- gam(GPP~ s(doy, k = 90),data = gppB, method = 'REML')
+gpp_B_gam <- gam(GPP~ s(doy, k = 75),data = gppB, method = 'REML')
 summary(gpp_B_gam) # gam.check(gpp_B_gam)
 #Total P GAM - Pond F
-gpp_F_gam <- gam(GPP~ s(doy, k = 90),data = gppF, method = 'REML')
+gpp_F_gam <- gam(GPP~ s(doy, k = 75),data = gppF, method = 'REML')
 summary(gpp_F_gam) # gam.check(gpp_F_gam)
 
 # Log Scale # 
@@ -472,7 +472,7 @@ par(mfrow =c(1,3),omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
 plot(gpp_B_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_B_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_B, ylim=c(-24,44), xlim=c(140, 245),
+     shade.col = low_col_B, ylim=c(0,22), xlim=c(140, 245),
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = low_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -486,7 +486,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(gpp_F_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_F_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(-24,44),
+     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(0,22),
      cex = 1, pch = 17, lwd = 2, lty = 1, col = low_col_F,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 2, line = 3, "gpp", cex = 1.25)
@@ -497,7 +497,7 @@ mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
 plot(gpp_A_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_A_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_A, ylim=c(-24,44), xlim = c(140,245),
+     shade.col = int_col_A, ylim=c(0,22), xlim = c(140,245),
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = int_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -511,7 +511,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(gpp_D_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_D_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(-24,44), 
+     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(0,22), 
      cex = 1, pch = 17, lwd = 2, lty = 1, col = int_col_D,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
@@ -521,7 +521,7 @@ mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
 plot(gpp_C_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_C_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_C,  ylim=c(-24,44), xlim=c(140, 245), 
+     shade.col = high_col_C,  ylim=c(0,22), xlim=c(140, 245), 
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = high_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -535,7 +535,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(gpp_E_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_E_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_E, yaxt = "n", ylim=c(-24,44), xlim=c(140,245),
+     shade.col = high_col_E, yaxt = "n", ylim=c(0,22), xlim=c(140,245),
      cex = 1, pch = 17, lwd = 2, lty = 1, col = high_col_E,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25) 
@@ -620,7 +620,7 @@ mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25)
 plot(resp_B_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_B_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_B, ylim=c(-24,44), xlim=c(140, 245),
+     shade.col = low_col_B, ylim=c(-24,0), xlim=c(140, 245),
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = low_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -634,7 +634,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(resp_F_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_F_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(-24,44),
+     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(-24,0),
      cex = 1, pch = 17, lwd = 2, lty = 1, col = low_col_F,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 2, line = 3, "R", cex = 1.25)
@@ -645,7 +645,7 @@ mtext(side = 2, line = 3, "R", cex = 1.25)
 plot(resp_A_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_A_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_A, ylim=c(-24,44), xlim = c(140,245),
+     shade.col = int_col_A, ylim=c(-24,0), xlim = c(140,245),
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = int_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -659,7 +659,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(resp_D_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_D_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(-24,44), 
+     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(-24,0), 
      cex = 1, pch = 17, lwd = 2, lty = 1, col = int_col_D,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -669,7 +669,7 @@ plot(resp_D_gam, select = 1,
 plot(resp_C_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_C_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_C,  ylim=c(-24,44), xlim=c(140, 245), 
+     shade.col = high_col_C,  ylim=c(-24,0), xlim=c(140, 245), 
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = high_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -683,7 +683,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(resp_E_gam, select = 1, 
      seWithMean = TRUE, shift = coef(resp_E_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_E, yaxt = "n", ylim=c(-24,44), xlim=c(140,245),
+     shade.col = high_col_E, yaxt = "n", ylim=c(-24,0), xlim=c(140,245),
      cex = 1, pch = 17, lwd = 2, lty = 1, col = high_col_E,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -691,7 +691,7 @@ plot(resp_E_gam, select = 1,
 plot(gpp_B_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_B_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_B, ylim=c(-24,44), xlim=c(140, 245),
+     shade.col = low_col_B, ylim=c(0,22), xlim=c(140, 245),
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = low_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -705,18 +705,17 @@ par(new = TRUE) #add new smooth to the same plot
 plot(gpp_F_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_F_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(-24,44),
+     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(0,22),
      cex = 1, pch = 17, lwd = 2, lty = 1, col = low_col_F,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 2, line = 3, "GPP", cex = 1.25)
-
 
 #==================================================
 #Plot of the Total P GAM for POND A ===============
 plot(gpp_A_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_A_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_A, ylim=c(-24,44), xlim = c(140,245),
+     shade.col = int_col_A, ylim=c(0,22), xlim = c(140,245),
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = int_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -730,7 +729,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(gpp_D_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_D_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(-24,44), 
+     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(0,22), 
      cex = 1, pch = 17, lwd = 2, lty = 1, col = int_col_D,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -740,7 +739,7 @@ plot(gpp_D_gam, select = 1,
 plot(gpp_C_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_C_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_C,  ylim=c(-24,44), xlim=c(140, 245), 
+     shade.col = high_col_C,  ylim=c(0,22), xlim=c(140, 245), 
      cex = 0.75, pch = 19, lwd = 2, lty = 3, col = high_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
@@ -754,7 +753,7 @@ par(new = TRUE) #add new smooth to the same plot
 plot(gpp_E_gam, select = 1, 
      seWithMean = TRUE, shift = coef(gpp_E_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_E, yaxt = "n", ylim=c(-24,44), xlim=c(140,245),
+     shade.col = high_col_E, yaxt = "n", ylim=c(0,22), xlim=c(140,245),
      cex = 1, pch = 17, lwd = 2, lty = 1, col = high_col_E,
      xlab = "", ylab = "", cex.axis= 1.2)
  

@@ -39,7 +39,17 @@ hort_dosat = read_csv('hort20_dosat_dat.csv')
 hort_dosat
 
 hort_metabolism = read_csv('daily-metabolism_data.csv') 
-hort_metabolism
+hort_gpp = hort_metabolism %>% 
+  select(pond_id, doy, GPP) %>%
+  filter(GPP >= 0)
+hort_r = hort_metabolism %>%
+  select(pond_id, doy, R) %>%
+  filter(R <= 0)
+hort_metab_join = left_join(hort_gpp, hort_r, by = c('doy', 'pond_id'))
+hort_metabolism_clean = hort_metab_join %>% 
+  mutate(NEP = GPP+R) %>% 
+  drop_na()
+hort_metabolism_clean
 
 ## Food Web Data ## 
 hort_fish_bodysize = read_csv('fish_length_weight.csv') # fish size 

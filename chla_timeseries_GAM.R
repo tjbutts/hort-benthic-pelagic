@@ -110,6 +110,7 @@ high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 # Set up the Plot
 windows(height = 3, width = 6.5)
 par(mfrow =c(1,3),omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
+col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
 
 #Plot of the Total P GAM for POND B ===============
 plot(alg_B_gam, select = 1, 
@@ -134,6 +135,7 @@ plot(alg_F_gam, select = 1,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 2, line = 3, "Chl-a Biomass (ug/L)", cex = 1.25)
 mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
+rect(185,-2,190,50, col=col, border=NA)
 
 #==================================================
 #Plot of the Total P GAM for POND A ===============
@@ -158,6 +160,7 @@ plot(alg_D_gam, select = 1,
      cex = 1, pch = 17, lwd = 2, lty = 1, col = int_col_D,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
+rect(185,-2,190,50, col=col, border=NA)
 
 #==================================================
 #Plot of the Total P GAM for POND C ===============
@@ -182,6 +185,7 @@ plot(alg_E_gam, select = 1,
      cex = 1, pch = 17, lwd = 2, lty = 1, col = high_col_E,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25) 
+rect(185,-2,190,50, col=col, border=NA)
 
 # Using a Log Scale # 
 # Set up the Plot

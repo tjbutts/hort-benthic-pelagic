@@ -76,29 +76,6 @@ field_dat_clean
 setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 write_csv(field_dat_clean, 'hort20_surface_dat.csv')
 
-## Metabolism data ## 
-setwd("C:/Users/Owner/Box/Hort Farm Experiment/2020 Benthic Pelagic Experiment")
-metabolism_dat = read_csv('ghg-model-dataset.csv') %>% select(pond_id, treatment, period, 
-                                                              doy, GPP, R, NEP)
-metabolism_dat
-dosat_minidot = read_csv('2020_dologger_dat.csv')
-dosat_minidot
-daily_do = dosat_minidot %>% 
-  mutate(datetime = mdy_hm(datetime), 
-         date = mdy(date)) %>%
-  mutate(doy = yday(date)) %>%
-  group_by(pond, doy) %>%
-  summarise(
-    dosat_dailyavg = mean(dosat)) %>%
-  rename(pond_id = pond) %>%
-  select(pond_id, doy, dosat_dailyavg) %>%
-  filter(doy > 141 & doy < 241)
-daily_do
-
-metab_join = left_join(metabolism_dat, daily_do, by = c('pond_id', 'doy'))
-metab_join
-
-setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 #write_csv(metab_join, 'hort20_metab_dat.csv')
 
 ## Food Web Data ##===============================
