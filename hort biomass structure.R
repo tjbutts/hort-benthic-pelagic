@@ -32,28 +32,28 @@ macrophy_summary_coupling
 ## Periphyton
 hort_periphy
 periphy_summary_pond= hort_periphy %>% # ug/cm^2
-  select(pond_id, collect, biomass_area_cm2) %>%
+  select(pond_id, collect, biomass_area_m2) %>%
   mutate(coupling = case_when(
     pond_id == 'B' | pond_id == 'F' ~ 'low', 
     pond_id == 'A' | pond_id == 'D' ~ 'intermediate', 
     pond_id == 'C' | pond_id == 'E' ~ 'high')) %>%
   group_by(pond_id) %>%
-  summarize(mean = mean(biomass_area_cm2, na.rm=T),
-            median = median(biomass_area_cm2, na.rm=T),
-            sd = sd(biomass_area_cm2, na.rm=T)) %>%
+  summarize(mean = mean(biomass_area_m2, na.rm=T),
+            median = median(biomass_area_m2, na.rm=T),
+            sd = sd(biomass_area_m2, na.rm=T)) %>%
   ungroup()
 periphy_summary_pond 
 
 periphy_summary_coupling = hort_periphy %>% # g/m^2 
-  select(pond_id, collect, biomass_area_cm2) %>%
+  select(pond_id, collect, biomass_area_m2) %>%
   mutate(coupling = case_when(
     pond_id == 'B' | pond_id == 'F' ~ 'low', 
     pond_id == 'A' | pond_id == 'D' ~ 'intermediate', 
     pond_id == 'C' | pond_id == 'E' ~ 'high')) %>%
   group_by(coupling) %>%
-  summarize(mean = mean(biomass_area_cm2, na.rm=T),
-            median = median(biomass_area_cm2, na.rm=T),
-            sd = sd(biomass_area_cm2, na.rm=T)) %>%
+  summarize(mean = mean(biomass_area_m2, na.rm=T),
+            median = median(biomass_area_m2, na.rm=T),
+            sd = sd(biomass_area_m2, na.rm=T)) %>%
   ungroup()
 periphy_summary_coupling
 
@@ -120,6 +120,14 @@ zoop_summary_coupling = hort_zoop %>% #ug/L
 zoop_summary_coupling
 
 # Macroinvertebrates 
+
+# Plotting # 
+# By Pond # 
+macrophy_summary_coupling = as.data.frame(macrophy_summary_coupling)
+periphy_summary_pond
+zoop_summary_pond
+
+boxplot(median~coupling, data=macrophy_summary_coupling)
 
 # Mean & Median Trophic Level Biomasses pre-first pulse ##=============================
 # 1st Trophic Level # 

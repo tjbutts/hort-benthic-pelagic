@@ -127,13 +127,13 @@ peri_dat_raw = peri_dat %>%
          pond_id = pond, 
          chl_rfu = chl) %>% 
   mutate(plate_area_m = 0.1*3) %>% # area of the 3 plates (m^2) of the periphyton samplers (Envco Hester Dendy Sampler) 
-  mutate(plate_area_cm = 1000*3) %>%
+  mutate(plate_area_cm = 3000) %>% # area of the 3 plates in cm
   select(pond_id, collect, launch, bottle_dilution, filtered_sample, chl_rfu, biomass_ug_l, plate_area_m, plate_area_cm)
 peri_dat_raw
 
 periphy_clean = peri_dat_raw %>%
   mutate(biomass_area_m2 = (biomass_ug_l*bottle_dilution)/plate_area_m) %>% # get biomass of periphyton per area (ug/m^2)
-  mutate(biomass_area_cm2 = (biomass_ug_l*bottle_dilution)/plate_area_m) %>% # get biomass of periphyton per area (ug/cm^2)
+  mutate(biomass_area_cm2 = (biomass_ug_l*bottle_dilution)/plate_area_cm) %>% # get biomass of periphyton per area (ug/cm^2)
   select(pond_id, launch, collect, biomass_area_m2, biomass_area_cm2)
 periphy_clean
 
@@ -181,7 +181,7 @@ miv_taxa
 
 miv_join = left_join(df, miv_taxa, by = 'taxa')
 miv_dat = miv_join %>%
-  select(sampleid, spelling_correct, order_class, count, gear) %>%
+  select(sampleid, spelling_correct, order_class, common_name, count, gear) %>%
   rename(taxa = spelling_correct) %>% 
   drop_na()
 miv_dat
@@ -201,8 +201,7 @@ hort_mivdensity = miv_dat2 %>%
   mutate(treatment = case_when(.$pond_id %in% c('A', 'B', 'C') ~ 'pulsed', 
                                .$pond_id %in% c('D', 'E', 'F') ~ 'reference')) %>%
   mutate(period = cut(doy, breaks=c(-Inf, 176, 212, Inf), labels=c("prepulse","postpulse1","postpulse2"))) %>%
-  select(sampleid, pond_id, doy, treatment, period, taxa, order_class, gear, density)
+  select(sampleid, pond_id, doy, treatment, period, taxa, order_class, common_name, gear, density)
 hort_mivdensity
 
-setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 #write_csv(hort_mivdensity, 'hort_mivdensity.csv')
