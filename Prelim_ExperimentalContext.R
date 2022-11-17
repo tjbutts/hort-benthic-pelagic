@@ -105,7 +105,7 @@ polygon(c(176,211,211,176), c(-100,-100,200,200), col = "gray90", border= NA)
 polygon(c(211,239,239,211), c(-100,-100,200,200), col = "gray75", border= NA)
 lines(fieldB$doy, fieldB$tp_diff, col = low_col, lwd = 2, lty = 1)
 lines(fieldF$doy, fieldF$tp_diff, col = low_col, lwd = 2, lty = 3); box()
-mtext(side = 3, line = 0.3, "Low Coupling", font = 2)
+#mtext(side = 3, line = 0.3, "Low Coupling", font = 2)
 mtext(side = 2, line = 2.7, "Total P (ug/L)", font = 2)
 
 plot(fieldA$doy, fieldA$tp_diff, type = "l", 

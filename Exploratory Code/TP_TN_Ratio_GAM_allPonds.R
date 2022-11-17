@@ -94,8 +94,8 @@ high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 
 #============================
 # Set up the Plot
-windows(height = 7, width = 6.5)
-par(mfrow = c(3,3), omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
+windows(height = 6, width = 6.5)
+par(mfrow = c(2,3), omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
 
 #Plot of the Total P GAM for POND B ===============
 plot(tp_B_gam, select = 1, 
@@ -108,7 +108,7 @@ plot(tp_B_gam, select = 1,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,100), lty = 3)
 lines(c(211,211), c(-10,100), lty = 3)
-lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
 
 #Plot of the Total P GAM for POND F ===============
 par(new = TRUE) #add new smooth to the same plot
@@ -119,7 +119,7 @@ plot(tp_F_gam, select = 1,
      cex = 1, pch = 17, lwd = 2, lty = 1, col = low_col_F,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 2, line = 3, "Total P (ug/L)", cex = 1.25)
-mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
+#mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
 
 #==================================================
 #Plot of the Total P GAM for POND A ===============
@@ -133,7 +133,7 @@ plot(tp_A_gam, select = 1,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,200), lty = 3)
 lines(c(211,211), c(-10,200), lty = 3)
-lines(c(223,223), c(-10,200), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,200), lty = 2, lwd = 2)
 
 #Plot of the Total P GAM for POND D ===============
 par(new = TRUE) #add new smooth to the same plot
@@ -143,7 +143,7 @@ plot(tp_D_gam, select = 1,
      shade.col = int_col_D, yaxt = "n",
      cex = 1, pch = 17, lwd = 2, lty = 1, col = int_col_D,
      xlab = "", ylab = "", cex.axis= 1.2)
-mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
+#mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
 
 #==================================================
 #Plot of the Total P GAM for POND C ===============
@@ -157,7 +157,7 @@ plot(tp_C_gam, select = 1,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,100), lty = 3)
 lines(c(211,211), c(-10,100), lty = 3)
-lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
 
 #Plot of the Total P GAM for POND E ===============
 par(new = TRUE) #add new smooth to the same plot
@@ -167,7 +167,7 @@ plot(tp_E_gam, select = 1,
      shade.col = high_col_E, yaxt = "n",
      cex = 1, pch = 17, lwd = 2, lty = 1, col = high_col_E,
      xlab = "", ylab = "", cex.axis= 1.2)
-mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25)
+#mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25)
 
 
 # GAM-ing the nutrients for pattern - not analysis...
@@ -208,7 +208,7 @@ plot(tn_B_gam, select = 1,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,100), lty = 3)
 lines(c(211,211), c(-10,100), lty = 3)
-lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
 
 #Plot of the Total N GAM for POND F ===============
 par(new = TRUE) #add new smooth to the same plot
@@ -232,7 +232,7 @@ plot(tn_A_gam, select = 1,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,200), lty = 3)
 lines(c(211,211), c(-10,200), lty = 3)
-lines(c(223,223), c(-10,200), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,200), lty = 2, lwd = 2)
 
 #Plot of the Total N GAM for POND D ===============
 par(new = TRUE) #add new smooth to the same plot
@@ -255,7 +255,7 @@ plot(tn_C_gam, select = 1,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,100), lty = 3)
 lines(c(211,211), c(-10,100), lty = 3)
-lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,100), lty = 2, lwd = 2)
 
 #Plot of the Total N GAM for POND E ===============
 par(new = TRUE) #add new smooth to the same plot

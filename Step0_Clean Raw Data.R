@@ -181,7 +181,7 @@ miv_taxa
 
 miv_join = left_join(df, miv_taxa, by = 'taxa')
 miv_dat = miv_join %>%
-  select(sampleid, spelling_correct, order_class, common_name, count, gear) %>%
+  select(sampleid, spelling_correct, order_class, common_name, feeding_type, count, gear) %>%
   rename(taxa = spelling_correct) %>% 
   drop_na()
 miv_dat
@@ -201,7 +201,7 @@ hort_mivdensity = miv_dat2 %>%
   mutate(treatment = case_when(.$pond_id %in% c('A', 'B', 'C') ~ 'pulsed', 
                                .$pond_id %in% c('D', 'E', 'F') ~ 'reference')) %>%
   mutate(period = cut(doy, breaks=c(-Inf, 176, 212, Inf), labels=c("prepulse","postpulse1","postpulse2"))) %>%
-  select(sampleid, pond_id, doy, treatment, period, taxa, order_class, common_name, gear, density)
+  select(sampleid, pond_id, doy, treatment, period, taxa, order_class, common_name, feeding_type, gear, density)
 hort_mivdensity
 
 #write_csv(hort_mivdensity, 'hort_mivdensity.csv')

@@ -38,6 +38,20 @@ algE = chl %>% #ref, high
 algF = chl %>% #ref, low
   filter(pond_id == "F") 
 
+# Example program 
+#================================================
+algA
+windows(height = 3, width = 4)
+plot(chla~doy, data = algA, type='l', lwd=2, col=int_col, xlim=c(165, 245), ylim=c(0, 40),
+     cex = 1, pch = 17, lty = 1)
+par(new = TRUE) #add new smooth to the same plot
+plot(chla~doy, data = algD, type='l', lwd=2, col=ref_col, xlim=c(165, 245), ylim=c(0, 40),
+     cex = 1, pch = 17, lty = 1)
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+
+
 # GAM-ing the chlorophyll for pattern - not analysis...
 #=============================================================
 
@@ -96,6 +110,8 @@ summary(alg_F_gam2) # gam.check(alg_F_gam2)
 low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
 low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
 low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
 
 int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
 int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
@@ -105,87 +121,177 @@ high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
 high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
 high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 
+#============================
+# Set up Blank Plot 
+windows(height = 3, width = 6.5)
+par(mfrow =c(1,3),omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
+#col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
+
+
+
+#Plot of the Total P GAM for POND B ===============
+plot(alg_F_gam, select = 1, 
+     seWithMean = FALSE, shift = coef(alg_F_gam)[1],
+     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
+     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(0, 35),
+     cex = .75, pch = 17, lwd = 0.5, lty = 1, col = low_col,
+     xlab = "", ylab = "", cex.axis= 1.2)
+
+#Plot of the Total P GAM for POND F ===============
+par(new = TRUE) #add new smooth to the same plot
+plot(alg_B_gam, select = 1, 
+     seWithMean = FALSE, shift = coef(alg_B_gam)[1],
+     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
+     shade.col = ref_col, ylim=c(0, 35), xlim=c(140, 245),
+     cex = 0.75, pch = 16, lwd = 0.5, lty = 1, col = ref_col,
+     xlab = "", ylab = "", cex.axis= 1.2)
+mtext(side = 2, line = 3, "Chlorophyll-a (ug/L)", cex = 1.25)
+#mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
+#rect(185,-2,190,50, col=col, border=NA)
+
+
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+#lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+
+#==================================================
+#Plot of the Total P GAM for POND A ===============
+plot(alg_D_gam, select = 1, 
+     seWithMean = TRUE, shift = coef(alg_D_gam)[1],
+     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
+     shade.col = 'white', yaxt = "n", xlim = c(140, 245), ylim=c(0, 35), 
+     cex = 1, pch = 17, lwd = 2, lty = 1, col = 'white',
+     xlab = "", ylab = "", cex.axis= 1.2)
+
+#Plot of the Total P GAM for POND D ===============
+par(new = TRUE) #add new smooth to the same plot
+plot(alg_A_gam, select = 1, 
+     seWithMean = TRUE, shift = coef(alg_A_gam)[1],
+     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
+     shade.col = 'white', ylim=c(0, 35), xlim = c(140,245),
+     cex = 0.75, pch = 19, lwd = 2, lty = 3, col = 'white',
+     xlab = "", ylab = "", cex.axis= 1.2)
+#mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
+#rect(185,-2,190,50, col=col, border=NA)
+
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+#lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+#==================================================
+#Plot of the Total P GAM for POND C ===============
+plot(alg_E_gam, select = 1, 
+     seWithMean = TRUE, shift = coef(alg_E_gam)[1],
+     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
+     shade.col = 'white', yaxt = "n", ylim=c(0, 35), xlim=c(140,245),
+     cex = 1, pch = 17, lwd = 2, lty = 1, col = 'white',
+     xlab = "", ylab = "", cex.axis= 1.2)
+#mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25) 
+#rect(185,-2,190,50, col=col, border=NA)
+
+#Plot of the Total P GAM for POND E ===============
+par(new = TRUE) #add new smooth to the same plot
+plot(alg_C_gam, select = 1, 
+     seWithMean = TRUE, shift = coef(alg_C_gam)[1],
+     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
+     shade.col = 'white',  ylim=c(0, 35), xlim=c(140, 245), 
+     cex = 0.75, pch = 19, lwd = 2, lty = 3, col = 'white',
+     xlab = "", ylab = "", cex.axis= 1.2)
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+#lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
 
 #============================
 # Set up the Plot
-windows(height = 3, width = 6.5)
-par(mfrow =c(1,3),omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
-col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
+windows(height = 3, width = 5)
+par(omi = c(0.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
+#col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
 
-#Plot of the Total P GAM for POND B ===============
-plot(alg_B_gam, select = 1, 
-     seWithMean = TRUE, shift = coef(alg_B_gam)[1],
+dat = read_csv('daily-sonde-profiles_mean-values_10-30cm_gapfilled.csv')
+algF = dat %>%
+  filter(pond_id == 'F')
+algB = dat %>% 
+  filter(pond_id == 'B')
+ 
+plot(chla~doy, type = 'l', lwd=2, data = algF, col = 'gray60', ylab='', xlab='')
+points(chla~doy, type='l', lwd=2, data = algB, col = low_col)
+
+#Plot of the Total P GAM for POND F ===============
+plot(alg_F_gam, select = 1, 
+     seWithMean = TRUE, shift = coef(alg_F_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_B, ylim=c(0, 35), xlim=c(140, 245),
-     cex = 0.75, pch = 19, lwd = 2, lty = 3, col = low_col,
+     shade.col = ref_col, yaxt = "n", xlim=c(140, 245), ylim=c(0, 35),
+     cex = .75, pch = 17, lwd = 0.5, lty = 1, col = ref_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
 
-#Plot of the Total P GAM for POND F ===============
+#Plot of the Total P GAM for POND B ===============
 par(new = TRUE) #add new smooth to the same plot
-plot(alg_F_gam, select = 1, 
-     seWithMean = TRUE, shift = coef(alg_F_gam)[1],
+plot(alg_B_gam, select = 1, 
+     seWithMean = TRUE, shift = coef(alg_B_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = low_col_F, yaxt = "n", xlim=c(140, 245), ylim=c(0, 35),
-     cex = 1, pch = 17, lwd = 2, lty = 1, col = low_col_F,
+     shade.col = low_col_F, ylim=c(0, 35), xlim=c(140, 245),
+     cex = 0.75, pch = 16, lwd = 0.5, lty = 1, col = low_col,
      xlab = "", ylab = "", cex.axis= 1.2)
-mtext(side = 2, line = 3, "Chl-a Biomass (ug/L)", cex = 1.25)
-mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
-rect(185,-2,190,50, col=col, border=NA)
+mtext(side = 2, line = 3, "Chlorophyll-a (ug/L)", cex = 1.25)
+#mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
+#rect(185,-2,190,50, col=col, border=NA)
 
 #==================================================
+#Plot of the Total P GAM for POND D ===============
+plot(alg_D_gam, select = 1, 
+     seWithMean = TRUE, shift = coef(alg_D_gam)[1],
+     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
+     shade.col = ref_col, yaxt = "n", xlim = c(140, 245), ylim=c(0, 35), 
+     cex = 0.75, pch = 17, lwd = 0.5, lty = 1, col = ref_col,
+     xlab = "", ylab = "", cex.axis= 1.2)
+
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+#lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+
 #Plot of the Total P GAM for POND A ===============
+par(new = TRUE) #add new smooth to the same plot
 plot(alg_A_gam, select = 1, 
      seWithMean = TRUE, shift = coef(alg_A_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
      shade.col = int_col_A, ylim=c(0, 35), xlim = c(140,245),
-     cex = 0.75, pch = 19, lwd = 2, lty = 3, col = int_col,
+     cex = 0.75, pch = 16, lwd = 0.5, lty = 1, col = int_col,
      xlab = "", ylab = "", cex.axis= 1.2)
+#mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
+#rect(185,-2,190,50, col=col, border=NA)
+
+#==================================================
+#Plot of the Total P GAM for POND C ===============
+plot(alg_E_gam, select = 1, 
+     seWithMean = TRUE, shift = coef(alg_E_gam)[1],
+     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
+     shade.col = ref_col, yaxt = "n", ylim=c(0, 35), xlim=c(140,245),
+     cex = .75, pch = 17, lwd = .5, lty = 1, col = ref_col,
+     xlab = "", ylab = "", cex.axis= 1.2)
+#mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25) 
+#rect(185,-2,190,50, col=col, border=NA)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
 
-#Plot of the Total P GAM for POND D ===============
+#Plot of the Total P GAM for POND E ===============
 par(new = TRUE) #add new smooth to the same plot
-plot(alg_D_gam, select = 1, 
-     seWithMean = TRUE, shift = coef(alg_D_gam)[1],
-     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = int_col_D, yaxt = "n", xlim = c(140, 245), ylim=c(0, 35), 
-     cex = 1, pch = 17, lwd = 2, lty = 1, col = int_col_D,
-     xlab = "", ylab = "", cex.axis= 1.2)
-mtext(side = 3, line = 0.5, "Int. Coupling", cex = 1.25)
-rect(185,-2,190,50, col=col, border=NA)
-
-#==================================================
-#Plot of the Total P GAM for POND C ===============
 plot(alg_C_gam, select = 1, 
      seWithMean = TRUE, shift = coef(alg_C_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
      shade.col = high_col_C,  ylim=c(0, 35), xlim=c(140, 245), 
-     cex = 0.75, pch = 19, lwd = 2, lty = 3, col = high_col,
+     cex = 0.75, pch = 16, lwd = 0.5, lty = 1, col = high_col,
      xlab = "", ylab = "", cex.axis= 1.2)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,700), lty = 3)
-lines(c(211,211), c(-10,700), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-
-#Plot of the Total P GAM for POND E ===============
-par(new = TRUE) #add new smooth to the same plot
-plot(alg_E_gam, select = 1, 
-     seWithMean = TRUE, shift = coef(alg_E_gam)[1],
-     se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
-     shade.col = high_col_E, yaxt = "n", ylim=c(0, 35), xlim=c(140,245),
-     cex = 1, pch = 17, lwd = 2, lty = 1, col = high_col_E,
-     xlab = "", ylab = "", cex.axis= 1.2)
-mtext(side = 3, line = 0.5, "High Coupling", cex = 1.25) 
-rect(185,-2,190,50, col=col, border=NA)
 
 # Using a Log Scale # 
 # Set up the Plot
@@ -203,7 +309,7 @@ plot(alg_B_gam2, select = 1,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+#lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
 axis(side=2,
      at=c(log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
           log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100),
@@ -220,7 +326,7 @@ plot(alg_F_gam2, select = 1,
      cex = 1, pch = 17, lwd = 2, lty = 1, col = low_col_F, yaxt='n', 
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 2, line = 3, "Total Zooplankton (ug/L)", cex = 1.25)
-mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
+#mtext(side = 3, line = 0.5, "Low Coupling", cex = 1.25)
 
 
 #Plot of the Total P gam2 for POND A ===============
