@@ -200,6 +200,21 @@ gam.check(gpp_F_gam)
 windows(height = 9, width = 6)
 par(mfrow =c(3,3),omi = c(3,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
 
+#Colors for data visualization
+#Ref: lty = 1, pulse: lty = 1
+low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
+low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
+low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+
+int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
+int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
+int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
+
+high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 plot(nep_B_gam, select = 1, 
      seWithMean = TRUE, shift = coef(nep_B_gam)[1],
      se = TRUE, residuals = TRUE, all.terms = TRUE, shade = TRUE, rug = FALSE,
@@ -214,6 +229,7 @@ plot(nep_F_gam, select = 1,
      cex = .75, pch = 17, lwd = .5, lty = 1, col = ref_col,
      xlab = "", ylab = "", cex.axis= 1.2)
 mtext(side = 2, line = 3, "NEP", cex = 1.25)
+mtext(side = 3, line = 1, 'Low Coupling', cex = 1.25)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
@@ -232,6 +248,7 @@ plot(nep_D_gam, select = 1,
      shade.col = ref_col, yaxt = "n", xlim = c(140, 245), ylim=c(-8,7), 
      cex = .75, pch = 17, lwd = .5, lty = 1, col = ref_col,
      xlab = "", ylab = "", cex.axis= 1.2)
+mtext(side = 3, line = 1, 'Intermediate', cex = 1.25)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
@@ -250,6 +267,7 @@ plot(nep_E_gam, select = 1,
      shade.col = ref_col, yaxt = "n", ylim=c(-8,7), xlim=c(140,245),
      cex = .75, pch = 17, lwd = .5, lty = 1, col = ref_col,
      xlab = "", ylab = "", cex.axis= 1.2)
+mtext(side = 3, line = 1, 'High Coupling', cex = 1.25)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
@@ -344,6 +362,7 @@ plot(r_D_gam, select = 1,
      shade.col = ref_col, yaxt = "n", xlim = c(140, 245), ylim=c(-20,0), 
      cex = .75, pch = 17, lwd = .5, lty = 1, col = ref_col,
      xlab = "", ylab = "", cex.axis= 1.2)
+mtext('Day of Year, 2020', side = 1, cex=1.25, line = 3)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)

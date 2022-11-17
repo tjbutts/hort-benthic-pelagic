@@ -280,8 +280,8 @@ high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
 high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 
 # Disturbed Ponds #===================== 
-windows(height = 3, width = 6)
-par(mfrow =c(1,3),omi = c(0.8,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
+windows(height = 6, width = 6)
+par(mfrow =c(2,3),omi = c(1.5,0.5,0.5,0.1), mai = c(0.3,0.3,0.1,0.1))
 
 # Pulsed Low 
 x.full = as.vector(algB$chla) 
@@ -355,3 +355,76 @@ B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
 
 mtext('High Coupling', side = 3, line = 1, cex = 1.25)
+
+ ## Reference Ponds ##==================================
+# Reference Low 
+x.full = as.vector(algF$chla) 
+T.full = as.vector(algF$doy)
+
+title = c('Low Coupling AR(1)', line = 1) #Title for the plot
+color= 'black' # this is the color for the eigenvalue line
+color1="gray88" #this is the color for the error polygon 
+nobs = length(x.full)
+
+# START PROTOTYPE SHELL
+# USER MUST INPUT: nl; delta; x.full; T.full; title
+
+nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+delta = 0.9 # 0<delta<1; see advice in functions
+
+ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
+mtext(side = 2, line = 3, "Eigenvalues", cex = 1.25)
+
+Yyhat = ODL.out[[1]]
+EigenVals = ODL.out[[2]]
+B.ests = ODL.out[[3]]
+B.sd = ODL.out[[4]]
+
+# Pulsed Intermediate 
+x.full = as.vector(algD$chla) 
+T.full = as.vector(algD$doy)
+
+title = c('Intermediate AR(1)', line = 1) #Title for the plot
+color= 'black' # this is the color for the eigenvalue line
+color1="gray88" #this is the color for the error polygon 
+nobs = length(x.full)
+
+# START PROTOTYPE SHELL
+# USER MUST INPUT: nl; delta; x.full; T.full; title
+
+nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+delta = 0.9 # 0<delta<1; see advice in functions
+
+ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
+
+Yyhat = ODL.out[[1]]
+EigenVals = ODL.out[[2]]
+B.ests = ODL.out[[3]]
+B.sd = ODL.out[[4]]
+
+mtext('Day of Year, 2020', side = 1, line = 3, cex = 1.25)
+
+# Pulsed High 
+x.full = as.vector(algE$chla) 
+T.full = as.vector(algE$doy)
+
+title = c('High Coupling AR(1)', line = 1) #Title for the plot
+color= 'black' # this is the color for the eigenvalue line
+color1="gray88" #this is the color for the error polygon 
+nobs = length(x.full)
+
+# START PROTOTYPE SHELL
+# USER MUST INPUT: nl; delta; x.full; T.full; title
+
+nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+delta = 0.9 # 0<delta<1; see advice in functions
+
+ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
+
+Yyhat = ODL.out[[1]]
+EigenVals = ODL.out[[2]]
+B.ests = ODL.out[[3]]
+B.sd = ODL.out[[4]]
+
+#mtext('High Coupling', side = 3, line = 1, cex = 1.25)
+
