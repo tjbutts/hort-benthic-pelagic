@@ -126,7 +126,7 @@ peri_dat_raw = peri_dat %>%
          filtered_sample = filtered,
          pond_id = pond, 
          chl_rfu = chl) %>% 
-  mutate(plate_area_m = 0.1*3) %>% # area of the 3 plates (m^2) of the periphyton samplers (Envco Hester Dendy Sampler) 
+  mutate(plate_area_m = 0.3) %>% # area of the 3 plates (m^2) of the periphyton samplers (Envco Hester Dendy Sampler) 
   mutate(plate_area_cm = 3000) %>% # area of the 3 plates in cm
   select(pond_id, collect, launch, bottle_dilution, filtered_sample, chl_rfu, biomass_ug_l, plate_area_m, plate_area_cm)
 peri_dat_raw
@@ -138,7 +138,7 @@ periphy_clean = peri_dat_raw %>%
 periphy_clean
 
 setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
-#write_csv(periphy_clean, 'periphy_clean.csv')  
+write_csv(periphy_clean, 'periphy_clean.csv')  
 
 ## Macrophytes ## 
 setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Macrophytes")
@@ -166,15 +166,17 @@ setwd("C:/Users/Tyler/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experim
 ## Macroinvertebrates ## 
 # Combine .csv files into one file
 # Read in individual .csv into one .csv file 
-df <- list.files(path="J:/Box Sync/Iowa Data/Biology Data/Macroinvertebrates/2020 Hort Farm Macroinvertebrate Sheets", full.names = TRUE) %>% 
+df <- list.files(path="C:/Users/tjbut/Box Sync/Iowa Data/Biology Data/Macroinvertebrates/2020 Hort Farm Macroinvertebrate Sheets", full.names = TRUE) %>% 
   lapply(read_csv) %>% 
   bind_rows 
-df 
+df = df[,1:4] %>% drop_na()
+df
 
-unique(df$taxa) # Add to 'unique_miv_taxa' dataset key 
+unique = as.data.frame(unique(df$taxa))
 
+    
 # Add in order taxonomic classification #
-setwd("J:/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
+setwd("C:/Users/tjbut/Box Sync/Hort Farm Experiment/2020 Benthic Pelagic Experiment/Tyler Hort Resilience/hort-benthic-pelagic")
 miv_taxa = read_csv('unique_miv_taxa.csv')
 miv_taxa %<>% rename(taxa = unique_taxa)
 miv_taxa
@@ -204,4 +206,4 @@ hort_mivdensity = miv_dat2 %>%
   select(sampleid, pond_id, doy, treatment, period, taxa, order_class, common_name, feeding_type, gear, density)
 hort_mivdensity
 
-#write_csv(hort_mivdensity, 'hort_mivdensity.csv')
+write_csv(hort_mivdensity, 'hort_mivdensity.csv')
