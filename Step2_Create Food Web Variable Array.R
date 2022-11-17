@@ -9,6 +9,7 @@
 library(ggplot2)
 library(scales)
 library(gridExtra)
+library(ggpubr)
 
 #Plotting Colors
 #Colors for data visualization
@@ -100,7 +101,11 @@ p3 = ggplot(high_zoop, aes(x=treatment, y=biomass, fill = treatment, alpha = tre
   theme(legend.position='none')
 p3
 
-grid.arrange(p1, p2, p3, ncol=3, nrow=1)
+
+windows(height = 3, width = 6)
+
+plots = grid.arrange(p1, p2, p3, ncol=3, nrow=1)
+
    
 ## Zoobenthos Density ##========================
 hort_mivdensity
