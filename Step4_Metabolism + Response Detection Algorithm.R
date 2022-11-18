@@ -343,7 +343,7 @@ plot(r_F_gam, select = 1,
      shade.col = ref_col, yaxt = "n", xlim=c(140, 245), ylim=c(-20,0),
      cex = .75, pch = 17, lwd = .5, lty = 1, col = ref_col,
      xlab = "", ylab = "", cex.axis= 1.2)
-mtext(side = 2, line = 3, "GPP", cex = 1.25)
+mtext(side = 2, line = 3, "R", cex = 1.25)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
