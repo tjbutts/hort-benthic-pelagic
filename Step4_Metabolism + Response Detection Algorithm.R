@@ -22,7 +22,7 @@ doy = as.data.frame(c(145:240)) %>% rename(doy = 'c(145:240)')
 dat_y = select(metab, pond_id, doy, GPP) 
 # Can use GPP, R, or NEP as the flag removes all data from a DOY if GPP or R is erroneous
 
-dat = as_tibble(merge(gpp_y, doy, by = 'doy', all=TRUE))
+dat = as_tibble(merge(dat_y, doy, by = 'doy', all=TRUE))
 dat
 
 windows(width=6, height = 6)
@@ -140,6 +140,8 @@ r_F_gam <- gam(R~ s(doy, k = 75),data = rF, method = 'REML')
 summary(r_F_gam) # Smoothing term significant 
 gam.check(r_F_gam)
 
+# A and E are significant (may indicate k is too low?)
+
 # GPP GAMs #============================
 gpp = metab %>% 
   select(pond_id, doy, GPP)
@@ -195,6 +197,7 @@ gpp_F_gam <- gam(GPP~ s(doy, k = 75),data = gppF, method = 'REML')
 summary(gpp_F_gam) # Smoothing term significant 
 gam.check(gpp_F_gam)
 
+## E is significant ## 
 
 ## Plotting Metabolism ##===============
 windows(height = 9, width = 6)
