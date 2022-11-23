@@ -107,11 +107,12 @@ alg_E_smooth = predict(alg_E_loess, se = TRUE)
 
 
 # Plot Chlorophyll #========================
-windows(height = 3, width = 6, pointsize = 10)
-#pdf(file = "C:/Users/tjbut/Downloads/plot-test.pdf", # Directory to save file 
- #   width = 6, # width in inches 
-  #  height = 3) # height in inches
-par(mfrow =c(1,3), mai = c(0.3,0.1,0.1,0.1))
+windows(height = 3, width = 6)
+
+#pdf(file = "C:/Users/tjbut/Downloads/plot-test.pdf", 
+ #   height = 3, 
+  #  width = 6)
+par(mfrow =c(1,3), mai = c(0.3,0.1,0.1,0.1), omi = c(0.5,0.7,0.5,0.1))
 
 plot(algF$chla, x=algF$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
      ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = ref_col)
@@ -128,7 +129,12 @@ polygon(c(142:240, 240:142), c(alg_B_smooth$fit - alg_B_smooth$se.fit,
                                rev(alg_B_smooth$fit + alg_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(alg_B_smooth$fit, x=algB$doy, col=low_col_B, lwd = 1.5)
-mtext(side = 2, line = 3, "Chlorophyll-a (ug/L)", cex = 10/12)
+mtext(side = 2, line = 3.2, 
+      expression('Chlorophyll-'~italic(a)), cex = 9/12)
+mtext(side = 2, line = 2, 
+      expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 9/12)
+
+
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
@@ -176,5 +182,5 @@ lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
 
 # Create the pdf of the plot 
-dev.off()
+# dev.off()
 
