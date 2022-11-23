@@ -631,10 +631,8 @@ lines(c(100,300), c(0,0), lty = 1)
 # Window for checking plot 
 # windows(height = 8, width = 6) 
 
-here('figures') # Create figure in the figures folder 
-
 # Will create plot in whatever file path you set  
-pdf(file = "C:/Users/tjbut/Downloads/Hort_Figure3.pdf", 
+pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure3.pdf", 
    height = 8, 
   width = 6)
 
