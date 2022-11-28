@@ -35,6 +35,13 @@ hort_met
 hort_field = read_csv('hort20_surface_dat.csv')
 hort_field
 
+hort_carbon = read_csv('hort_carbon_2020.csv') %>% 
+  filter(sampleID != 'BLANK') %>%
+  select(pondID, doy, TOC_ppb) %>%
+  rename(pond_id = pondID) %>%
+  mutate(DOC_mgL = TOC_ppb*.001)
+hort_carbon
+
 # Sonde profile data - average between 10 - 30 cm depth 
    # One DOY is missing in early summer, data filled by linear interpolation 
 hort_sonde = read_csv('daily-sonde-profiles_mean-values_10-30cm_gapfilled.csv')
