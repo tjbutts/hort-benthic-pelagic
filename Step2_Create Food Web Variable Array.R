@@ -9,9 +9,13 @@
 #Plotting Colors
 #Colors for data visualization
 #Ref: lty = 3, pulse: lty = 1
+# ========= PLOTTING COLORS ===== # 
 low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
 low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
 low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+transparent = rgb(255,255,255, max=255, alpha = 0)
 
 int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
 int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
@@ -20,6 +24,7 @@ int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
 high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
 high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
 high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
+
 
 ############# Boxplot Figure #######################
 

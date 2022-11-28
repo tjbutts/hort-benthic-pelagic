@@ -4,8 +4,7 @@
 # Code originally written by TJ Butts & GM Wilkinson November 2022
 
 #============================================#
-# STEP 3: Chlorophyll-a time series 
-#           & Response Detection Algorithm
+# STEP 3: Chl-a, GPP, R, NEP dynamics 
 #============================================#
 
 # Read in the relevant data and packages
@@ -629,7 +628,7 @@ lines(c(100,300), c(0,0), lty = 1)
 # Combine chlorophyll, gpp, r, and nep plots into one array #==========================
 
 # Window for checking plot 
-# windows(height = 8, width = 6) 
+windows(height = 8, width = 6) 
 
 # Will create plot in whatever file path you set  
 pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure3.pdf", 
