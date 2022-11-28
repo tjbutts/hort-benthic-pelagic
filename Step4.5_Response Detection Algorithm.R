@@ -170,10 +170,10 @@ high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 
 ## ============ Plot Margins ================= ##
 # Window for checking plot 
-windows(height = 4, width = 6) 
+#windows(height = 4, width = 6) 
 
 # Will create plot in whatever file path you set  
-pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure3.pdf", 
+pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure4.pdf", 
     height = 4, 
     width = 6)
 
@@ -218,7 +218,7 @@ text(141, 6, 'B', font = 2)
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent, 
-     lwd=4, col=high_col, data=rda_high)
+     lwd=3, col=high_col, data=rda_high)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -249,13 +249,14 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 abline(h=0.5) 
-text(141, 6, 'C', font = 2)
+text(141, 6, 'D', font = 2)
 
 ## Intermediate Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
-      ylab = '', xlab = 'Day of Year, 2020', yaxt = 'n', 
+      ylab = '', xlab = '', yaxt = 'n', 
      lwd=3, col=int_col, data=rda_int2)
 axis(side = 2, at = c(-2, 0, 2, 4, 6), labels = F)
+mtext(side = 1, line = 2, 'Day of Year, 2020', cex = 9/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -264,7 +265,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 abline(h=0.5)
-text(141, 6, 'D', font = 2)
+text(141, 6, 'E', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
@@ -279,4 +280,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 abline(h=0.5)
-text(141, 6, 'E', font = 2)
+text(141, 6, 'F', font = 2)
+
+# Create plot in specified file path # 
+dev.off()
