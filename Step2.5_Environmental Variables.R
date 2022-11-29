@@ -99,21 +99,22 @@ nhx_avg = nhx %>%
 nhx_avg 
 
 ##DOC_mgL ##=============
-DOC_mgL = hort_carbon %>%
-  select(pond_id, doy, DOC_mgL) %>% 
-  filter(DOC_mgL != 'NA')
-DOC_mgL
+doc = hort_carbon %>%
+  drop_na() %>% 
+  group_by(pond_id, doy) %>%
+  summarize(doc_ppm = mean(doc_ppm))
+doc
 
-n = DOC_mgL %>% filter(pond_id == 'A') 
+n = doc %>% filter(pond_id == 'A') 
 n
 
-DOC_mgL_avg = DOC_mgL %>%
+doc_avg = doc %>%
   group_by(pond_id) %>%
-  summarize(DOC_mgL_avg = mean(DOC_mgL), 
-            DOC_mgL_sd = sd(DOC_mgL)) %>%
+  summarize(doc_avg = mean(doc_ppm), # ppm = mg/L 
+            doc_sd = sd(doc_ppm)) %>%
   ungroup()
 
-DOC_mgL_avg 
+doc_avg 
 
 ## Macrophyte dry biomass ## 
 
