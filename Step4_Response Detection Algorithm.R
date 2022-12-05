@@ -84,8 +84,16 @@ rda_high = mwdistdiffz(testy = testy_high, refy = refy_high,
                        ddiff_method = 'integral')
 
 # Gross Primary Production #===================
-# data # 
-metab 
+# data - need to include NAs for rollign window # 
+metab_gross = read_csv('daily-metabolism_data_robertcorrected.csv') 
+metab_gross$doy # Look for missing day of years # 
+# No missing days 
+
+# Replace values with flag =1 with NAs # 
+metab_gross$GPP[metab_gross$flag == 1] <- NA
+metab_gross$R[metab_gross$flag == 1] <- NA
+metab_gross$NEP[metab_gross$flag == 1] <- NA
+metab_gross # False data now removed and replaced with NAs 
 
 # Run Response Detection Analysis # 
 # Create disturbed and reference time series # 
@@ -170,12 +178,12 @@ high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 
 ## ============ Plot Margins ================= ##
 # Window for checking plot 
-#windows(height = 4, width = 6) 
+windows(height = 4, width = 6) 
 
 # Will create plot in whatever file path you set  
-pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure4.pdf", 
-    height = 4, 
-    width = 6)
+#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure4.pdf", 
+ #   height = 4, 
+ #    width = 6)
 
 # Set dimensions for figure array # 
 par(mfrow =c(2,3), mar = c(0,0.5,0.5,0), oma = c(4,4,.5,.5))
