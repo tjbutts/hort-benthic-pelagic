@@ -14,6 +14,11 @@
 
 graphics.off()
 
+#============================================# 
+ # Chlorophyll - a Dynamic Linear Modeling #==========
+#============================================#
+
+
 ## ============ Plot Margins ================= ##
 # Window for checking plot 
 #windows(height = 4, width = 6) 
@@ -321,7 +326,7 @@ ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2))
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 9/12)
-mtext(side = 2, line = 2, 'Eigenvalues', cex = 9/12)
+mtext(side = 2, line = 2, 'Eigenvalues, Pulsed', cex = 9/12)
 text(167, 1.2, 'A', font = 2)
 
 Yyhat = ODL.out[[1]]
@@ -524,8 +529,8 @@ x.full = as.vector(algF$chla)
 T.full = as.vector(algF$doy)
 
 #title = c('Low Coupling AR(1)', line = 1) #Title for the plot
-color= 'gray88' # this is the color for the eigenvalue line
-color1=low_col_F #this is the color for the error polygon 
+color= low_col_B # this is the color for the eigenvalue line
+color1= 'gray88' #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
@@ -537,7 +542,7 @@ delta = 0.9 # 0<delta<1; see advice in functions
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 9/12)
-mtext(side = 2, line = 2, 'Eigenvalues', cex = 9/12)
+mtext(side = 2, line = 2, 'Eigenvalues, Reference', cex = 9/12)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2))
 text(167, 1.2, 'D', font = 2)
 
@@ -552,8 +557,8 @@ x.full = as.vector(algD$chla)
 T.full = as.vector(algD$doy)
 
 #title = c('Intermediate AR(1)', line = 1) #Title for the plot
-color= 'gray88' # this is the color for the eigenvalue line
-color1=int_col_D #this is the color for the error polygon 
+color= int_col_D # this is the color for the eigenvalue line
+color1= 'gray88' #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
@@ -578,8 +583,8 @@ x.full = as.vector(algE$chla)
 T.full = as.vector(algE$doy)
 
 #title = c('High Coupling AR(1)', line = 1) #Title for the plot
-color= 'gray88' # this is the color for the eigenvalue line
-color1=high_col_E #this is the color for the error polygon 
+color= high_col_E # this is the color for the eigenvalue line
+color1='gray88' #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
@@ -602,3 +607,4 @@ B.sd = ODL.out[[4]]
 
 # Print plot in specified file # 
 dev.off()
+
