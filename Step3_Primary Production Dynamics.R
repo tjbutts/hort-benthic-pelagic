@@ -104,82 +104,6 @@ alg_E_loess
 # get smoothed output
 alg_E_smooth = predict(alg_E_loess, se = TRUE) 
 
-
-# Check Plots of Chlorophyll #========================
-windows(height = 3, width = 6)
-
-#pdf(file = "C:/Users/tjbut/Downloads/plot-test.pdf", 
- #   height = 3, 
-  #  width = 6)
-par(mfrow =c(1,3), mai = c(0.3,0.1,0.1,0.1), omi = c(0.5,0.7,0.5,0.1))
-
-plot(algF$chla, x=algF$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
-     ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = ref_col)
-polygon(c(142:240, 240:142), c(alg_F_smooth$fit - alg_F_smooth$se.fit, 
-                               rev(alg_F_smooth$fit + alg_F_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(alg_F_smooth$fit, x=algF$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(algB$chla, x=algB$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
-     ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = low_col_F)
-polygon(c(142:240, 240:142), c(alg_B_smooth$fit - alg_B_smooth$se.fit, 
-                               rev(alg_B_smooth$fit + alg_B_smooth$se.fit)), 
-        col = low_col_F, border = NA)
-lines(alg_B_smooth$fit, x=algB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 3.2, 
-      expression('Chlorophyll-'~italic(a)), cex = 9/12)
-mtext(side = 2, line = 2, 
-      expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 9/12)
-
-
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,700), lty = 3)
-lines(c(211,211), c(-10,700), lty = 3)
-
-plot(algD$chla, x=algD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(0, 35), col = ref_col, col.axis = transparent)
-polygon(c(142:240, 240:142), c(alg_D_smooth$fit - alg_D_smooth$se.fit, 
-                               rev(alg_D_smooth$fit + alg_D_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(alg_D_smooth$fit, x=algD$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(algA$chla, x=algA$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-      xlim=c(140, 245), ylim=c(0, 35), col = int_col_D, yaxt= 'n')
-polygon(c(142:240, 240:142), c(alg_A_smooth$fit - alg_A_smooth$se.fit, 
-                               rev(alg_A_smooth$fit + alg_A_smooth$se.fit)), 
-        col = int_col_D, border = NA)
-lines(alg_A_smooth$fit, x=algA$doy, col=int_col_D, lwd = 2)
-mtext(side = 1, line = 3, "Day of Year, 2020", cex = 10/12)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,700), lty = 3)
-lines(c(211,211), c(-10,700), lty = 3)
-
-plot(algE$chla, x=algE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(0, 35), col = ref_col, col.axis = transparent)
-polygon(c(142:240, 240:142), c(alg_E_smooth$fit - alg_E_smooth$se.fit, 
-                               rev(alg_E_smooth$fit + alg_E_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(alg_E_smooth$fit, x=algE$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(algC$chla, x=algC$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(0, 35), col = high_col_E, yaxt = 'n')
-polygon(c(142:240, 240:142), c(alg_C_smooth$fit - alg_C_smooth$se.fit, 
-                               rev(alg_C_smooth$fit + alg_C_smooth$se.fit)), 
-        col = high_col_E, border = NA)
-lines(alg_C_smooth$fit, x=algC$doy, col=high_col_E, lwd = 2)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,700), lty = 3)
-lines(c(211,211), c(-10,700), lty = 3)
-
 # Create the pdf of the plot 
 # dev.off()
 
@@ -216,14 +140,14 @@ set.seed(55)
 
 #======= LOW ========# 
 # loess low pulse 
-gpp_B_loess = loess(GPP ~ doy, data = gppB, span = 0.10) # 10% span
+gpp_B_loess = loess(GPP ~ doy, data = gppB, span = 0.30) # 10% span
 gpp_B_loess # 89 obsv
 
 # get smoothed output
 gpp_B_smooth = predict(gpp_B_loess, se = TRUE)
 
 # loess low reference
-gpp_F_loess = loess(GPP ~ doy, data = gppF, span = 0.10) # 10% span
+gpp_F_loess = loess(GPP ~ doy, data = gppF, span = 0.30) # 10% span
 gpp_F_loess # 92 obsv
 
 # get smoothed output
@@ -231,14 +155,14 @@ gpp_F_smooth = predict(gpp_F_loess, se = TRUE)
 
 #======= INTERMEDIATE ========# 
 # loess intermediate pulse
-gpp_A_loess = loess(GPP ~ doy, data = gppA, span = 0.10) # 10% span
+gpp_A_loess = loess(GPP ~ doy, data = gppA, span = 0.30) # 10% span
 gpp_A_loess
 
 # get smoothed output
 gpp_A_smooth = predict(gpp_A_loess, se = TRUE)
 
 # loess intermediate reference
-gpp_D_loess = loess(GPP ~ doy, data = gppD, span = 0.10) # 10% span
+gpp_D_loess = loess(GPP ~ doy, data = gppD, span = 0.30) # 10% span
 gpp_D_loess
 
 # get smoothed output
@@ -246,89 +170,18 @@ gpp_D_smooth = predict(gpp_D_loess, se = TRUE)
 
 #======= HIGH ========# 
 # loess intermediate pulse
-gpp_C_loess = loess(GPP ~ doy, data = gppC, span = 0.10) # 10% span
+gpp_C_loess = loess(GPP ~ doy, data = gppC, span = 0.30) # 10% span
 gpp_C_loess
 
 # get smoothed output
 gpp_C_smooth = predict(gpp_C_loess, se = TRUE)
 
 # loess intermediate reference
-gpp_E_loess = loess(GPP ~ doy, data = gppE, span = 0.10) # 10% span
+gpp_E_loess = loess(GPP ~ doy, data = gppE, span = 0.30) # 10% span
 gpp_E_loess
 
 # get smoothed output
 gpp_E_smooth = predict(gpp_E_loess, se = TRUE) 
-
-# Check Plots for GPP #========================
-windows(height = 3, width = 6)
-
-#pdf(file = "C:/Users/tjbut/Downloads/plot-test.pdf", 
-#   height = 3, 
-#  width = 6)
-par(mfrow =c(1,3), mai = c(0.3,0.1,0.1,0.1), omi = c(0.5,0.7,0.5,0.1))
-
-plot(gppF$GPP, x=gppF$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
-     ylab = '', xlim=c(140, 245), ylim=c(0, 20), col = ref_col)
-polygon(c(gppF$doy, rev(gppF$doy)), c(gpp_F_smooth$fit - gpp_F_smooth$se.fit, 
-                               rev(gpp_F_smooth$fit + gpp_F_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(gpp_F_smooth$fit, x=gppF$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(gppB$GPP, x=gppB$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
-     ylab = '', xlim=c(140, 245), ylim=c(0, 20), col = low_col_F)
-polygon(c(gppB$doy, rev(gppB$doy)), c(gpp_B_smooth$fit - gpp_B_smooth$se.fit, 
-                               rev(gpp_B_smooth$fit + gpp_B_smooth$se.fit)), 
-        col = low_col_F, border = NA)
-lines(gpp_B_smooth$fit, x=gppB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2, 'Gross Primary Production', cex = 9/12)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,700), lty = 3)
-lines(c(211,211), c(-10,700), lty = 3)
-
-plot(gppD$GPP, x=gppD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(0, 20), col = ref_col, col.axis = transparent)
-polygon(c(gppD$doy, rev(gppD$doy)), c(gpp_D_smooth$fit - gpp_D_smooth$se.fit, 
-                               rev(gpp_D_smooth$fit + gpp_D_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(gpp_D_smooth$fit, x=gppD$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(gppA$GPP, x=gppA$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(0, 20), col = int_col_D, yaxt= 'n')
-polygon(c(gppA$doy, rev(gppA$doy)), c(gpp_A_smooth$fit - gpp_A_smooth$se.fit, 
-                               rev(gpp_A_smooth$fit + gpp_A_smooth$se.fit)), 
-        col = int_col_D, border = NA)
-lines(gpp_A_smooth$fit, x=gppA$doy, col=int_col_D, lwd = 2)
-mtext(side = 1, line = 3, "Day of Year, 2020", cex = 10/12)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,700), lty = 3)
-lines(c(211,211), c(-10,700), lty = 3)
-
-plot(gppE$GPP, x=gppE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(0, 20), col = ref_col, col.axis = transparent)
-polygon(c(gppE$doy, rev(gppE$doy)), c(gpp_E_smooth$fit - gpp_E_smooth$se.fit, 
-                               rev(gpp_E_smooth$fit + gpp_E_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(gpp_E_smooth$fit, x=gppE$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(gppC$GPP, x=gppC$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(0, 20), col = high_col_E, yaxt = 'n')
-polygon(c(gppC$doy, rev(gppC$doy)), c(gpp_C_smooth$fit - gpp_C_smooth$se.fit, 
-                               rev(gpp_C_smooth$fit + gpp_C_smooth$se.fit)), 
-        col = high_col_E, border = NA)
-lines(gpp_C_smooth$fit, x=gppC$doy, col=high_col_E, lwd = 2)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,700), lty = 3)
-lines(c(211,211), c(-10,700), lty = 3)
-
 
 # LOESS regression of R for pattern - not analysis ##==========================
 
@@ -363,14 +216,14 @@ set.seed(55)
 
 #======= LOW ========# 
 # loess low pulse 
-resp_B_loess = loess(R ~ doy, data = respB, span = 0.10) # 10% span
+resp_B_loess = loess(R ~ doy, data = respB, span = 0.30) # 10% span
 resp_B_loess # 89 obsv
 
 # get smoothed output
 resp_B_smooth = predict(resp_B_loess, se = TRUE)
 
 # loess low reference
-resp_F_loess = loess(R ~ doy, data = respF, span = 0.10) # 10% span
+resp_F_loess = loess(R ~ doy, data = respF, span = 0.30) # 10% span
 resp_F_loess # 92 obsv
 
 # get smoothed output
@@ -378,14 +231,14 @@ resp_F_smooth = predict(resp_F_loess, se = TRUE)
 
 #======= INTERMEDIATE ========# 
 # loess intermediate pulse
-resp_A_loess = loess(R ~ doy, data = respA, span = 0.10) # 10% span
+resp_A_loess = loess(R ~ doy, data = respA, span = 0.30) # 10% span
 resp_A_loess
 
 # get smoothed output
 resp_A_smooth = predict(resp_A_loess, se = TRUE)
 
 # loess intermediate reference
-resp_D_loess = loess(R ~ doy, data = respD, span = 0.10) # 10% span
+resp_D_loess = loess(R ~ doy, data = respD, span = 0.30) # 10% span
 resp_D_loess
 
 # get smoothed output
@@ -393,88 +246,18 @@ resp_D_smooth = predict(resp_D_loess, se = TRUE)
 
 #======= HIGH ========# 
 # loess intermediate pulse
-resp_C_loess = loess(R ~ doy, data = respC, span = 0.10) # 10% span
+resp_C_loess = loess(R ~ doy, data = respC, span = 0.30) # 10% span
 resp_C_loess
 
 # get smoothed output
 resp_C_smooth = predict(resp_C_loess, se = TRUE)
 
 # loess intermediate reference
-resp_E_loess = loess(R ~ doy, data = respE, span = 0.10) # 10% span
+resp_E_loess = loess(R ~ doy, data = respE, span = 0.30) # 10% span
 resp_E_loess
 
 # get smoothed output
 resp_E_smooth = predict(resp_E_loess, se = TRUE) 
-
-# Check Plots for R #========================
-windows(height = 3, width = 6)
-
-#pdf(file = "C:/Users/tjbut/Downloads/plot-test.pdf", 
-#   height = 3, 
-#  width = 6)
-par(mfrow =c(1,3), mai = c(0.3,0.1,0.1,0.1), omi = c(0.5,0.7,0.5,0.1))
-
-plot(respF$R, x=respF$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
-     ylab = '', xlim=c(140, 245), ylim=c(-20, 0), col = ref_col)
-polygon(c(respF$doy, rev(respF$doy)), c(resp_F_smooth$fit - resp_F_smooth$se.fit, 
-                                      rev(resp_F_smooth$fit + resp_F_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(resp_F_smooth$fit, x=respF$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(respB$R, x=respB$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
-     ylab = '', xlim=c(140, 245), ylim=c(-20, 0), col = low_col_F)
-polygon(c(respB$doy, rev(respB$doy)), c(resp_B_smooth$fit - resp_B_smooth$se.fit, 
-                                      rev(resp_B_smooth$fit + resp_B_smooth$se.fit)), 
-        col = low_col_F, border = NA)
-lines(resp_B_smooth$fit, x=respB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2, 'Respiration', cex = 9/12)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-100,700), lty = 3)
-lines(c(211,211), c(-100,700), lty = 3)
-
-plot(respD$R, x=respD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(-20, 0), col = ref_col, col.axis = transparent)
-polygon(c(respD$doy, rev(respD$doy)), c(resp_D_smooth$fit - resp_D_smooth$se.fit, 
-                                      rev(resp_D_smooth$fit + resp_D_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(resp_D_smooth$fit, x=respD$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(respA$R, x=respA$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(-20, 0), col = int_col_D, yaxt= 'n')
-polygon(c(respA$doy, rev(respA$doy)), c(resp_A_smooth$fit - resp_A_smooth$se.fit, 
-                                      rev(resp_A_smooth$fit + resp_A_smooth$se.fit)), 
-        col = int_col_D, border = NA)
-lines(resp_A_smooth$fit, x=respA$doy, col=int_col_D, lwd = 2)
-mtext(side = 1, line = 3, "Day of Year, 2020", cex = 10/12)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-100,700), lty = 3)
-lines(c(211,211), c(-100,700), lty = 3)
-
-plot(respE$R, x=respE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(-20, 0), col = ref_col, col.axis = transparent)
-polygon(c(respE$doy, rev(respE$doy)), c(resp_E_smooth$fit - resp_E_smooth$se.fit, 
-                                      rev(resp_E_smooth$fit + resp_E_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(resp_E_smooth$fit, x=respE$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(respC$R, x=respC$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(-20, 0), col = high_col_E, yaxt = 'n')
-polygon(c(respC$doy, rev(respC$doy)), c(resp_C_smooth$fit - resp_C_smooth$se.fit, 
-                                      rev(resp_C_smooth$fit + resp_C_smooth$se.fit)), 
-        col = high_col_E, border = NA)
-lines(resp_C_smooth$fit, x=respC$doy, col=high_col_E, lwd = 2)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-100,700), lty = 3)
-lines(c(211,211), c(-100,700), lty = 3)
 
 # LOESS regression of NEP for pattern - not analysis ##==========================
 
@@ -509,14 +292,14 @@ set.seed(55)
 
 #======= LOW ========# 
 # loess low pulse 
-netp_B_loess = loess(NEP ~ doy, data = netpB, span = 0.10) # 10% span
+netp_B_loess = loess(NEP ~ doy, data = netpB, span = 0.30) # 10% span
 netp_B_loess # 89 obsv
 
 # get smoothed output
 netp_B_smooth = predict(netp_B_loess, se = TRUE)
 
 # loess low reference
-netp_F_loess = loess(NEP ~ doy, data = netpF, span = 0.10) # 10% span
+netp_F_loess = loess(NEP ~ doy, data = netpF, span = 0.30) # 10% span
 netp_F_loess # 92 obsv
 
 # get smoothed output
@@ -524,14 +307,14 @@ netp_F_smooth = predict(netp_F_loess, se = TRUE)
 
 #======= INTERMEDIATE ========# 
 # loess intermediate pulse
-netp_A_loess = loess(NEP ~ doy, data = netpA, span = 0.10) # 10% span
+netp_A_loess = loess(NEP ~ doy, data = netpA, span = 0.30) # 10% span
 netp_A_loess
 
 # get smoothed output
 netp_A_smooth = predict(netp_A_loess, se = TRUE)
 
 # loess intermediate reference
-netp_D_loess = loess(NEP ~ doy, data = netpD, span = 0.10) # 10% span
+netp_D_loess = loess(NEP ~ doy, data = netpD, span = 0.30) # 10% span
 netp_D_loess
 
 # get smoothed output
@@ -539,91 +322,19 @@ netp_D_smooth = predict(netp_D_loess, se = TRUE)
 
 #======= HIGH ========# 
 # loess intermediate pulse
-netp_C_loess = loess(NEP ~ doy, data = netpC, span = 0.10) # 10% span
+netp_C_loess = loess(NEP ~ doy, data = netpC, span = 0.30) # 10% span
 netp_C_loess
 
 # get smoothed output
 netp_C_smooth = predict(netp_C_loess, se = TRUE)
 
 # loess intermediate reference
-netp_E_loess = loess(NEP ~ doy, data = netpE, span = 0.10) # 10% span
+netp_E_loess = loess(NEP ~ doy, data = netpE, span = 0.30) # 10% span
 netp_E_loess
 
 # get smoothed output
 netp_E_smooth = predict(netp_E_loess, se = TRUE) 
 
-# Check Plots for NEP #========================
-windows(height = 3, width = 6) 
-
-#pdf(file = "C:/Users/tjbut/Downloads/Hort_Figure3.pdf", 
-#   height = 3, 
-#  width = 6)
-par(mfrow =c(1,3), mai = c(0.3,0.1,0.1,0.1), omi = c(0.5,0.7,0.5,0.1))
-
-plot(netpF$NEP, x=netpF$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
-     ylab = '', xlim=c(140, 245), ylim=c(-8, 7), col = ref_col)
-polygon(c(netpF$doy, rev(netpF$doy)), c(netp_F_smooth$fit - netp_F_smooth$se.fit, 
-                                        rev(netp_F_smooth$fit + netp_F_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(netp_F_smooth$fit, x=netpF$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(netpB$NEP, x=netpB$doy, type = 'p', pch = 20, cex=1.5, xlab = '',
-     ylab = '', xlim=c(140, 245), ylim=c(-8, 7), col = low_col_F)
-polygon(c(netpB$doy, rev(netpB$doy)), c(netp_B_smooth$fit - netp_B_smooth$se.fit, 
-                                        rev(netp_B_smooth$fit + netp_B_smooth$se.fit)), 
-        col = low_col_F, border = NA)
-lines(netp_B_smooth$fit, x=netpB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2, 'Net Ecosystem Production', cex = 9/12)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-100,700), lty = 3)
-lines(c(211,211), c(-100,700), lty = 3)
-lines(c(100,300), c(0,0), lty = 1)
-
-plot(netpD$NEP, x=netpD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(-8, 7), col = ref_col, col.axis = transparent)
-polygon(c(netpD$doy, rev(netpD$doy)), c(netp_D_smooth$fit - netp_D_smooth$se.fit, 
-                                        rev(netp_D_smooth$fit + netp_D_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(netp_D_smooth$fit, x=netpD$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(netpA$NEP, x=netpA$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(-8, 7), col = int_col_D, yaxt= 'n')
-polygon(c(netpA$doy, rev(netpA$doy)), c(netp_A_smooth$fit - netp_A_smooth$se.fit, 
-                                        rev(netp_A_smooth$fit + netp_A_smooth$se.fit)), 
-        col = int_col_D, border = NA)
-lines(netp_A_smooth$fit, x=netpA$doy, col=int_col_D, lwd = 2)
-mtext(side = 1, line = 3, "Day of Year, 2020", cex = 10/12)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-100,700), lty = 3)
-lines(c(211,211), c(-100,700), lty = 3)
-lines(c(100,300), c(0,0), lty = 1)
-
-plot(netpE$NEP, x=netpE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(-8, 7), col = ref_col, col.axis = transparent)
-polygon(c(netpE$doy, rev(netpE$doy)), c(netp_E_smooth$fit - netp_E_smooth$se.fit, 
-                                        rev(netp_E_smooth$fit + netp_E_smooth$se.fit)), 
-        col = ref_col, border = NA)
-lines(netp_E_smooth$fit, x=netpE$doy, col=ref_col, lwd = 2)
-
-par(new=T) # add new smooth to same plot 
-
-plot(netpC$NEP, x=netpC$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
-     xlim=c(140, 245), ylim=c(-8, 7), col = high_col_E, yaxt = 'n')
-polygon(c(netpC$doy, rev(netpC$doy)), c(netp_C_smooth$fit - netp_C_smooth$se.fit, 
-                                        rev(netp_C_smooth$fit + netp_C_smooth$se.fit)), 
-        col = high_col_E, border = NA)
-lines(netp_C_smooth$fit, x=netpC$doy, col=high_col_E, lwd = 2)
-
-#Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-100,700), lty = 3)
-lines(c(211,211), c(-100,700), lty = 3)
-lines(c(100,300), c(0,0), lty = 1)
 
 # Combine chlorophyll, gpp, r, and nep plots into one array #==========================
 
@@ -636,7 +347,7 @@ pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort
   width = 6)
 
 # Set dimensions for figure array # 
-par(mfrow =c(4,3), mar = c(0,0.5,0.5,0), oma = c(4,4,.5,.5))
+par(mfrow =c(4,3), mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
 par(tcl = -0.25)
 par(mgp = c(2, 0.6, 0))
 
@@ -658,9 +369,9 @@ polygon(c(142:240, 240:142), c(alg_B_smooth$fit - alg_B_smooth$se.fit,
         col = low_col_F, border = NA)
 lines(alg_B_smooth$fit, x=algB$doy, col=low_col_B, lwd = 2)
 mtext(side = 2, line = 3.2, 
-      expression('Chlorophyll-'~italic(a)), cex = 9/12)
+      expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 
-      expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 9/12)
+      expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 11/12)
 axis(side = 2, at = c(0,5,10,15,20,25,30,35)) 
 text(141, 35, 'A', font = 2)
 
@@ -727,7 +438,7 @@ polygon(c(gppB$doy, rev(gppB$doy)), c(gpp_B_smooth$fit - gpp_B_smooth$se.fit,
                                       rev(gpp_B_smooth$fit + gpp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(gpp_B_smooth$fit, x=gppB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'Gross Primary Production', cex = 9/12)
+mtext(side = 2, line = 2.5, 'GPP', cex = 11/12)
 axis(side = 2, at = c(0,5,10,15,20))
 text(141, 20, 'D', font = 2)
 
@@ -794,7 +505,7 @@ polygon(c(respB$doy, rev(respB$doy)), c(resp_B_smooth$fit - resp_B_smooth$se.fit
                                         rev(resp_B_smooth$fit + resp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(resp_B_smooth$fit, x=respB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'Respiration', cex = 9/12)
+mtext(side = 2, line = 2.5, 'R', cex = 11/12)
 axis(side =2, at = c(-20, -15, -10, -5, 0))
 text(141, 0, 'G', font = 2)
 
@@ -860,7 +571,7 @@ polygon(c(netpB$doy, rev(netpB$doy)), c(netp_B_smooth$fit - netp_B_smooth$se.fit
                                         rev(netp_B_smooth$fit + netp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(netp_B_smooth$fit, x=netpB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'Net Ecosystem Production', cex = 9/12)
+mtext(side = 2, line = 2.5, 'NEP', cex = 11/12)
 axis(side = 2, at=c(-5, 0, 5))
 text(141, 8, 'J', font = 2)
 
@@ -884,7 +595,7 @@ polygon(c(netpA$doy, rev(netpA$doy)), c(netp_A_smooth$fit - netp_A_smooth$se.fit
                                         rev(netp_A_smooth$fit + netp_A_smooth$se.fit)), 
         col = int_col_D, border = NA)
 lines(netp_A_smooth$fit, x=netpA$doy, col=int_col_D, lwd = 2)
-mtext(side = 1, line = 2.5, "Day of Year, 2020", cex = 10/12) 
+mtext(side = 1, line = 2.5, "Day of Year, 2020", cex = 11/12) 
 text(141, 8, 'K', font = 2)
 
 #Add in the nutrient pulse dates to the graph
@@ -915,5 +626,5 @@ lines(c(211,211), c(-100,700), lty = 3)
 #lines(c(100,300), c(0,0), lty = 1)
 
 # Create the pdf of the plot 
-dev.off()
+#dev.off()
 
