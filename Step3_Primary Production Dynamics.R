@@ -339,11 +339,11 @@ netp_E_smooth = predict(netp_E_loess, se = TRUE)
 # Combine chlorophyll, gpp, r, and nep plots into one array #==========================
 
 # Window for checking plot 
-windows(height = 8, width = 6) 
+#windows(height = 8, width = 6) 
 
 # Will create plot in whatever file path you set  
 pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure3.pdf", 
-   height = 8, 
+  height = 8, 
   width = 6)
 
 # Set dimensions for figure array # 
@@ -354,7 +354,7 @@ par(mgp = c(2, 0.6, 0))
 ## Chlorophyll Final plot ========================
 # Set plot dimensions # 
 plot(algF$chla, x=algF$doy, type = 'p', pch = 20, cex=1.5, xlab = '', col.axis = transparent,
-     ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = ref_col, yaxt='n' )
+     ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = ref_col, yaxt='n', cex.axis = 1.2 )
 polygon(c(142:240, 240:142), c(alg_F_smooth$fit - alg_F_smooth$se.fit, 
                                rev(alg_F_smooth$fit + alg_F_smooth$se.fit)), 
         col = ref_col, border = NA)
@@ -372,7 +372,7 @@ mtext(side = 2, line = 3.2,
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 
       expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 11/12)
-axis(side = 2, at = c(0,5,10,15,20,25,30,35)) 
+axis(side = 2, at = c(0,5,10,15,20,25,30,35), cex.axis = 1) 
 text(141, 35, 'A', font = 2)
 
 #Add in the nutrient pulse dates to the graph
@@ -626,5 +626,5 @@ lines(c(211,211), c(-100,700), lty = 3)
 #lines(c(100,300), c(0,0), lty = 1)
 
 # Create the pdf of the plot 
-#dev.off()
+dev.off()
 
