@@ -339,7 +339,7 @@ netp_E_smooth = predict(netp_E_loess, se = TRUE)
 # Combine chlorophyll, gpp, r, and nep plots into one array #==========================
 
 # Window for checking plot 
-#windows(height = 8, width = 6) 
+windows(height = 8, width = 6) 
 
 # Will create plot in whatever file path you set  
 pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure3.pdf", 
