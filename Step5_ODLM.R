@@ -21,15 +21,15 @@ graphics.off()
 
 ## ============ Plot Margins ================= ##
 # Window for checking plot 
-#windows(height = 4, width = 6) 
+windows(height = 4, width = 6) 
 
 # Will create plot in whatever file path you set  
-pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure5.pdf", 
-    height = 4, 
-    width = 6)
+#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure5.pdf", 
+ #   height = 4, 
+  #  width = 6)
 
 # Set dimensions for figure array # 
-par(mfrow =c(2,3), mar = c(0,0.5,0.5,0), oma = c(4,4,.5,.5))
+par(mfrow =c(2,3),  mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
 par(tcl = -0.25)
 par(mgp = c(2, 0.6, 0)) 
 
@@ -325,9 +325,10 @@ delta = 0.9 # 0<delta<1; see advice in functions
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2))
 mtext(side = 2, line = 3.2, 
-      expression('Chlorophyll-'~italic(a)), cex = 9/12)
-mtext(side = 2, line = 2, 'Eigenvalues, Pulsed', cex = 9/12)
+      expression('Chlorophyll-'~italic(a)), cex = 11/12)
+mtext(side = 2, line = 2, 'Eigenvalues, Pulsed', cex = 11/12)
 text(167, 1.2, 'A', font = 2)
+mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
@@ -353,6 +354,7 @@ delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = FALSE)
+mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 text(167, 1.2, 'B', font = 2)
 Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
@@ -378,6 +380,7 @@ delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = FALSE)
+mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
 text(167, 1.2, 'C', font = 2)
 
 Yyhat = ODL.out[[1]]
@@ -541,8 +544,8 @@ delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 mtext(side = 2, line = 3.2, 
-      expression('Chlorophyll-'~italic(a)), cex = 9/12)
-mtext(side = 2, line = 2, 'Eigenvalues, Reference', cex = 9/12)
+      expression('Chlorophyll-'~italic(a)), cex = 11/12)
+mtext(side = 2, line = 2, 'Eigenvalues, Reference', cex = 11/12)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2))
 text(167, 1.2, 'D', font = 2)
 
@@ -576,7 +579,7 @@ EigenVals = ODL.out[[2]]
 B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
 
-mtext('Day of Year, 2020', side = 1, line = 2, cex = 9/12)
+mtext('Day of Year, 2020', side = 1, line = 2, cex = 11/12)
 
 # Pulsed High 
 x.full = as.vector(algE$chla) 
@@ -606,5 +609,7 @@ B.sd = ODL.out[[4]]
 #mtext('High Coupling', side = 3, line = 1, cex = 1.25)
 
 # Print plot in specified file # 
-dev.off()
+
+
+#dev.off()
 

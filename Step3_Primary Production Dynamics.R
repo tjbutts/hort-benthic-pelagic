@@ -342,9 +342,9 @@ netp_E_smooth = predict(netp_E_loess, se = TRUE)
 windows(height = 8, width = 6) 
 
 # Will create plot in whatever file path you set  
-pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure3.pdf", 
-  height = 8, 
-  width = 6)
+#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure3.pdf", 
+ # height = 8, 
+  #width = 6)
 
 # Set dimensions for figure array # 
 par(mfrow =c(4,3), mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
@@ -359,6 +359,7 @@ polygon(c(142:240, 240:142), c(alg_F_smooth$fit - alg_F_smooth$se.fit,
                                rev(alg_F_smooth$fit + alg_F_smooth$se.fit)), 
         col = ref_col, border = NA)
 lines(alg_F_smooth$fit, x=algF$doy, col=ref_col, lwd = 2)
+mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
@@ -385,6 +386,7 @@ polygon(c(142:240, 240:142), c(alg_D_smooth$fit - alg_D_smooth$se.fit,
                                rev(alg_D_smooth$fit + alg_D_smooth$se.fit)), 
         col = ref_col, border = NA)
 lines(alg_D_smooth$fit, x=algD$doy, col=ref_col, lwd = 2)
+mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
@@ -416,6 +418,7 @@ polygon(c(142:240, 240:142), c(alg_C_smooth$fit - alg_C_smooth$se.fit,
         col = high_col_E, border = NA)
 lines(alg_C_smooth$fit, x=algC$doy, col=high_col_E, lwd = 2)
 text(141, 35, 'C', font = 2)
+mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
@@ -626,5 +629,5 @@ lines(c(211,211), c(-100,700), lty = 3)
 #lines(c(100,300), c(0,0), lty = 1)
 
 # Create the pdf of the plot 
-dev.off()
+#dev.off()
 

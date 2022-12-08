@@ -350,6 +350,7 @@ mtext(side = 2, line = 3.2,
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 6, 'A', font = 2)
+mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -363,6 +364,7 @@ abline(h=0.5)
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent,
      lwd=3, col=int_col, data=rda_int)
+mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -377,6 +379,7 @@ text(141, 6, 'B', font = 2)
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent, 
      lwd=3, col=high_col, data=rda_high)
+mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)

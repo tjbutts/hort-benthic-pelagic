@@ -134,9 +134,9 @@ high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 windows(height = 6, width = 6) 
 
 # Will create plot in whatever file path you set  
-pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure2.pdf", 
-    height = 6, 
-    width = 6)
+#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure2.pdf", 
+ #   height = 6, 
+ #    width = 6)
 
 # Set dimensions for figure array # 
 par(mfrow =c(3,3), mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
@@ -148,16 +148,17 @@ boxplot(log(biomass)~treatment, data = low_zoop, ylim = c(log(1), log(800)),
         yaxt = 'n', col=c(low_col_B, ref_col), 
         ylab = 'ZP Biomass (ug/L)', col.axis = transparent, at = c(3,5), 
         cex.axis = 1.5)
+mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 axis(side=2,
      at=c( log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
            log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
            log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
      labels = c('1', '', '', '', '', '', '', '', '', '10', '', '','','','','','','','100','','','','','','','800'),
-     las=2)
+     las=0)
 mtext(side = 2, line = 3.2, 
-      expression('Zooplankton'), cex = 9/12)
-mtext(side = 2, line = 2, 
-      expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 9/12)
+      expression('Zooplankton'), cex = 11/12)
+mtext(side = 2, line = 1.8, 
+      expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 11/12)
 # Add data points # 
 stripchart(log(biomass)~treatment, vertical = TRUE, data = low_zoop, at = c(3,5),
            method = 'jitter', add = TRUE, pch = 20, col = 'black', cex = 1.5)
@@ -166,6 +167,7 @@ text(2.55, log(800), 'A', font = 2)
 boxplot(log(biomass)~treatment, data = int_zoop, ylim = c(log(1), log(800)), col.axis = transparent,
         yaxt = 'n', col=c(int_col_A, ref_col), 
         ylab = '', at = c(3,5))
+mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 # Add data points # 
 stripchart(log(biomass)~treatment, vertical = TRUE, data = int_zoop, at = c(3,5),
            method = 'jitter', add = TRUE, pch = 20, col = 'black', cex = 1.5)
@@ -174,12 +176,14 @@ axis(side=2,
            log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
            log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
      labels = c('', '', '', '', '', '', '', '', '', '', '', '','','','','','','','','','','','','','',''),
-     las=2, cex.axis=.8)
+     las=0, cex.axis=.8)
 text(2.55, log(800), 'B', font = 2)
 
 boxplot(log(biomass)~treatment, data = high_zoop, ylim = c(log(1), log(800)), 
         yaxt = 'n', col=c(high_col_C, ref_col), col.axis = transparent, 
         ylab = '', at = c(3,5))
+mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+
 # Add data points # 
 stripchart(log(biomass)~treatment, vertical = TRUE, data = low_zoop, at = c(3,5), 
            method = 'jitter', add = TRUE, pch = 20, col = 'black', cex = 1.5)
@@ -188,7 +192,7 @@ axis(side=2,
            log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
            log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
      labels = c('', '', '', '', '', '', '', '', '', '', '', '','','','','','','','','','','','','','',''),
-     las=2, cex.axis=.8)
+     las=0, cex.axis=.8)
 text(2.55, log(800), 'C', font = 2)
 
 ## Plot Zoobenthos Density ##=======================
@@ -203,11 +207,11 @@ axis(side=2,
      at=c(log(300),log(400),log(500),log(600),log(700),log(800), log(900), log(1000),
           log(2000), log(3000), log(4000), log(5000), log(6000), log(7000), log(8000), log(9000), log(10000), log(20000)), #Where the tick marks should be drawn
      labels = c('300','','','','','','','1000', '','','','','','','','','',''),
-     las=2)
+     las=0)
 mtext(side = 2, line = 3.5, 
-      expression('Zoobenthos'), cex = 9/12)
-mtext(side = 2, line = 2.3, 
-      expression('Density' ~"(#"~L^-1*")"), cex = 9/12)
+      expression('Macroinvertebrate'), cex = 11/12)
+mtext(side = 2, line = 1.8, 
+      expression('Density' ~"(#"~L^-1*")"), cex = 11/12)
 text(2.55, log(14000), 'D', font = 2)
 
 boxplot(log(density)~treatment, data = int_miv, ylim = c(log(300), log(14000)), 
@@ -220,7 +224,7 @@ axis(side=2,
      at=c(log(300),log(400),log(500),log(600),log(700),log(800), log(900), log(1000),
           log(2000), log(3000), log(4000), log(5000), log(6000), log(7000), log(8000), log(9000), log(10000), log(20000)), #Where the tick marks should be drawn
      labels = c('','','','','','','','', '','','','','','','','','',''),
-     las=2)
+     las=0)
 text(2.55, log(14000), 'E', font = 2)
 
 boxplot(log(density)~treatment, data = high_miv, ylim = c(log(300), log(14000)), 
@@ -233,29 +237,29 @@ axis(side=2,
      at=c(log(300),log(400),log(500),log(600),log(700),log(800), log(900), log(1000),
           log(2000), log(3000), log(4000), log(5000), log(6000), log(7000), log(8000), log(9000), log(10000), log(20000)), #Where the tick marks should be drawn
      labels = c('','','','','','','','', '','','','','','','','','',''),
-     las=2)
+     las=0)
 text(2.55, log(14000), 'F', font = 2)
 
 ## Plot Periphyton areal biomass ##================= 
 boxplot(biomass_area~treatment, data = low_peri, ylim = c(0, 0.4), 
         col=c(low_col_B, ref_col), at = c(3,5), yaxt = 'n',
-        ylab = '', cex.axis = 1.5)
+        ylab = '', cex.axis = 1.4)
 axis(side = 2, 
      at = c(0, 0.1, 0.2, 0.3, 0.4), 
      labels = c('0', '0.1', '0.2', '0.3', '0.4'), 
-     las = 2)
+     las=0)
 # Add data points # 
 stripchart(biomass_area~treatment, vertical = TRUE, data = low_peri, at = c(3,5), 
            method = 'jitter', add = TRUE, pch = 20, col = 'black', cex=1.5)
-mtext(side = 2, line = 3.2, 
-      expression('Periphyton Areal'), cex = 9/12)
-mtext(side = 2, line = 2, 
-      expression('Biomass' ~"("*mu*g~cm^-2*")"), cex = 9/12)
+mtext(side = 2, line = 3.3, 
+      expression('Periphyton Areal'), cex = 11/12)
+mtext(side = 2, line = 1.8, 
+      expression('Biomass' ~"("*mu*g~cm^-2*")"), cex = 11/12)
 text(2.55, 0.4, 'G', font = 2)
 
 boxplot(biomass_area~treatment, data = int_peri, ylim = c(0,0.4), 
         col=c(int_col_A, ref_col), yaxt = 'n', at = c(3,5),
-        ylab = '', cex.axis=1.5)
+        ylab = '', cex.axis = 1.4)
 axis(side = 2, at = c(0, 0.1, 0.2, 0.3, 0.4), labels = F)
 # Add data points # 
 stripchart(biomass_area~treatment, vertical = TRUE, data = int_peri, at=c(3,5), 
@@ -264,7 +268,7 @@ text(2.55, 0.4, 'H', font = 2)
 
 boxplot(biomass_area~treatment, data = high_peri, ylim = c(0,0.4), 
         col=c(high_col_C, ref_col), yaxt = 'n', at=c(3,5),  
-        ylab = '', cex.axis = 1.5)
+        ylab = '', cex.axis = 1.4)
 axis(side = 2, at = c(0, 0.1, 0.2, 0.3, 0.4), labels = F)
 # Add data points # 
 stripchart(biomass_area~treatment, vertical = TRUE, data = high_peri, at = c(3,5), 
@@ -272,4 +276,4 @@ stripchart(biomass_area~treatment, vertical = TRUE, data = high_peri, at = c(3,5
 text(2.55, 0.4, 'I', font = 2)
 
 # Load plot into specified directory # 
-dev.off()
+#dev.off()
