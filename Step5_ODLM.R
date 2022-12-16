@@ -532,7 +532,7 @@ x.full = as.vector(algF$chla)
 T.full = as.vector(algF$doy)
 
 #title = c('Low Coupling AR(1)', line = 1) #Title for the plot
-color= low_col_B # this is the color for the eigenvalue line
+color= 'black' # this is the color for the eigenvalue line
 color1= 'gray88' #this is the color for the error polygon 
 nobs = length(x.full)
 
@@ -560,7 +560,7 @@ x.full = as.vector(algD$chla)
 T.full = as.vector(algD$doy)
 
 #title = c('Intermediate AR(1)', line = 1) #Title for the plot
-color= int_col_D # this is the color for the eigenvalue line
+color= 'black' # this is the color for the eigenvalue line
 color1= 'gray88' #this is the color for the error polygon 
 nobs = length(x.full)
 
@@ -586,7 +586,7 @@ x.full = as.vector(algE$chla)
 T.full = as.vector(algE$doy)
 
 #title = c('High Coupling AR(1)', line = 1) #Title for the plot
-color= high_col_E # this is the color for the eigenvalue line
+color= 'black' # this is the color for the eigenvalue line
 color1='gray88' #this is the color for the error polygon 
 nobs = length(x.full)
 
