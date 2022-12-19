@@ -447,7 +447,10 @@ polygon(c(gppB$doy, rev(gppB$doy)), c(gpp_B_smooth$fit - gpp_B_smooth$se.fit,
                                       rev(gpp_B_smooth$fit + gpp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(gpp_B_smooth$fit, x=gppB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'GPP', cex = 11/12)
+mtext(side = 2, line = 3.2, 
+      expression('GPP'), cex = 11/12)
+mtext(side = 2, line = 1.8, 
+      expression('(mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
 axis(side = 2, at = c(0,5,10,15,20))
 text(141, 20, 'D', font = 2)
 
@@ -498,7 +501,6 @@ lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
 
 ## R Final plot ##==========================
-
 plot(respF$R, x=respF$doy, type = 'p', pch = 20, cex=1.5, xlab = '', yaxt = 'n', col.axis=transparent,
      ylab = '', xlim=c(140, 245), ylim=c(0,20), col = ref_col)
 polygon(c(respF$doy, rev(respF$doy)), c(resp_F_smooth$fit - resp_F_smooth$se.fit, 
@@ -514,7 +516,10 @@ polygon(c(respB$doy, rev(respB$doy)), c(resp_B_smooth$fit - resp_B_smooth$se.fit
                                         rev(resp_B_smooth$fit + resp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(resp_B_smooth$fit, x=respB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'R', cex = 11/12)
+mtext(side = 2, line = 3.2, 
+      expression('|R|'), cex = 11/12)
+mtext(side = 2, line = 1.8, 
+      expression('mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
 axis(side =2, at = c(0, 5, 10, 15, 20))
 text(141, 20, 'G', font = 2)
 
@@ -580,14 +585,17 @@ polygon(c(netpB$doy, rev(netpB$doy)), c(netp_B_smooth$fit - netp_B_smooth$se.fit
                                         rev(netp_B_smooth$fit + netp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(netp_B_smooth$fit, x=netpB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'NEP', cex = 11/12)
+mtext(side = 2, line = 3.2, 
+      expression('NEP'), cex = 11/12)
+mtext(side = 2, line = 1.8, 
+      expression('mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
 axis(side = 2, at=c(-5, 0, 5))
 text(141, 8, 'J', font = 2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
-#lines(c(100,300), c(0,0), lty = 1)
+lines(c(100,300), c(0,0), lty = 1)
 
 plot(netpD$NEP, x=netpD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(-8,8), col = ref_col, col.axis = transparent)
@@ -610,7 +618,7 @@ text(141, 8, 'K', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
-#lines(c(100,300), c(0,0), lty = 1)
+lines(c(100,300), c(0,0), lty = 1)
 
 plot(netpE$NEP, x=netpE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(-8,8), col = ref_col, col.axis = transparent)
@@ -632,7 +640,7 @@ text(141, 8, 'L', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
-#lines(c(100,300), c(0,0), lty = 1)
+lines(c(100,300), c(0,0), lty = 1)
 
 # Create the pdf of the plot 
 #dev.off()
@@ -674,7 +682,7 @@ lines(alg_B_smooth$fit, x=algB$doy, col=low_col_B, lwd = 2)
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 
-      expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 11/12)
+      expression('Concentration' ~"("*mu*g~L^-1*")"), cex = 11/12)
 axis(side = 2, at = c(0,5,10,15,20,25,30,35), cex.axis = 1) 
 text(141, 35, 'A', font = 2)
 
@@ -749,7 +757,10 @@ polygon(c(gppB$doy, rev(gppB$doy)), c(gpp_B_smooth$fit - gpp_B_smooth$se.fit,
                                       rev(gpp_B_smooth$fit + gpp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(gpp_B_smooth$fit, x=gppB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'GPP', cex = 11/12)
+mtext(side = 2, line = 3.2, 
+      expression('GPP'), cex = 11/12)
+mtext(side = 2, line = 2, 
+      expression('mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
 axis(side = 2, at = c(0,5,10,15,20))
 text(141, 20, 'D', font = 2)
 
@@ -822,7 +833,10 @@ polygon(c(respB$doy, rev(respB$doy)), c(resp_B_smooth$fit - resp_B_smooth$se.fit
                                         rev(resp_B_smooth$fit + resp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(resp_B_smooth$fit, x=respB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'R', cex = 11/12)
+mtext(side = 2, line = 3.2, 
+      expression('|R|'), cex = 11/12)
+mtext(side = 2, line = 1.8, 
+      expression('mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
 axis(side =2, at = c(0, 5, 10, 15, 20))
 text(141, 20, 'G', font = 2)
 
@@ -894,7 +908,10 @@ polygon(c(netpB$doy, rev(netpB$doy)), c(netp_B_smooth$fit - netp_B_smooth$se.fit
                                         rev(netp_B_smooth$fit + netp_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(netp_B_smooth$fit, x=netpB$doy, col=low_col_B, lwd = 2)
-mtext(side = 2, line = 2.5, 'NEP', cex = 11/12)
+mtext(side = 2, line = 3.2, 
+      expression('NEP'), cex = 11/12)
+mtext(side = 2, line = 1.8, 
+      expression('mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
 axis(side = 2, at=c(-5, 0, 5))
 text(141, 8, 'J', font = 2)
 
