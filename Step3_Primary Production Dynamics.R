@@ -296,6 +296,15 @@ netpF = netp %>% #ref, low
 
 set.seed(55)
 
+netp$pond_id[netp$pond_id == 'A' | netp$pond_id == 'D'] <- 'INT'
+netp$pond_id[netp$pond_id == 'B' | netp$pond_id == 'F'] <- 'LO'
+netp$pond_id[netp$pond_id == 'C' | netp$pond_id == 'E'] <- 'HI'
+avg = netp %>%
+  group_by(pond_id) %>%
+  summarize(mean = mean(NEP), 
+            sd = sd(NEP)) 
+avg
+
 #======= LOW ========# 
 # loess low pulse 
 netp_B_loess = loess(NEP ~ doy, data = netpB, span = 0.30) # 30% span
