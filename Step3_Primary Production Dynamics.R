@@ -12,6 +12,29 @@
 if (!require(tidyverse)) install.packages('tidyverse')
 library(tidyverse)
 
+# Assess data removed for metabolism data # 
+metab = read_csv('daily-metabolism_data_robertcorrected.csv')
+metab
+
+dat = arrange(metab, desc(flag))
+
+dat2 = dat %>% 
+  filter(flag != 0) %>%
+  group_by(pond_id) %>%
+  mutate(numbers = row_number()) %>%
+  ungroup() %>%
+  group_by(pond_id) %>%
+  summarize(flag.removed = max(numbers))
+
+dat3 = dat %>%
+  group_by(pond_id) %>% 
+  mutate(numbers = row_number()) %>% 
+  ungroup() %>%
+  group_by(pond_id) %>% 
+  summarize(tot = max(numbers))
+
+dat4 = left_join(dat2, dat3, by = 'pond_id') %>% mutate(perc = (flag.removed/tot)*100)
+dat4
 
 # ========= PLOTTING COLORS ===== # 
 low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F

@@ -1565,7 +1565,7 @@ lines(x =c(176, 250), y = c(0.5, 0.5))
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', 
      lwd=3, col=int_col, data=rda_int4)
-mtext(side = 1, line = 3.5, 'Last Day of Year in\n9-day rolling window', cex = 11/12)
+mtext(side = 1, line = 3.5, 'Last Day of Year in\n10-day rolling window', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)

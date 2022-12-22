@@ -319,7 +319,7 @@ nobs = length(x.full)
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 2 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 3 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
@@ -593,7 +593,7 @@ nobs = length(x.full)
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 3 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
