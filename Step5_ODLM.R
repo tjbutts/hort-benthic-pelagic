@@ -206,8 +206,8 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
   err1 = yhat-Y # errors
   sd1 = sqrt(vupdate)  # error variance estimate
   LL = dnorm(err1, mean=0, sd=sd1, log=T) # log likelihoods
-  aic = 2*p - 2*sum(LL)
-  print(c('AIC = ',round(aic,2)),quote=F)
+  aicc = (2*p - 2*sum(LL))+(2*p*(p+1)/(nobs - p - 1))
+  print(c('AICc = ',round(aicc,2)),quote=F)
   
   # compute eigenvalues
   lamda = rep(0,(nobs-nl))
@@ -279,7 +279,7 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
 # plotting DLMs ## ==============================
 
 # Data # 
-hort_sonde # Daily profile data 
+ # Daily profile data 
 
 # Separate to just chlorophyll-a measurements 
 chl = hort_sonde %>%
@@ -319,7 +319,7 @@ nobs = length(x.full)
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 3 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
@@ -349,7 +349,7 @@ nobs = length(x.full)
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 3 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
