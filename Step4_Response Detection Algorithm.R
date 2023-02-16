@@ -349,7 +349,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'A', font = 2)
+text(141, 5.8, 'A', font = 2)
 mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
@@ -373,7 +373,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'B', font = 2)
+text(141, 5.8, 'B', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
@@ -388,7 +388,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'C', font = 2)
+text(141, 5.8, 'C', font = 2)
 
 # Add in Labels 
 text(155, 2.5, 'Response')
@@ -410,7 +410,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'D', font = 2)
+text(141, 5.8, 'D', font = 2)
 
 ## Intermediate Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
@@ -425,7 +425,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'E', font = 2)
+text(141, 5.8, 'E', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
@@ -440,7 +440,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'F', font = 2)
+text(141, 5.8, 'F', font = 2)
 
 ## Respiration RDA plot ##==========================
 ## Low Coupling ## 
@@ -451,7 +451,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('R'), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'G', font = 2)
+text(141, 5.8, 'G', font = 2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -473,7 +473,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'H', font = 2)
+text(141, 5.8, 'H', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent, 
@@ -487,7 +487,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'I', font = 2)
+text(141, 5.8, 'I', font = 2)
 
 ## Net Ecosystem Production RDA plot ##==========================
 ## Low Coupling ## 
@@ -498,7 +498,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('NEP'), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'L', font = 2)
+text(141, 5.8, 'J', font = 2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -521,7 +521,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'K', font = 2)
+text(141, 5.8, 'K', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
@@ -535,7 +535,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'L', font = 2)
+text(141, 5.8, 'L', font = 2)
 # Create plot in specified file path # 
 #dev.off()
 
@@ -877,7 +877,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'A', font = 2)
+text(141, 5.8, 'A', font = 2)
 mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
@@ -901,7 +901,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'B', font = 2)
+text(141, 5.8, 'B', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
@@ -916,7 +916,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'C', font = 2)
+text(141, 5.8, 'C', font = 2)
 
 # Add in Labels 
 text(155, 2.5, 'Response')
@@ -938,7 +938,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'D', font = 2)
+text(141, 5.8, 'D', font = 2)
 
 ## Intermediate Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
@@ -953,7 +953,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'E', font = 2)
+text(141, 5.8, 'E', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
@@ -968,7 +968,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'F', font = 2)
+text(141, 5.8, 'F', font = 2)
 
 #### Respiration RDA plot ##==========================
 ## Low Coupling ## 
@@ -979,7 +979,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('R'), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'G', font = 2)
+text(141, 5.8, 'G', font = 2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -1001,7 +1001,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'H', font = 2)
+text(141, 5.8, 'H', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent, 
@@ -1015,7 +1015,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'I', font = 2)
+text(141, 5.8, 'I', font = 2)
 
 #### Net Ecosystem Production RDA plot ##==========================
 ## Low Coupling ## 
@@ -1026,7 +1026,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('NEP'), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'L', font = 2)
+text(141, 5.8, 'L', font = 2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -1049,7 +1049,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'K', font = 2)
+text(141, 5.8, 'K', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
@@ -1063,7 +1063,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'L', font = 2)
+text(141, 5.8, 'L', font = 2)
 # Create plot in specified file path # 
 #dev.off()
 
@@ -1402,7 +1402,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'A', font = 2)
+text(141, 5.8, 'A', font = 2)
 mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
@@ -1426,7 +1426,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'B', font = 2)
+text(141, 5.8, 'B', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
@@ -1441,7 +1441,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'C', font = 2)
+text(141, 5.8, 'C', font = 2)
 
 # Add in Labels 
 text(155, 2.5, 'Response')
@@ -1463,7 +1463,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'D', font = 2)
+text(141, 5.8, 'D', font = 2)
 
 ## Intermediate Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
@@ -1478,7 +1478,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'E', font = 2)
+text(141, 5.8, 'E', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
@@ -1493,7 +1493,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'F', font = 2)
+text(141, 5.8, 'F', font = 2)
 
 #### Respiration RDA plot ##==========================
 ## Low Coupling ## 
@@ -1504,7 +1504,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('R'), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'G', font = 2)
+text(141, 5.8, 'G', font = 2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -1526,7 +1526,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'H', font = 2)
+text(141, 5.8, 'H', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent, 
@@ -1540,7 +1540,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'I', font = 2)
+text(141, 5.8, 'I', font = 2)
 
 #### Net Ecosystem Production RDA plot ##==========================
 ## Low Coupling ## 
@@ -1551,7 +1551,7 @@ axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('NEP'), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
-text(141, 6, 'L', font = 2)
+text(141, 5.8, 'L', font = 2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -1574,7 +1574,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
-text(141, 6, 'K', font = 2)
+text(141, 5.8, 'K', font = 2)
 
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
@@ -1588,7 +1588,7 @@ lines(c(211,211), c(-10,20000), lty = 3)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5))
-text(141, 6, 'L', font = 2)
+text(141, 5.8, 'L', font = 2)
 # Create plot in specified file path # 
 #dev.off()
 
