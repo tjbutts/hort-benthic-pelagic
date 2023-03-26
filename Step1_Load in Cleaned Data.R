@@ -44,9 +44,6 @@ hort_carbon
 hort_sonde = read_csv('daily-sonde-profiles_mean-values_10-30cm_gapfilled_avg.csv')
 hort_sonde
 
-## do ## 
-hort_dosat = read_csv('hort20_dosat_dat.csv')
-hort_dosat
 
 # Load in metabolism data from Robert 
 metab = read_csv('daily-metabolism_data_robertcorrected.csv') %>% 
