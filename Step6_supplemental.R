@@ -316,3 +316,4 @@ text(141, 1.2, 'F', font = 2)
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
 axis(side = 2, at = c(0,0.2, 0.4,0.6,0.8,1.0,1.2), cex.axis = 1, labels = F) 
+

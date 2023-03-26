@@ -41,7 +41,7 @@ hort_carbon
 
 # Sonde profile data - average between 10 - 30 cm depth 
    # One DOY is missing in early summer, data filled by linear interpolation 
-hort_sonde = read_csv('daily-sonde-profiles_mean-values_10-30cm_gapfilled.csv')
+hort_sonde = read_csv('daily-sonde-profiles_mean-values_10-30cm_gapfilled_avg.csv')
 hort_sonde
 
 ## do ## 
