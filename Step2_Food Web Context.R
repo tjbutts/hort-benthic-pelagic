@@ -144,16 +144,20 @@ par(tcl = -0.25)
 par(mgp = c(2, 0.6, 0))
 
 # Plot Zooplankton Biomass #===============
-boxplot(log(biomass)~treatment, data = low_zoop, ylim = c(log(1), log(800)), 
+boxplot(log(biomass)~treatment, data = low_zoop, ylim = c(log(0.01), log(800)), 
         yaxt = 'n', col=c(low_col_B, ref_col), 
         ylab = 'ZP Biomass (ug/L)', col.axis = transparent, at = c(3,5), 
         cex.axis = 1.5)
 mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 axis(side=2,
-     at=c( log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
+     at=c( log(0.01), log(0.02), log(0.03), log(0.04), log(0.05), log(0.06), log(0.07), log(0.08),log(0.09), log(0.1),
+           log(0.2), log(0.3), log(0.4), log(0.5), log(0.6), log(0.7), log(0.8), log(0.9),
+           log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
            log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
            log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
-     labels = c('1', '', '', '', '', '', '', '', '', '10', '', '','','','','','','','100','','','','','','','800'),
+     labels = c('0.01', '', '', '', '', '', '', '', '',
+                '0.1', '', '', '', '', '', '', '', '','1', '', '', '', '', '', '', '', '', 
+                '10', '', '','','','','','','','100','','','','','','','800'),
      las=0)
 mtext(side = 2, line = 3.2, 
       expression('Zooplankton'), cex = 11/12)
@@ -164,7 +168,7 @@ stripchart(log(biomass)~treatment, vertical = TRUE, data = low_zoop, at = c(3,5)
            method = 'jitter', add = TRUE, pch = 20, col = 'black', cex = 1.5)
 text(2.55, log(800), 'A', font = 2)
 
-boxplot(log(biomass)~treatment, data = int_zoop, ylim = c(log(1), log(800)), col.axis = transparent,
+boxplot(log(biomass)~treatment, data = int_zoop, ylim = c(log(0.01), log(800)), col.axis = transparent,
         yaxt = 'n', col=c(int_col_A, ref_col), 
         ylab = '', at = c(3,5))
 mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
@@ -172,14 +176,18 @@ mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 stripchart(log(biomass)~treatment, vertical = TRUE, data = int_zoop, at = c(3,5),
            method = 'jitter', add = TRUE, pch = 20, col = 'black', cex = 1.5)
 axis(side=2,
-     at=c( log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
+     at=c( log(0.01), log(0.02), log(0.03), log(0.04), log(0.05), log(0.06), log(0.07), log(0.08),log(0.09), log(0.1),
+           log(0.2), log(0.3), log(0.4), log(0.5), log(0.6), log(0.7), log(0.8), log(0.9),
+           log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
            log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
            log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
-     labels = c('', '', '', '', '', '', '', '', '', '', '', '','','','','','','','','','','','','','',''),
-     las=0, cex.axis=.8)
+     labels = c('', '', '', '', '', '', '', '', '',
+                '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', 
+                '', '', '','','','','','','','','','','','','','',''),
+     las=0)
 text(2.55, log(800), 'B', font = 2)
 
-boxplot(log(biomass)~treatment, data = high_zoop, ylim = c(log(1), log(800)), 
+boxplot(log(biomass)~treatment, data = high_zoop, ylim = c(log(0.01), log(800)), 
         yaxt = 'n', col=c(high_col_C, ref_col), col.axis = transparent, 
         ylab = '', at = c(3,5))
 mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
@@ -188,11 +196,15 @@ mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
 stripchart(log(biomass)~treatment, vertical = TRUE, data = low_zoop, at = c(3,5), 
            method = 'jitter', add = TRUE, pch = 20, col = 'black', cex = 1.5)
 axis(side=2,
-     at=c( log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
+     at=c( log(0.01), log(0.02), log(0.03), log(0.04), log(0.05), log(0.06), log(0.07), log(0.08),log(0.09), log(0.1),
+           log(0.2), log(0.3), log(0.4), log(0.5), log(0.6), log(0.7), log(0.8), log(0.9),
+           log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
            log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
            log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
-     labels = c('', '', '', '', '', '', '', '', '', '', '', '','','','','','','','','','','','','','',''),
-     las=0, cex.axis=.8)
+     labels = c('', '', '', '', '', '', '', '', '',
+                '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', 
+                '', '', '','','','','','','','','','','','','','',''),
+     las=0)
 text(2.55, log(800), 'C', font = 2)
 
 ## Plot Zoobenthos Density ##=======================

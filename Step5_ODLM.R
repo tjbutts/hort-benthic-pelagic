@@ -319,13 +319,13 @@ T.full = as.vector(algB$doy)
 
 #title = c('Low Coupling AR(2)', line = 1) #Title for the plot
 color= low_col # this is the color for the eigenvalue line
-color1=low_col_F #this is the color for the error polygon 
+color1=ref_col #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 2 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
@@ -349,7 +349,7 @@ T.full = as.vector(algA$doy)
 
 #title = c('Intermediate AR(1)', line = 1) #Title for the plot
 color= int_col # this is the color for the eigenvalue line
-color1=int_col_D #this is the color for the error polygon 
+color1=ref_col #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
@@ -375,7 +375,7 @@ T.full = as.vector(algC$doy)
 
 #title = c('High Coupling AR(1)', line = 1) #Title for the plot
 color= high_col # this is the color for the eigenvalue line
-color1= high_col_E #this is the color for the error polygon 
+color1= ref_col #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
