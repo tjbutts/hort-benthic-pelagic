@@ -8,13 +8,13 @@
 #============================================#
 
 ## Data ## 
-hort_field
+hort_sonde
 hort_carbon
 hort_macrophy
 
 ## Average +- sd of ##===========
 ##TP ##========== 
-tp = hort_field %>%
+tp = hort_sonde %>%
   select(pond_id, doy, tp, tp_flag) %>% # No tp flags so will discount 
   filter(tp != 'NA')
 tp
@@ -31,7 +31,7 @@ tp_avg = tp %>%
 tp_avg 
 
 ##TN ##=============
-tn = hort_field %>%
+tn = hort_sonde %>%
   select(pond_id, doy, tn, tn_flag) %>% # No tn flags so will discount 
   filter(tn != 'NA')
 tn
@@ -48,7 +48,7 @@ tn_avg = tn %>%
 tn_avg
 
 ##SRP ##=============
-srp = hort_field %>%
+srp = hort_sonde %>%
   select(pond_id, doy, srp, srp_flag) %>% # Flags indicate value replaced with long-term labortory minimum reporting value  
   filter(srp != 'NA')
 srp
@@ -65,7 +65,7 @@ srp_avg = srp %>%
 srp_avg
 
 ##NOX ##=============
-nox = hort_field %>%
+nox = hort_sonde %>%
   select(pond_id, doy, nox, nox_flag) %>% # Flags indicate value replaced with long-term labortory minimum reporting value  
   filter(nox != 'NA')
 nox
@@ -82,7 +82,7 @@ nox_avg = nox %>%
 nox_avg
 
 ##nhx ##=============
-nhx = hort_field %>%
+nhx = hort_sonde %>%
   select(pond_id, doy, nhx, nhx_flag) %>% # Flags indicate value replaced with long-term labortory minimum reporting value  
   filter(nhx != 'NA')
 nhx
@@ -98,39 +98,4 @@ nhx_avg = nhx %>%
 
 nhx_avg 
 
-##DOC_mgL ##=============
-doc = hort_carbon %>%
-  drop_na() %>% 
-  group_by(pond_id, doy) %>%
-  summarize(doc_ppm = mean(doc_ppm))
-doc
 
-n = doc %>% filter(pond_id == 'A') 
-n
-
-doc_avg = doc %>%
-  group_by(pond_id) %>%
-  summarize(doc_avg = mean(doc_ppm), # ppm = mg/L 
-            doc_sd = sd(doc_ppm)) %>%
-  ungroup()
-
-doc_avg 
-
-## Macrophyte dry biomass ## 
-
-mac = hort_macrophy %>% 
-  select(pond_id, doy, areal_biomass) %>% 
-  filter(areal_biomass != 'NA') %>% 
-  filter(doy == 171 | doy == 213) %>% # day of years where all ponds were sampled 
-  group_by(pond_id, doy) %>%
-  summarize(mean = mean(areal_biomass), 
-            sd = sd(areal_biomass)) %>%
-  ungroup()
-mac
-
-mac2 = mac %>%
-  group_by(pond_id) %>%
-  summarize(mean = mean(mean), 
-            sd = sd(sd)) %>%
-  ungroup()
-mac2  

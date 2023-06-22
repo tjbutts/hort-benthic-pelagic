@@ -27,19 +27,7 @@ library(mgcv)
 
 # Data sets # 
 
-## Meteorology ## 
-hort_met = read_csv('weather-station_data.csv')
-hort_met
-
-## Water Quality and response variables ## 
-hort_field = read_csv('hort20_surface_dat.csv')
-hort_field
-
-hort_carbon = read_csv('ghg-model-dataset_2022-07-26.csv') %>%
-  select(pond_id, doy, doc_ppm)
-hort_carbon
-
-# Sonde profile data - average between 10 - 30 cm depth 
+# Sonde profile data - average between 10 - 30 cm depth + surface nutrients 
 hort_sonde = read_csv('surface_nutrients_chla.csv')
 hort_sonde
 
@@ -52,7 +40,6 @@ metab
 hort_fish_bodysize = read_csv('fish_length_weight.csv') # fish size 
 hort_fish_gaslav = read_csv('gaslav_clean.csv') # fish diet (gastric lavage)
 hort_periphy = read_csv('periphy_clean.csv') # periphyton
-hort_macrophy = read_csv('macrophy_clean.csv') # macrophytes 
 hort_zoop = read_csv('hort_zp_clean_72622.csv') # zooplankton 
 hort_mivdensity = read_csv('hort_mivdensity.csv') # macroinvertebrates 
 
