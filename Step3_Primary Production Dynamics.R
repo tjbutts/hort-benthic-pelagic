@@ -12,30 +12,6 @@
 if (!require(tidyverse)) install.packages('tidyverse')
 library(tidyverse)
 
-# Assess data removed for metabolism data # 
-metab = read_csv('daily-metabolism_data_robertcorrected.csv')
-metab
-
-dat = arrange(metab, desc(flag))
-
-dat2 = dat %>% 
-  filter(flag != 0) %>%
-  group_by(pond_id) %>%
-  mutate(numbers = row_number()) %>%
-  ungroup() %>%
-  group_by(pond_id) %>%
-  summarize(flag.removed = max(numbers))
-
-dat3 = dat %>%
-  group_by(pond_id) %>% 
-  mutate(numbers = row_number()) %>% 
-  ungroup() %>%
-  group_by(pond_id) %>% 
-  summarize(tot = max(numbers))
-
-dat4 = left_join(dat2, dat3, by = 'pond_id') %>% mutate(perc = (flag.removed/tot)*100)
-dat4
-
 # ========= PLOTTING COLORS ===== # 
 low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
 low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
@@ -58,7 +34,7 @@ hort_sonde # Daily profile data
 # LOESS regression of chlorophyll for pattern - not analysis ##==========================
 # Separate to just chlorophyll-a measurements 
 chl = hort_sonde %>%
-  select(pond_id, doy, chla)
+  select(pond_id, doy, chla_10_30)
 chl
 
 # Chlorophyll-a by pond (easier to apply LOESS fit if separated) #
@@ -84,14 +60,14 @@ set.seed(55)
 
 #======= LOW ========# 
 # loess low pulse 
-alg_B_loess = loess(chla ~ doy, data = algB, span = 0.10) # 10% span
+alg_B_loess = loess(chla_10_30 ~ doy, data = algB, span = 0.10) # 10% span
 alg_B_loess
 
 # get smoothed output
 alg_B_smooth = predict(alg_B_loess, se = TRUE)
 
 # loess low reference
-alg_F_loess = loess(chla ~ doy, data = algF, span = 0.10) # 10% span
+alg_F_loess = loess(chla_10_30 ~ doy, data = algF, span = 0.10) # 10% span
 alg_F_loess
 
 # get smoothed output
@@ -99,14 +75,14 @@ alg_F_smooth = predict(alg_F_loess, se = TRUE)
 
 #======= INTERMEDIATE ========# 
 # loess intermediate pulse
-alg_A_loess = loess(chla ~ doy, data = algA, span = 0.10) # 10% span
+alg_A_loess = loess(chla_10_30 ~ doy, data = algA, span = 0.10) # 10% span
 alg_A_loess
 
 # get smoothed output
 alg_A_smooth = predict(alg_A_loess, se = TRUE)
 
 # loess intermediate reference
-alg_D_loess = loess(chla ~ doy, data = algD, span = 0.10) # 10% span
+alg_D_loess = loess(chla_10_30 ~ doy, data = algD, span = 0.10) # 10% span
 alg_D_loess
 
 # get smoothed output
@@ -114,14 +90,14 @@ alg_D_smooth = predict(alg_D_loess, se = TRUE)
 
 #======= HIGH ========# 
 # loess intermediate pulse
-alg_C_loess = loess(chla ~ doy, data = algC, span = 0.10) # 10% span
+alg_C_loess = loess(chla_10_30 ~ doy, data = algC, span = 0.10) # 10% span
 alg_C_loess
 
 # get smoothed output
 alg_C_smooth = predict(alg_C_loess, se = TRUE)
 
 # loess intermediate reference
-alg_E_loess = loess(chla ~ doy, data = algE, span = 0.10) # 10% span
+alg_E_loess = loess(chla_10_30 ~ doy, data = algE, span = 0.10) # 10% span
 alg_E_loess
 
 # get smoothed output
@@ -319,19 +295,17 @@ netpF = netp %>% #ref, low
 
 set.seed(55)
 
-
-
 #======= LOW ========# 
 # loess low pulse 
 netp_B_loess = loess(NEP ~ doy, data = netpB, span = 0.30) # 30% span
-netp_B_loess # 89 obsv
+netp_B_loess 
 
 # get smoothed output
 netp_B_smooth = predict(netp_B_loess, se = TRUE)
 
 # loess low reference
 netp_F_loess = loess(NEP ~ doy, data = netpF, span = 0.30) # 30% span
-netp_F_loess # 92 obsv
+netp_F_loess 
 
 # get smoothed output
 netp_F_smooth = predict(netp_F_loess, se = TRUE) 
@@ -384,9 +358,9 @@ par(mgp = c(2, 0.6, 0))
 
 ## Chlorophyll Final plot ========================
 # Set plot dimensions # 
-plot(algF$chla, x=algF$doy, type = 'p', pch = 20, cex=1.5, xlab = '', col.axis = transparent,
+plot(algF$chla_10_30, x=algF$doy, type = 'p', pch = 20, cex=1.5, xlab = '', col.axis = transparent,
      ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = ref_col, yaxt='n', cex.axis = 1.2 )
-polygon(c(142:240, 240:142), c(alg_F_smooth$fit - alg_F_smooth$se.fit, 
+polygon(c(142:241, 241:142), c(alg_F_smooth$fit - alg_F_smooth$se.fit, 
                                rev(alg_F_smooth$fit + alg_F_smooth$se.fit)), 
         col = ref_col, border = NA)
 lines(alg_F_smooth$fit, x=algF$doy, col=ref_col, lwd = 2)
@@ -394,9 +368,9 @@ mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
-plot(algB$chla, x=algB$doy, type = 'p', pch = 20, cex=1.5, xlab = '', yaxt = 'n',
+plot(algB$chla_10_30, x=algB$doy, type = 'p', pch = 20, cex=1.5, xlab = '', yaxt = 'n',
      ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = low_col_F, col.axis = transparent)
-polygon(c(142:240, 240:142), c(alg_B_smooth$fit - alg_B_smooth$se.fit, 
+polygon(c(142:241, 241:142), c(alg_B_smooth$fit - alg_B_smooth$se.fit, 
                                rev(alg_B_smooth$fit + alg_B_smooth$se.fit)), 
         col = low_col_F, border = NA)
 lines(alg_B_smooth$fit, x=algB$doy, col=low_col_B, lwd = 2)
@@ -411,9 +385,9 @@ text(141, 35, 'A', font = 2)
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
 
-plot(algD$chla, x=algD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
+plot(algD$chla_10_30, x=algD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = ref_col, col.axis = transparent)
-polygon(c(142:240, 240:142), c(alg_D_smooth$fit - alg_D_smooth$se.fit, 
+polygon(c(142:241, 241:142), c(alg_D_smooth$fit - alg_D_smooth$se.fit, 
                                rev(alg_D_smooth$fit + alg_D_smooth$se.fit)), 
         col = ref_col, border = NA)
 lines(alg_D_smooth$fit, x=algD$doy, col=ref_col, lwd = 2)
@@ -421,9 +395,9 @@ mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
-plot(algA$chla, x=algA$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
+plot(algA$chla_10_30, x=algA$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = int_col_D, yaxt= 'n', col.axis = transparent)
-polygon(c(142:240, 240:142), c(alg_A_smooth$fit - alg_A_smooth$se.fit, 
+polygon(c(142:241, 241:142), c(alg_A_smooth$fit - alg_A_smooth$se.fit, 
                                rev(alg_A_smooth$fit + alg_A_smooth$se.fit)), 
         col = int_col_D, border = NA)
 lines(alg_A_smooth$fit, x=algA$doy, col=int_col_D, lwd = 2)
@@ -433,18 +407,18 @@ text(141, 35, 'B', font = 2)
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
 
-plot(algE$chla, x=algE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
+plot(algE$chla_10_30, x=algE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = ref_col, col.axis = transparent)
-polygon(c(142:240, 240:142), c(alg_E_smooth$fit - alg_E_smooth$se.fit, 
+polygon(c(142:241, 241:142), c(alg_E_smooth$fit - alg_E_smooth$se.fit, 
                                rev(alg_E_smooth$fit + alg_E_smooth$se.fit)), 
         col = ref_col, border = NA)
 lines(alg_E_smooth$fit, x=algE$doy, col=ref_col, lwd = 2)
 
 par(new=T) # add new smooth to same plot 
 
-plot(algC$chla, x=algC$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
+plot(algC$chla_10_30, x=algC$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = high_col_E, yaxt = 'n', col.axis = transparent)
-polygon(c(142:240, 240:142), c(alg_C_smooth$fit - alg_C_smooth$se.fit, 
+polygon(c(142:241, 241:142), c(alg_C_smooth$fit - alg_C_smooth$se.fit, 
                                rev(alg_C_smooth$fit + alg_C_smooth$se.fit)), 
         col = high_col_E, border = NA)
 lines(alg_C_smooth$fit, x=algC$doy, col=high_col_E, lwd = 2)
@@ -544,7 +518,7 @@ lines(resp_B_smooth$fit, x=respB$doy, col=low_col_B, lwd = 2)
 mtext(side = 2, line = 3.2, 
       expression('|R|'), cex = 11/12)
 mtext(side = 2, line = 1.8, 
-      expression('mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
+      expression('(mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
 axis(side =2, at = c(0, 5, 10, 15, 20))
 text(141, 20, 'G', font = 2)
 
@@ -613,7 +587,7 @@ lines(netp_B_smooth$fit, x=netpB$doy, col=low_col_B, lwd = 2)
 mtext(side = 2, line = 3.2, 
       expression('NEP'), cex = 11/12)
 mtext(side = 2, line = 1.8, 
-      expression('mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
+      expression('(mg O'[2]~L^-1*~d^-1*")"), cex = 11/12)
 axis(side = 2, at=c(-5, 0, 5))
 text(141, 8, 'J', font = 2)
 
@@ -688,7 +662,7 @@ col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1')
 
 ## Chlorophyll Final plot ========================
 # Set plot dimensions # 
-plot(algF$chla, x=algF$doy, type = 'p', pch = 20, cex=1.5, xlab = '', col.axis = transparent,
+plot(algF$chla_10_30, x=algF$doy, type = 'p', pch = 20, cex=1.5, xlab = '', col.axis = transparent,
      ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = ref_col, yaxt='n', cex.axis = 1.2 )
 polygon(c(142:240, 240:142), c(alg_F_smooth$fit - alg_F_smooth$se.fit, 
                                rev(alg_F_smooth$fit + alg_F_smooth$se.fit)), 
@@ -698,7 +672,7 @@ mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
-plot(algB$chla, x=algB$doy, type = 'p', pch = 20, cex=1.5, xlab = '', yaxt = 'n',
+plot(algB$chla_10_30, x=algB$doy, type = 'p', pch = 20, cex=1.5, xlab = '', yaxt = 'n',
      ylab = '', xlim=c(140, 245), ylim=c(0, 35), col = low_col_F, col.axis = transparent)
 polygon(c(142:240, 240:142), c(alg_B_smooth$fit - alg_B_smooth$se.fit, 
                                rev(alg_B_smooth$fit + alg_B_smooth$se.fit)), 
@@ -717,7 +691,7 @@ lines(c(211,211), c(-10,700), lty = 3)
 lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
 rect(185,-2,190,50, col=col, border=NA)
 
-plot(algD$chla, x=algD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
+plot(algD$chla_10_30, x=algD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = ref_col, col.axis = transparent)
 polygon(c(142:240, 240:142), c(alg_D_smooth$fit - alg_D_smooth$se.fit, 
                                rev(alg_D_smooth$fit + alg_D_smooth$se.fit)), 
@@ -727,7 +701,7 @@ mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
-plot(algA$chla, x=algA$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
+plot(algA$chla_10_30, x=algA$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = int_col_D, yaxt= 'n', col.axis = transparent)
 polygon(c(142:240, 240:142), c(alg_A_smooth$fit - alg_A_smooth$se.fit, 
                                rev(alg_A_smooth$fit + alg_A_smooth$se.fit)), 
@@ -741,7 +715,7 @@ lines(c(211,211), c(-10,700), lty = 3)
 lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
 rect(185,-2,190,50, col=col, border=NA)
 
-plot(algE$chla, x=algE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
+plot(algE$chla_10_30, x=algE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = ref_col, col.axis = transparent)
 polygon(c(142:240, 240:142), c(alg_E_smooth$fit - alg_E_smooth$se.fit, 
                                rev(alg_E_smooth$fit + alg_E_smooth$se.fit)), 
@@ -750,7 +724,7 @@ lines(alg_E_smooth$fit, x=algE$doy, col=ref_col, lwd = 2)
 
 par(new=T) # add new smooth to same plot 
 
-plot(algC$chla, x=algC$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
+plot(algC$chla_10_30, x=algC$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = high_col_E, yaxt = 'n', col.axis = transparent)
 polygon(c(142:240, 240:142), c(alg_C_smooth$fit - alg_C_smooth$se.fit, 
                                rev(alg_C_smooth$fit + alg_C_smooth$se.fit)), 

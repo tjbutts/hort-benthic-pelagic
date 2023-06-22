@@ -24,47 +24,47 @@ hort_sonde
 # Create disturbed and reference time series # 
 ## Low Coupling ## 
 testy_low = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'B') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_low
 
 refy_low = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'F') %>%
   rename(tt = doy, 
-         yy=chla)
+         yy=chla_10_30)
 refy_low
 
 ## Intermediate Coupling ## 
 testy_int = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'A') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_int
 
 refy_int = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'D') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 refy_int
 
 ## High Coupling ## 
 testy_high = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'C') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_high
 
 refy_high = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'E') %>%
   rename(tt = doy, 
-         yy=chla)
+         yy=chla_10_30)
 refy_high
 
 # Run Response Detection Analysis # 
@@ -552,47 +552,47 @@ hort_sonde
 # Create disturbed and reference time series # 
 ## Low Coupling ## 
 testy_low = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'B') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_low
 
 refy_low = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'F') %>%
   rename(tt = doy, 
-         yy=chla)
+         yy=chla_10_30)
 refy_low
 
 ## Intermediate Coupling ## 
 testy_int = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'A') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_int
 
 refy_int = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'D') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 refy_int
 
 ## High Coupling ## 
 testy_high = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'C') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_high
 
 refy_high = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'E') %>%
   rename(tt = doy, 
-         yy=chla)
+         yy=chla_10_30)
 refy_high
 
 # Run Response Detection Analysis # 
@@ -601,13 +601,13 @@ refy_high
 ## Calculating differeing by taking the integral of the absolute difference between the two time series
 ## Thresholds = response (2); recovery (0.5) as recommended in package 
 
-rda_low = mwdistdiffz(testy = testy_low, refy = refy_low, 
+rda_low_5day = mwdistdiffz(testy = testy_low, refy = refy_low, 
                       wwidth = 5, 
                       ddiff_method = 'integral')
-rda_int = mwdistdiffz(testy = testy_int, refy = refy_int, 
+rda_int_5day = mwdistdiffz(testy = testy_int, refy = refy_int, 
                       wwidth = 5, 
                       ddiff_method = 'integral')
-rda_high = mwdistdiffz(testy = testy_high, refy = refy_high, 
+rda_high_5day = mwdistdiffz(testy = testy_high, refy = refy_high, 
                        wwidth = 5, 
                        ddiff_method = 'integral')
 
@@ -872,7 +872,7 @@ par(mgp = c(2, 0.6, 0))
 ## Low Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
      ylab = '', xlab = '', col.axis = transparent, yaxt = 'n', 
-     lwd=3, col=low_col, data=rda_low)
+     lwd=3, col=low_col, data=rda_low_5day)
 axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
@@ -891,7 +891,7 @@ lines(x =c(176, 250), y = c(0.5, 0.5))
 ## Intermediate Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent,
-     lwd=3, col=int_col, data=rda_int)
+     lwd=3, col=int_col, data=rda_int_5day)
 mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
@@ -906,7 +906,7 @@ text(141, 5.8, 'B', font = 2)
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent, 
-     lwd=3, col=high_col, data=rda_high)
+     lwd=3, col=high_col, data=rda_high_5day)
 mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
@@ -1077,62 +1077,62 @@ hort_sonde
 # Create disturbed and reference time series # 
 ## Low Coupling ## 
 testy_low = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'B') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_low
 
 refy_low = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'F') %>%
   rename(tt = doy, 
-         yy=chla)
+         yy=chla_10_30)
 refy_low
 
 ## Intermediate Coupling ## 
 testy_int = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'A') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_int
 
 refy_int = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'D') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 refy_int
 
 ## High Coupling ## 
 testy_high = hort_sonde %>%
-  select(pond_id, doy, chla) %>% 
+  select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'C') %>%
   rename(tt = doy, 
-         yy = chla)
+         yy = chla_10_30)
 testy_high
 
 refy_high = hort_sonde %>%
-  select(pond_id, doy, chla) %>%
+  select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'E') %>%
   rename(tt = doy, 
-         yy=chla)
+         yy=chla_10_30)
 refy_high
 
 # Run Response Detection Analysis # 
-## Rolling Window for disturbed time-series = 7 days 
+## Rolling Window for disturbed time-series = 10 days 
 ## Using entire reference time series as the reference (no adaptive window)
 ## Calculating differeing by taking the integral of the absolute difference between the two time series
 ## Thresholds = response (2); recovery (0.5) as recommended in package 
 
-rda_low = mwdistdiffz(testy = testy_low, refy = refy_low, 
+rda_low_10day = mwdistdiffz(testy = testy_low, refy = refy_low, 
                       wwidth = 10, 
                       ddiff_method = 'integral')
-rda_int = mwdistdiffz(testy = testy_int, refy = refy_int, 
+rda_int_10day = mwdistdiffz(testy = testy_int, refy = refy_int, 
                       wwidth = 10, 
                       ddiff_method = 'integral')
-rda_high = mwdistdiffz(testy = testy_high, refy = refy_high, 
+rda_high_10day = mwdistdiffz(testy = testy_high, refy = refy_high, 
                        wwidth = 10, 
                        ddiff_method = 'integral')
 
@@ -1397,7 +1397,7 @@ par(mgp = c(2, 0.6, 0))
 ## Low Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), 
      ylab = '', xlab = '', col.axis = transparent, yaxt = 'n', 
-     lwd=3, col=low_col, data=rda_low)
+     lwd=3, col=low_col, data=rda_low_10day)
 axis(side = 2, at=c(-2, 0, 2, 4, 6))
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
@@ -1416,7 +1416,7 @@ lines(x =c(176, 250), y = c(0.5, 0.5))
 ## Intermediate Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent,
-     lwd=3, col=int_col, data=rda_int)
+     lwd=3, col=int_col, data=rda_int_10day)
 mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
@@ -1431,7 +1431,7 @@ text(141, 5.8, 'B', font = 2)
 ## High Coupling ## 
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent, 
-     lwd=3, col=high_col, data=rda_high)
+     lwd=3, col=high_col, data=rda_high_10day)
 mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph

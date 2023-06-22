@@ -133,23 +133,23 @@ par(mgp = c(2, 0.6, 0))
 
 # Low # 
 plot(log(zpF$biomass), x=zpF$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
-     ylab = '', xlim=c(140, 245), ylim=c(log(0.1), log(800)), col = ref_col, yaxt='n', cex.axis = 1.2 )
+     ylab = '', xlim=c(140, 245), ylim=c(log(0.01), log(800)), col = ref_col, yaxt='n', cex.axis = 1.2 )
 axis(side=2,
-      at=c(
+      at=c(log(0.01),log(0.02),log(0.03),log(0.04),log(0.05),log(0.06),log(0.07),log(0.08),log(0.09),
            log(.1),log(.2),log(.3),log(.4),log(.5),log(.6),log(.7),log(.8),log(.9),
            log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
            log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
            log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
-     labels = c( '0.1', '', '', '', '', '', '', '', '',
+     labels = c('0.1', '', '', '', '', '', '', '', '', '0.1', '', '', '', '', '', '', '', '',
                 '1', '', '', '', '', '', '', '', '', 
                 '10', '', '','','','','','','','100','','','','','','','800'),
-     las=0)
+     las=0, cex.axis=1.2)
 mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
 plot(log(zpB$biomass), x=zpB$doy, type = 'o', pch = 20, cex=1.5, xlab = '', yaxt = 'n', lwd = 3,
-     ylab = '', xlim=c(140, 245), ylim=c(log(0.1), log(800)), col = low_col_B, col.axis = transparent)
+     ylab = '', xlim=c(140, 245), ylim=c(log(0.01), log(800)), col = low_col_B, col.axis = transparent)
 mtext(side = 2, line = 3.2, 
       expression('Zooplankton'), cex = 11/12)
 mtext(side = 2, line = 2, 
@@ -162,23 +162,23 @@ lines(c(211,211), c(-10,700), lty = 3)
 
 # Intermediate #
 plot(log(zpD$biomass), x=zpD$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
-     ylab = '', xlim=c(140, 245), ylim=c(log(0.1), log(800)), col = ref_col, yaxt='n', cex.axis = 1.2 )
+     ylab = '', xlim=c(140, 245), ylim=c(log(0.01), log(800)), col = ref_col, yaxt='n', cex.axis = 1.2 )
 axis(side=2,
-     at=c(
+     at=c(log(0.01),log(0.02),log(0.03),log(0.04),log(0.05),log(0.06),log(0.07),log(0.08),log(0.09),
           log(.1),log(.2),log(.3),log(.4),log(.5),log(.6),log(.7),log(.8),log(.9),
           log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
           log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
           log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
-     labels = c( '', '', '', '', '', '', '', '', '',
+     labels = c('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
                 '', '', '', '', '', '', '', '', '', 
                 '', '', '','','','','','','','','','','','','','',''),
-     las=0)
+     las=0, cex.axis=1.2)
 mtext(side = 3, line = 0.1, 'Intermediate Coupling', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
 plot(log(zpA$biomass), x=zpA$doy, type = 'o', pch = 20, cex=1.5, xlab = '', yaxt = 'n', lwd = 3,
-     ylab = '', xlim=c(140, 245), ylim=c(log(0.1), log(800)), col = int_col_A, col.axis = transparent)
+     ylab = '', xlim=c(140, 245), ylim=c(log(0.01), log(800)), col = int_col_A, col.axis = transparent)
 text(141, log(800), 'B', font = 2)
 
 #Add in the nutrient pulse dates to the graph
@@ -187,17 +187,17 @@ lines(c(211,211), c(-10,700), lty = 3)
 
 # High # 
 plot(log(zpE$biomass), x=zpE$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
-     ylab = '', xlim=c(140, 245), ylim=c(log(0.1), log(800)), col = ref_col, yaxt='n', cex.axis = 1.2 )
+     ylab = '', xlim=c(140, 245), ylim=c(log(0.01), log(800)), col = ref_col, yaxt='n', cex.axis = 1.2 )
 axis(side=2,
-     at=c(
+     at=c(log(0.01),log(0.02),log(0.03),log(0.04),log(0.05),log(0.06),log(0.07),log(0.08),log(0.09),
           log(.1),log(.2),log(.3),log(.4),log(.5),log(.6),log(.7),log(.8),log(.9),
           log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
           log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
           log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
-     labels = c( '', '', '', '', '', '', '', '', '',
+     labels = c('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
                 '', '', '', '', '', '', '', '', '', 
                 '', '', '','','','','','','','','','','','','','',''),
-     las=0)
+     las=0, cex.axis=1.2)
 mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
@@ -228,7 +228,7 @@ mivE = high_miv %>% #reference, high
 
 # Low # 
 plot(log(mivF$density), x=mivF$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
-     ylab = '', xlim=c(140, 245),  ylim = c(log(300), log(8000)), col = ref_col, yaxt='n')
+     ylab = '', xlim=c(140, 245),  ylim = c(log(300), log(8000)), col = ref_col, yaxt='n', cex.axis = 1.2 )
 axis(side=2,
      at=c(log(300),log(400),log(500),log(600),log(700),log(800), log(900), log(1000),
           log(2000), log(3000), log(4000), log(5000), log(6000), log(7000), log(8000)), #Where the tick marks should be drawn
@@ -251,7 +251,7 @@ lines(c(211,211), c(-10,700), lty = 3)
 
 # Intermediate #
 plot(log(mivD$density), x=mivD$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
-     ylab = '', xlim=c(140, 245), ylim = c(log(300), log(8000)), col = ref_col, yaxt='n')
+     ylab = '', xlim=c(140, 245), ylim = c(log(300), log(8000)), col = ref_col, yaxt='n', cex.axis = 1.2 )
 axis(side=2,
      at=c(log(300),log(400),log(500),log(600),log(700),log(800), log(900), log(1000),
           log(2000), log(3000), log(4000), log(5000), log(6000), log(7000), log(8000), log(9000), log(10000), log(20000)), #Where the tick marks should be drawn
@@ -270,7 +270,7 @@ lines(c(211,211), c(-10,700), lty = 3)
 
 # High # 
 plot(log(mivE$density), x=mivE$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
-     ylab = '', xlim=c(140, 245), ylim = c(log(300), log(8000)), col = ref_col, yaxt='n')
+     ylab = '', xlim=c(140, 245), ylim = c(log(300), log(8000)), col = ref_col, yaxt='n', cex.axis = 1.2 )
 axis(side=2,
      at=c(log(300),log(400),log(500),log(600),log(700),log(800), log(900), log(1000),
           log(2000), log(3000), log(4000), log(5000), log(6000), log(7000), log(8000), log(9000), log(10000), log(20000)), #Where the tick marks should be drawn
@@ -360,7 +360,7 @@ lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
 
 # Intermediate #
-plot(periD$biomass_area, x=periD$collect, type = 'o', pch = 20, cex=1.5, xlab = '', lwd = 3,
+plot(periD$biomass_area, x=periD$collect, type = 'o', pch = 20, cex=1.5, xlab = '',  lwd = 3,
      ylab = '', xlim=c(140, 245), ylim = c(0, 0.4), col = ref_col, yaxt='n')
 axis(side = 2, 
      at = c(0, 0.1, 0.2, 0.3, 0.4), 
@@ -372,11 +372,11 @@ par(new=T) # add new smooth to same plot
 plot(periA$biomass_area, x=periA$collect, type = 'o', pch = 20, cex=1.5, xlab = '', yaxt = 'n', lwd = 3,
      ylab = '', xlim=c(140, 245), ylim = c(0, 0.4), col = int_col_A, col.axis = transparent)
 text(141, 0.4, 'H', font = 2)
-mtext('Day of Year, 2020', side = 1, line = 2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+mtext(side = 1, 'Day of Year, 2020', line = 2)
 
 # High # 
 plot(periE$biomass_area, x=periE$collect, type = 'o', pch = 20, cex=1.5, xlab = '', lwd = 3,

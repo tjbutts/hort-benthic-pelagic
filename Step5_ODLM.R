@@ -19,35 +19,6 @@ graphics.off()
 #============================================#
 
 
-## ============ Plot Margins ================= ##
-# Window for checking plot 
-windows(height = 4, width = 6) 
-
-# Will create plot in whatever file path you set  
-#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure5.pdf", 
- #   height = 4, 
-  #  width = 6)
-
-# Set dimensions for figure array # 
-par(mfrow =c(2,3),  mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
-par(tcl = -0.25)
-par(mgp = c(2, 0.6, 0)) 
-
-# ========= PLOTTING COLORS ======== # 
-low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
-low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
-low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
-ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
-black_col = rgb(0,0,0, max=255, alpha = 100) # Black
-transparent = rgb(255,255,255, max=255, alpha = 0)
-
-int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
-int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
-int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
-
-high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
-high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
-high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 
 # This script combines the shell function ODLMAR(nl,delta,x.full,T.full,title) with the 
 #  online estimation function DLM(delta,n.gamma,d.gamma,mvec,Cpar,Yvec,Fmat)
@@ -283,7 +254,7 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
 
 # Separate to just chlorophyll-a measurements 
 chl = hort_sonde %>%
-  select(pond_id, doy, chla)
+  select(pond_id, doy, chla_10_30)
 chl
 
 # Chlorophyll-a by pond (easier to apply GAMs if separated) # 
@@ -310,16 +281,46 @@ algF = chl %>% #ref, low
 # Change between 4 - 7 have little support 
 # Change greater than 10 no support 
 
+## ============ Plot Margins ================= ##
+# Window for checking plot 
+windows(height = 4, width = 6) 
+
+# Will create plot in whatever file path you set  
+#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure5.pdf", 
+#   height = 4, 
+#  width = 6)
+
+# Set dimensions for figure array # 
+par(mfrow =c(2,3),  mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
+par(tcl = -0.25)
+par(mgp = c(2, 0.6, 0)) 
+
+# ========= PLOTTING COLORS ======== # 
+low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
+low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
+low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+transparent = rgb(255,255,255, max=255, alpha = 0)
+
+int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
+int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
+int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
+
+high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
+
 
 # Disturbed Ponds #===================== 
 
 # Pulsed Low 
-x.full = as.vector(algB$chla) 
+x.full = as.vector(algB$chla_10_30) 
 T.full = as.vector(algB$doy)
 
 #title = c('Low Coupling AR(2)', line = 1) #Title for the plot
-color= low_col # this is the color for the eigenvalue line
-color1=ref_col #this is the color for the error polygon 
+color= low_col_B # this is the color for the eigenvalue line
+color1=low_col_F #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
@@ -344,18 +345,18 @@ B.sd = ODL.out[[4]]
 #mtext('Low Coupling', side = 3, line = 1, cex = 1.25)
 
 # Pulsed Intermediate 
-x.full = as.vector(algA$chla) 
+x.full = as.vector(algA$chla_10_30) 
 T.full = as.vector(algA$doy)
 
 #title = c('Intermediate AR(1)', line = 1) #Title for the plot
 color= int_col # this is the color for the eigenvalue line
-color1=ref_col #this is the color for the error polygon 
+color1=int_col_D #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 2 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
@@ -370,12 +371,12 @@ B.sd = ODL.out[[4]]
 #mtext('Intermediate', side = 3, line = 1, cex = 1.25)
 
 # Pulsed High 
-x.full = as.vector(algC$chla) 
+x.full = as.vector(algC$chla_10_30) 
 T.full = as.vector(algC$doy)
 
 #title = c('High Coupling AR(1)', line = 1) #Title for the plot
 color= high_col # this is the color for the eigenvalue line
-color1= ref_col #this is the color for the error polygon 
+color1= high_col_E #this is the color for the error polygon 
 nobs = length(x.full)
 
 # START PROTOTYPE SHELL
@@ -534,7 +535,7 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
 }  # End online DLM function
 
 # Reference Low 
-x.full = as.vector(algF$chla) 
+x.full = as.vector(algF$chla_10_30) 
 T.full = as.vector(algF$doy)
 
 #title = c('Low Coupling AR(1)', line = 1) #Title for the plot
@@ -562,7 +563,7 @@ B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
 
 # Pulsed Intermediate 
-x.full = as.vector(algD$chla) 
+x.full = as.vector(algD$chla_10_30) 
 T.full = as.vector(algD$doy)
 
 #title = c('Intermediate AR(1)', line = 1) #Title for the plot
@@ -573,7 +574,7 @@ nobs = length(x.full)
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 2 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
@@ -588,7 +589,7 @@ B.sd = ODL.out[[4]]
 mtext('Day of Year, 2020', side = 1, line = 2, cex = 11/12)
 
 # Pulsed High 
-x.full = as.vector(algE$chla) 
+x.full = as.vector(algE$chla_10_30) 
 T.full = as.vector(algE$doy)
 
 #title = c('High Coupling AR(1)', line = 1) #Title for the plot
@@ -827,8 +828,8 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
   err1 = yhat-Y # errors
   sd1 = sqrt(vupdate)  # error variance estimate
   LL = dnorm(err1, mean=0, sd=sd1, log=T) # log likelihoods
-  aic = (2*p - 2*sum(LL))
-  print(c('AIC = ',round(aic,2)),quote=F)
+  aicc = (2*p - 2*sum(LL))+(2*p*(p+1)/(nobs - p - 1))
+  print(c('AICc = ',round(aicc,2)),quote=F)
   
   # compute eigenvalues
   lamda = rep(0,(nobs-nl))
@@ -904,7 +905,7 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
 
 # Separate to just chlorophyll-a measurements 
 chl = hort_sonde %>%
-  select(pond_id, doy, chla)
+  select(pond_id, doy, chla_10_30)
 chl
 
 # Chlorophyll-a by pond (easier to apply GAMs if separated) # 
@@ -935,7 +936,7 @@ algF = chl %>% #ref, low
 # Disturbed Ponds #===================== 
 
 # Pulsed Low 
-x.full = as.vector(algB$chla) 
+x.full = as.vector(algB$chla_10_30) 
 T.full = as.vector(algB$doy)
 
 #title = c('Low Coupling AR(2)', line = 1) #Title for the plot
@@ -946,7 +947,7 @@ nobs = length(x.full)
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 3 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 2 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
@@ -965,7 +966,7 @@ B.sd = ODL.out[[4]]
 #mtext('Low Coupling', side = 3, line = 1, cex = 1.25)
 
 # Pulsed Intermediate 
-x.full = as.vector(algA$chla) 
+x.full = as.vector(algA$chla_10_30) 
 T.full = as.vector(algA$doy)
 
 #title = c('Intermediate AR(1)', line = 1) #Title for the plot
@@ -991,7 +992,7 @@ B.sd = ODL.out[[4]]
 #mtext('Intermediate', side = 3, line = 1, cex = 1.25)
 
 # Pulsed High 
-x.full = as.vector(algC$chla) 
+x.full = as.vector(algC$chla_10_30) 
 T.full = as.vector(algC$doy)
 
 #title = c('High Coupling AR(1)', line = 1) #Title for the plot
@@ -1002,7 +1003,7 @@ nobs = length(x.full)
 # START PROTOTYPE SHELL
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
-nl = 1 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+nl = 2 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
@@ -1155,7 +1156,7 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
 }  # End online DLM function
 
 # Reference Low 
-x.full = as.vector(algF$chla) 
+x.full = as.vector(algF$chla_10_30) 
 T.full = as.vector(algF$doy)
 
 #title = c('Low Coupling AR(1)', line = 1) #Title for the plot
@@ -1183,7 +1184,7 @@ color= 'black' # this is the color for the eigenvalue line
     B.sd = ODL.out[[4]]
     
     # Pulsed Intermediate 
-    x.full = as.vector(algD$chla) 
+    x.full = as.vector(algD$chla_10_30) 
     T.full = as.vector(algD$doy)
     
     #title = c('Intermediate AR(1)', line = 1) #Title for the plot
@@ -1209,7 +1210,7 @@ color= 'black' # this is the color for the eigenvalue line
         mtext('Day of Year, 2020', side = 1, line = 2, cex = 11/12)
         
         # Pulsed High 
-        x.full = as.vector(algE$chla) 
+        x.full = as.vector(algE$chla_10_30) 
         T.full = as.vector(algE$doy)
         
         #title = c('High Coupling AR(1)', line = 1) #Title for the plot
@@ -1220,7 +1221,7 @@ color= 'black' # this is the color for the eigenvalue line
             # START PROTOTYPE SHELL
             # USER MUST INPUT: nl; delta; x.full; T.full; title
             
-            nl = 3 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
+            nl = 2 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
             delta = 0.9 # 0<delta<1; see advice in functions
             
             ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
@@ -1240,10 +1241,10 @@ color= 'black' # this is the color for the eigenvalue line
             
             #dev.off()
             
-# Optimal Order 2 ponds #=======================
+# Optimal Order 2 pond #=======================
             ## ============ Plot Margins ================= ##
             # Window for checking plot 
-            windows(height = 2, width = 6) 
+            windows(height = 3, width = 4) 
             
             # Will create plot in whatever file path you set  
             #pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure5.pdf", 
@@ -1251,7 +1252,7 @@ color= 'black' # this is the color for the eigenvalue line
             #  width = 6)
             
             # Set dimensions for figure array # 
-            par(mfrow =c(1,3),  mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
+            par( mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
             par(tcl = -0.25)
             par(mgp = c(2, 0.6, 0)) 
             
@@ -1505,7 +1506,7 @@ color= 'black' # this is the color for the eigenvalue line
             
             # Separate to just chlorophyll-a measurements 
             chl = hort_sonde %>%
-              select(pond_id, doy, chla)
+              select(pond_id, doy, chla_10_30)
             chl
             
             # Chlorophyll-a by pond (easier to apply GAMs if separated) # 
@@ -1533,37 +1534,7 @@ color= 'black' # this is the color for the eigenvalue line
             # Change greater than 10 no support 
             
             
-            # Disturbed Ponds #===================== 
-            
-            # Pulsed Low 
-            x.full = as.vector(algB$chla) 
-            T.full = as.vector(algB$doy)
-            
-            #title = c('Low Coupling AR(2)', line = 1) #Title for the plot
-            color= low_col # this is the color for the eigenvalue line
-            color1=low_col_F #this is the color for the error polygon 
-            nobs = length(x.full)
-            
-            # START PROTOTYPE SHELL
-            # USER MUST INPUT: nl; delta; x.full; T.full; title
-            
-            nl = 2 # number of lags, AIC is lower on lag 2, but lower on lag 1 for other ponds 
-            delta = 0.9 # 0<delta<1; see advice in functions
-            
-            ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
-            axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2))
-            mtext(side = 2, line = 3.2, 
-                  expression('Chlorophyll-'~italic(a)), cex = 11/12)
-            mtext(side = 2, line = 2, 
-                  'Eigenvalues')
-            text(167, 1.2, 'A', font = 2)
-            mtext(side = 3, line = 0.1, 'Low Coupling, Pulsed', cex = 11/12)
-            
-            Yyhat = ODL.out[[1]]
-            EigenVals = ODL.out[[2]]
-            B.ests = ODL.out[[3]]
-            B.sd = ODL.out[[4]]
-            
+           
 
             
             ## Reference Ponds ##==================================
@@ -1680,7 +1651,7 @@ color= 'black' # this is the color for the eigenvalue line
               lamda.minus = lamda-lamda.sd
               yrange = range(lamda.plus,lamda.minus,0,1)
               plot(T.ar,lamda,type='l',lwd=2,col=color,ylim=c(0, 1.2),
-                   xlab='',ylab='', cex=1, cex.axis=1.2, xlim=c(165,245), 
+                   xlab='',ylab='', cex=1, xlim=c(165,245), 
                    yaxt = 'n')
               polygon(c(T.ar, rev(T.ar)), c(lamda.plus, rev(lamda.minus)), col=color1, border=NA)
               points(T.ar,lamda,type='l',lwd=3,col=color)
@@ -1704,8 +1675,8 @@ color= 'black' # this is the color for the eigenvalue line
             }  # End online DLM function
             
             # Reference Low 
-            x.full = as.vector(algF$chla) 
-            T.full = as.vector(algF$doy)
+            x.full = as.vector(algE$chla_10_30) 
+            T.full = as.vector(algE$doy)
             
             #title = c('Low Coupling AR(1)', line = 1) #Title for the plot
             color= 'black' # this is the color for the eigenvalue line
@@ -1719,11 +1690,12 @@ color= 'black' # this is the color for the eigenvalue line
                 delta = 0.9 # 0<delta<1; see advice in functions
                 
                 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
-                axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = F)
-                text(167, 1.2, 'B', font = 2)
-                mtext(side = 3, line = 0.1, 'Low Coupling, Reference', cex = 11/12)
+                axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = T)
+                mtext(side = 3, line = 0.1, 'High Coupling, Reference', cex = 11/12)
                 mtext('Day of Year, 2020', side = 1, line = 2, cex = 11/12)
-                
+                mtext(side = 2, line = 3.2, 
+                      expression('Chlorophyll-'~italic(a)), cex = 11/12)
+                mtext(side = 2, line = 2, 'Eigenvalues, Reference', cex = 11/12)
                 
                 Yyhat = ODL.out[[1]]
                 EigenVals = ODL.out[[2]]
@@ -1734,7 +1706,7 @@ color= 'black' # this is the color for the eigenvalue line
               
                     
                     # Pulsed High 
-                    x.full = as.vector(algE$chla) 
+                    x.full = as.vector(algE$chla_10_30) 
                     T.full = as.vector(algE$doy)
                     
                     #title = c('High Coupling AR(1)', line = 1) #Title for the plot

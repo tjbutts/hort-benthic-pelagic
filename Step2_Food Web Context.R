@@ -223,7 +223,7 @@ axis(side=2,
 mtext(side = 2, line = 3.5, 
       expression('Macroinvertebrate'), cex = 11/12)
 mtext(side = 2, line = 1.8, 
-      expression('Density' ~"(#"~L^-1*")"), cex = 11/12)
+      expression('Density' ~"(#"~m^-2*")"), cex = 11/12)
 text(2.55, log(14000), 'D', font = 2)
 
 boxplot(log(density)~treatment, data = int_miv, ylim = c(log(300), log(14000)), 

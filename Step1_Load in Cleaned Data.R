@@ -40,16 +40,13 @@ hort_carbon = read_csv('ghg-model-dataset_2022-07-26.csv') %>%
 hort_carbon
 
 # Sonde profile data - average between 10 - 30 cm depth 
-   # One DOY is missing in early summer, data filled by linear interpolation 
-hort_sonde = read_csv('daily-sonde-profiles_mean-values_10-30cm_gapfilled_avg.csv')
+hort_sonde = read_csv('surface_nutrients_chla.csv')
 hort_sonde
-
 
 # Load in metabolism data from Robert 
 metab = read_csv('daily-metabolism_data_robertcorrected.csv') %>% 
   filter(flag == 0)
-metab # Need to interrogate distribution of missing values ## 
-  # Striplot by DOY for each pond 
+metab  
 
 ## Food Web Data ## 
 hort_fish_bodysize = read_csv('fish_length_weight.csv') # fish size 
@@ -58,3 +55,4 @@ hort_periphy = read_csv('periphy_clean.csv') # periphyton
 hort_macrophy = read_csv('macrophy_clean.csv') # macrophytes 
 hort_zoop = read_csv('hort_zp_clean_72622.csv') # zooplankton 
 hort_mivdensity = read_csv('hort_mivdensity.csv') # macroinvertebrates 
+
