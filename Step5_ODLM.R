@@ -253,7 +253,7 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
  # Daily profile data 
 
 # Separate to just chlorophyll-a measurements 
-chl = hort_sonde %>%
+chl = hort_field %>%
   select(pond_id, doy, chla_10_30)
 chl
 

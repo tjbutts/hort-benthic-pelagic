@@ -18,19 +18,19 @@ library(disturbhf)
 
 # Chlorophyll-a #===================
 # data # 
-hort_sonde
+hort_field
 
 # Run Response Detection Analysis # 
 # Create disturbed and reference time series # 
 ## Low Coupling ## 
-testy_low = hort_sonde %>%
+testy_low = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'B') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_low
 
-refy_low = hort_sonde %>%
+refy_low = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'F') %>%
   rename(tt = doy, 
@@ -38,14 +38,14 @@ refy_low = hort_sonde %>%
 refy_low
 
 ## Intermediate Coupling ## 
-testy_int = hort_sonde %>%
+testy_int = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'A') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_int
 
-refy_int = hort_sonde %>%
+refy_int = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'D') %>%
   rename(tt = doy, 
@@ -53,14 +53,14 @@ refy_int = hort_sonde %>%
 refy_int
 
 ## High Coupling ## 
-testy_high = hort_sonde %>%
+testy_high = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'C') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_high
 
-refy_high = hort_sonde %>%
+refy_high = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'E') %>%
   rename(tt = doy, 

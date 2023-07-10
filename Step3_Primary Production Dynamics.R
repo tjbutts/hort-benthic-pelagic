@@ -29,11 +29,11 @@ high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
 high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 
 # Data # 
-hort_sonde # Daily profile data 
+hort_field # Daily profile data 
 
 # LOESS regression of chlorophyll for pattern - not analysis ##==========================
 # Separate to just chlorophyll-a measurements 
-chl = hort_sonde %>%
+chl = hort_field %>%
   select(pond_id, doy, chla_10_30)
 chl
 

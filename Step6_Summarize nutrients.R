@@ -8,13 +8,11 @@
 #============================================#
 
 ## Data ## 
-hort_sonde
-hort_carbon
-hort_macrophy
+hort_field
 
 ## Average +- sd of ##===========
 ##TP ##========== 
-tp = hort_sonde %>%
+tp = hort_field %>%
   select(pond_id, doy, tp, tp_flag) %>% # No tp flags so will discount 
   filter(tp != 'NA')
 tp
@@ -31,7 +29,7 @@ tp_avg = tp %>%
 tp_avg 
 
 ##TN ##=============
-tn = hort_sonde %>%
+tn = hort_field %>%
   select(pond_id, doy, tn, tn_flag) %>% # No tn flags so will discount 
   filter(tn != 'NA')
 tn
@@ -48,7 +46,7 @@ tn_avg = tn %>%
 tn_avg
 
 ##SRP ##=============
-srp = hort_sonde %>%
+srp = hort_field %>%
   select(pond_id, doy, srp, srp_flag) %>% # Flags indicate value replaced with long-term labortory minimum reporting value  
   filter(srp != 'NA')
 srp
@@ -65,7 +63,7 @@ srp_avg = srp %>%
 srp_avg
 
 ##NOX ##=============
-nox = hort_sonde %>%
+nox = hort_field %>%
   select(pond_id, doy, nox, nox_flag) %>% # Flags indicate value replaced with long-term labortory minimum reporting value  
   filter(nox != 'NA')
 nox
@@ -82,7 +80,7 @@ nox_avg = nox %>%
 nox_avg
 
 ##nhx ##=============
-nhx = hort_sonde %>%
+nhx = hort_field %>%
   select(pond_id, doy, nhx, nhx_flag) %>% # Flags indicate value replaced with long-term labortory minimum reporting value  
   filter(nhx != 'NA')
 nhx

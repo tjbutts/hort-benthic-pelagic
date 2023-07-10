@@ -298,32 +298,32 @@ text(2.55, 0.4, 'I', font = 2)
 #dev.off()
 
 # Because we will be plotting by pond, make some separate data frames to make life easier
-fieldA = hort_sonde %>% #pulse, int
+fieldA = hort_field %>% #pulse, int
   filter(pond_id == "A") %>%
   filter(!(is.na(tp))) %>%
   mutate(np_ratio = ((tn * 14.01) / 1000) / ((tp * 30.97) / 1000000))
 
-fieldB = hort_sonde %>% #pulse, low
+fieldB = hort_field %>% #pulse, low
   filter(pond_id == "B") %>%
   filter(!(is.na(tp))) %>%
   mutate(np_ratio = ((tn * 14.01) / 1000) / ((tp * 30.97) / 1000000))
 
-fieldC = hort_sonde %>% #pulse, high
+fieldC = hort_field %>% #pulse, high
   filter(pond_id == "C") %>%
   filter(!(is.na(tp))) %>%
   mutate(np_ratio = ((tn * 14.01) / 1000) / ((tp * 30.97) / 1000000))
 
-fieldD = hort_sonde %>% #ref, int
+fieldD = hort_field %>% #ref, int
   filter(pond_id == "D") %>%
   filter(!(is.na(tp))) %>%
   mutate(np_ratio = ((tn * 14.01) / 1000) / ((tp * 30.97) / 1000000))
 
-fieldE = hort_sonde %>% #ref, high
+fieldE = hort_field %>% #ref, high
   filter(pond_id == "E") %>%
   filter(!(is.na(tp))) %>%
   mutate(np_ratio = ((tn * 14.01) / 1000) / ((tp * 30.97) / 1000000))
 
-fieldF = hort_sonde %>% #ref, low
+fieldF = hort_field %>% #ref, low
   filter(pond_id == "F") %>%
   filter(!(is.na(tp))) %>%
   mutate(np_ratio = ((tn * 14.01) / 1000) / ((tp * 30.97) / 1000000))
@@ -599,6 +599,7 @@ lines(c(211,211), c(-10,700), lty = 3)
 axis(side = 2, at = c(0,0.2, 0.4,0.6,0.8,1.0,1.2), cex.axis = 1, labels = F) 
 
 # Figure 3 with heat wave + derecho denoted # 
+
 # Create figure with heat wave and derecho for reference #==================
 # Window for checking plot 
 windows(height = 8, width = 6) 
@@ -934,19 +935,19 @@ rect(185,-50,190,50, col=col, border=NA)
 
 ### Chlorophyll-a #===================
 # data # 
-hort_sonde
+hort_field
 
 # Run Response Detection Analysis # 
 # Create disturbed and reference time series # 
 ## Low Coupling ## 
-testy_low = hort_sonde %>%
+testy_low = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'B') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_low
 
-refy_low = hort_sonde %>%
+refy_low = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'F') %>%
   rename(tt = doy, 
@@ -954,14 +955,14 @@ refy_low = hort_sonde %>%
 refy_low
 
 ## Intermediate Coupling ## 
-testy_int = hort_sonde %>%
+testy_int = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'A') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_int
 
-refy_int = hort_sonde %>%
+refy_int = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'D') %>%
   rename(tt = doy, 
@@ -969,14 +970,14 @@ refy_int = hort_sonde %>%
 refy_int
 
 ## High Coupling ## 
-testy_high = hort_sonde %>%
+testy_high = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'C') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_high
 
-refy_high = hort_sonde %>%
+refy_high = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'E') %>%
   rename(tt = doy, 
@@ -1459,19 +1460,19 @@ text(141, 5.8, 'L', font = 2)
 
 ### Chlorophyll-a #===================
 # data # 
-hort_sonde
+hort_field
 
 # Run Response Detection Analysis # 
 # Create disturbed and reference time series # 
 ## Low Coupling ## 
-testy_low = hort_sonde %>%
+testy_low = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'B') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_low
 
-refy_low = hort_sonde %>%
+refy_low = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'F') %>%
   rename(tt = doy, 
@@ -1479,14 +1480,14 @@ refy_low = hort_sonde %>%
 refy_low
 
 ## Intermediate Coupling ## 
-testy_int = hort_sonde %>%
+testy_int = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'A') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_int
 
-refy_int = hort_sonde %>%
+refy_int = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'D') %>%
   rename(tt = doy, 
@@ -1494,14 +1495,14 @@ refy_int = hort_sonde %>%
 refy_int
 
 ## High Coupling ## 
-testy_high = hort_sonde %>%
+testy_high = hort_field %>%
   select(pond_id, doy, chla_10_30) %>% 
   filter(pond_id == 'C') %>%
   rename(tt = doy, 
          yy = chla_10_30)
 testy_high
 
-refy_high = hort_sonde %>%
+refy_high = hort_field %>%
   select(pond_id, doy, chla_10_30) %>%
   filter(pond_id == 'E') %>%
   rename(tt = doy, 

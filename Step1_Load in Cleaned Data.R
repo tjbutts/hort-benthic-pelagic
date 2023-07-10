@@ -28,8 +28,8 @@ library(mgcv)
 # Data sets # 
 
 # Sonde profile data - average between 10 - 30 cm depth + surface nutrients 
-hort_sonde = read_csv('surface_nutrients_chla.csv')
-hort_sonde
+hort_field = read_csv('surface_nutrients_chla.csv')
+hort_field
 
 # Load in metabolism data from Robert 
 metab = read_csv('daily-metabolism_data_robertcorrected.csv') %>% 
