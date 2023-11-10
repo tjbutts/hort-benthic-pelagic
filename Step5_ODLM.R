@@ -335,7 +335,7 @@ mtext(side = 2, line = 3.2,
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Eigenvalues, Pulsed', cex = 11/12)
 text(167, 1.2, 'A', font = 2)
-mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
@@ -387,7 +387,7 @@ delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = FALSE)
-mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 text(167, 1.2, 'C', font = 2)
 
 Yyhat = ODL.out[[1]]

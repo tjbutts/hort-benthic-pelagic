@@ -144,7 +144,7 @@ axis(side=2,
                 '1', '', '', '', '', '', '', '', '', 
                 '10', '', '','','','','','','','100','','','','','','','800'),
      las=0, cex.axis=1.2)
-mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
@@ -173,7 +173,7 @@ axis(side=2,
                 '', '', '', '', '', '', '', '', '', 
                 '', '', '','','','','','','','','','','','','','',''),
      las=0, cex.axis=1.2)
-mtext(side = 3, line = 0.1, 'Intermediate Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
@@ -198,7 +198,7 @@ axis(side=2,
                 '', '', '', '', '', '', '', '', '', 
                 '', '', '','','','','','','','','','','','','','',''),
      las=0, cex.axis=1.2)
-mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 

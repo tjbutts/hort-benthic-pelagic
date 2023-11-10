@@ -364,7 +364,7 @@ polygon(c(142:241, 241:142), c(alg_F_smooth$fit - alg_F_smooth$se.fit,
                                rev(alg_F_smooth$fit + alg_F_smooth$se.fit)), 
         col = ref_col, border = NA)
 lines(alg_F_smooth$fit, x=algF$doy, col=ref_col, lwd = 2)
-mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
@@ -423,7 +423,7 @@ polygon(c(142:241, 241:142), c(alg_C_smooth$fit - alg_C_smooth$se.fit,
         col = high_col_E, border = NA)
 lines(alg_C_smooth$fit, x=algC$doy, col=high_col_E, lwd = 2)
 text(141, 35, 'C', font = 2)
-mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)

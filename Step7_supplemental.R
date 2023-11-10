@@ -155,7 +155,7 @@ boxplot(log(biomass)~treatment, data = low_zoop, ylim = c(log(0.01), log(800)),
         yaxt = 'n', col=c(low_col_B, ref_col), 
         ylab = 'ZP Biomass (ug/L)', col.axis = transparent, at = c(3,5), 
         cex.axis = 1.5)
-mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 axis(side=2,
      at=c( log(0.01), log(0.02), log(0.03), log(0.04), log(0.05), log(0.06), log(0.07), log(0.08),log(0.09), log(0.1),
            log(0.2), log(0.3), log(0.4), log(0.5), log(0.6), log(0.7), log(0.8), log(0.9),
@@ -197,7 +197,7 @@ text(2.55, log(800), 'B', font = 2)
 boxplot(log(biomass)~treatment, data = high_zoop, ylim = c(log(0.01), log(800)), 
         yaxt = 'n', col=c(high_col_C, ref_col), col.axis = transparent, 
         ylab = '', at = c(3,5))
-mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 # Add data points # 
 stripchart(log(biomass)~treatment, vertical = TRUE, data = low_zoop, at = c(3,5), 
@@ -409,7 +409,7 @@ polygon(c(fieldF$doy, rev(fieldF$doy)), c(field_F_smooth$fit - field_F_smooth$se
                                rev(field_F_smooth$fit + field_F_smooth$se.fit)), 
         col = ref_col, border = NA)
 lines(field_F_smooth$fit, x=fieldF$doy, col=ref_col, lwd = 2)
-mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 mtext(side = 2, line = 3.2, 
       expression('Total Phosphorus'), cex = 11/12)
 mtext(side = 2, line = 1.6, 
@@ -469,7 +469,7 @@ polygon(c(fieldC$doy, rev(fieldC$doy)), c(field_C_smooth$fit - field_C_smooth$se
         col = high_col_E, border = NA)
 lines(field_C_smooth$fit, x=fieldC$doy, col=high_col_E, lwd = 2)
 text(141, 90, 'C', font = 2)
-mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
@@ -624,7 +624,7 @@ polygon(c(142:241, 241:142), c(alg_F_smooth$fit - alg_F_smooth$se.fit,
                                rev(alg_F_smooth$fit + alg_F_smooth$se.fit)), 
         col = ref_col, border = NA)
 lines(alg_F_smooth$fit, x=algF$doy, col=ref_col, lwd = 2)
-mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 par(new=T) # add new smooth to same plot 
 
@@ -687,7 +687,7 @@ polygon(c(142:241, 241:142), c(alg_C_smooth$fit - alg_C_smooth$se.fit,
         col = high_col_E, border = NA)
 lines(alg_C_smooth$fit, x=algC$doy, col=high_col_E, lwd = 2)
 text(141, 35, 'C', font = 2)
-mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
@@ -1267,7 +1267,7 @@ mtext(side = 2, line = 3.2,
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 5.8, 'A', font = 2)
-mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -1296,7 +1296,7 @@ text(141, 5.8, 'B', font = 2)
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent, 
      lwd=3, col=high_col, data=rda_high_5day)
-mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -1792,7 +1792,7 @@ mtext(side = 2, line = 3.2,
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 5.8, 'A', font = 2)
-mtext(side = 3, line = 0.1, 'Low Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
@@ -1821,7 +1821,7 @@ text(141, 5.8, 'B', font = 2)
 plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      ylab = '', xlab = '', col.axis = transparent, 
      lwd=3, col=high_col, data=rda_high_10day)
-mtext(side = 3, line = 0.1, 'High Coupling', cex = 11/12)
+mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)

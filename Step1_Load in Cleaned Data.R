@@ -23,6 +23,8 @@ if (!require(scales)) install.packages('scales')
 library(scales) 
 if (!require(mgcv)) install.packages('mgcv')
 library(mgcv)
+if (!require(here)) install.packages('here')
+library(here)
 # Set working directory to the R Project folder 
 
 # Data sets # 
