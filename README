@@ -1,1 +1,3 @@
-Start of Hort Farm Analysis Repository
+Repository for analysis of data to generate figures within the manuscript 'Experimental evaluation of aquatic ecosystem resistance and resilience to episodic nutrient loading'
+
+Start with 'Step1_Load in Cleaned Data' and run, step-by-step from Step1 to Step6 to recreate figures and analyses 
