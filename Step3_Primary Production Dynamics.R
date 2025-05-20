@@ -24,9 +24,11 @@ int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
 int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
 int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
 
-high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
-high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
-high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
 
 # Data # 
 hort_field # Daily profile data 
@@ -384,6 +386,8 @@ text(141, 35, 'A', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 plot(algD$chla_10_30, x=algD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = ref_col, col.axis = transparent)
@@ -406,6 +410,8 @@ text(141, 35, 'B', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 plot(algE$chla_10_30, x=algE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 35), col = ref_col, col.axis = transparent)
@@ -428,6 +434,8 @@ mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 ## GPP Final plot ##===================
 
@@ -456,6 +464,8 @@ text(141, 20, 'D', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 plot(gppD$GPP, x=gppD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 20), col = ref_col, col.axis = transparent)
@@ -477,6 +487,8 @@ text(141, 20, 'E', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 plot(gppE$GPP, x=gppE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 20), col = ref_col, col.axis = transparent)
@@ -498,6 +510,8 @@ text(141, 20, 'F', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 ## R Final plot ##==========================
 plot(respF$R, x=respF$doy, type = 'p', pch = 20, cex=1.5, xlab = '', yaxt = 'n', col.axis=transparent,
@@ -525,6 +539,8 @@ text(141, 20, 'G', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 plot(respD$R, x=respD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0, 20), col = ref_col, col.axis = transparent)
@@ -546,6 +562,8 @@ text(141,20, 'H', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 plot(respE$R, x=respE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '', yaxt = 'n',
      xlim=c(140, 245), ylim=c(0, 20), col = ref_col, col.axis = transparent)
@@ -567,6 +585,8 @@ text(141,20, 'I', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 ## NEP Final Plot ##==============================
 plot(netpF$NEP, x=netpF$doy, type = 'p', pch = 20, cex=1.5, xlab = '', yaxt = 'n',
@@ -595,6 +615,8 @@ text(141, 8, 'J', font = 2)
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
 lines(c(100,300), c(0,0), lty = 1)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-15,190,50, col=col, border=NA)
 
 plot(netpD$NEP, x=netpD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(-8,8), col = ref_col, col.axis = transparent)
@@ -618,6 +640,8 @@ text(141, 8, 'K', font = 2)
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
 lines(c(100,300), c(0,0), lty = 1)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-15,190,50, col=col, border=NA)
 
 plot(netpE$NEP, x=netpE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(-8,8), col = ref_col, col.axis = transparent)
@@ -640,6 +664,8 @@ text(141, 8, 'L', font = 2)
 lines(c(176,176), c(-100,700), lty = 3)
 lines(c(211,211), c(-100,700), lty = 3)
 lines(c(100,300), c(0,0), lty = 1)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-15,190,50, col=col, border=NA)
 
 # Create the pdf of the plot 
 #dev.off()

@@ -33,6 +33,9 @@ library(here)
 hort_field = read_csv('surface_nutrients_chla.csv')
 hort_field
 
+hort_ysi = read_csv('profiles_daily_deepsite.csv')
+hort_ysi
+
 # Load in metabolism data from Robert 
 metab = read_csv('daily-metabolism_data_robertcorrected.csv') %>% 
   filter(flag == 0)
@@ -45,3 +48,5 @@ hort_periphy = read_csv('periphy_clean.csv') # periphyton
 hort_zoop = read_csv('hort_zp_clean_72622.csv') # zooplankton 
 hort_mivdensity = read_csv('hort_mivdensity.csv') # macroinvertebrates 
 
+## Summary Statistics ## 
+hort_rdasum = read_csv('rdalgo_summarystats.csv') # Response Detection Algorithm Summary Stats 

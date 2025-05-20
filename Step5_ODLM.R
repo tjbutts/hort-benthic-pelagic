@@ -225,13 +225,13 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
   points(T.ar,lamda,type='l',lwd=3,col=color)
   # points(T.ar,lamda.plus,type='l',lwd=2,lty=2,col=color1)
   # points(T.ar,lamda.minus,type='l',lwd=2,lty=2,col=color)
-  abline(h=1,lty=2)
+  abline(h=1,lty=1, lwd = 2)
   lines(c(176,176), c(-10,100), lwd=2, lty=3, col="gray20") #Pulse1
   lines(c(211,211), c(-10,100), lwd=2, lty=3, col="gray20") #Pulse2
   box()
-  #lines(c(223,223), c(-10,100), lwd=2, lty=2, col='gray20')
-  #col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
-  #rect(185,-2,190,15, col=col, border=NA)
+  lines(c(223,223), c(-10,100), lwd=2, lty=2, col='gray20')
+  col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
+  rect(185,-2,190,15, col=col, border=NA)
   
   # Create output list and return it
   Yyhat = matrix(c(T.ar,Y,yhat,vupdate),nr=(nobs-nl),nc=4)
@@ -243,9 +243,6 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
 }  # End online DLM function
 
 # end functions ----------------------------------------------------------------------------------------
-
-
-
 
 # plotting DLMs ## ==============================
 
@@ -271,10 +268,12 @@ algD = chl %>% #ref, int
   filter(pond_id == "D") 
 
 algE = chl %>% #ref, high
-  filter(pond_id == "E") 
+  filter(pond_id == "E") %>% 
+  filter(doy < 241)
 
 algF = chl %>% #ref, low
-  filter(pond_id == "F")
+  filter(pond_id == "F") 
+  
 
 ## Burnham and Anderson AIC rule of them ## 
 # Change less than two AIC have substantial support 
@@ -307,9 +306,11 @@ int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
 int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
 int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
 
-high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
-high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
-high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
 
 
 # Disturbed Ponds #===================== 
@@ -342,6 +343,11 @@ EigenVals = ODL.out[[2]]
 B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
 
+test.eig = EigenVals[,1]
+length(test.eig)
+Re(test.eig) # All real values (98) 
+Im(test.eig) # No imaginary 
+
 #mtext('Low Coupling', side = 3, line = 1, cex = 1.25)
 
 # Pulsed Intermediate 
@@ -357,7 +363,7 @@ nobs = length(x.full)
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
 nl = 1 # number of lags - vary to see lowest AICc 
-delta = 0.9 # 0<delta<1; see advice in functions
+delta = 0.90 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = FALSE)
@@ -367,6 +373,11 @@ Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
 B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
+
+test.eig = EigenVals[,1]
+length(test.eig)
+Re(test.eig) # All real values (99) 
+Im(test.eig) # No imaginary 
 
 #mtext('Intermediate', side = 3, line = 1, cex = 1.25)
 
@@ -383,7 +394,7 @@ nobs = length(x.full)
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
 nl = 1 # number of lags - vary to see lowest AICc 
-delta = 0.9 # 0<delta<1; see advice in functions
+delta = 0.90 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = FALSE)
@@ -394,6 +405,11 @@ Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
 B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
+
+test.eig = EigenVals[,1]
+length(test.eig)
+Re(test.eig) # All real values (99) 
+Im(test.eig) # No imaginary 
 
 #mtext('High Coupling', side = 3, line = 1, cex = 1.25)
 
@@ -517,13 +533,13 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
   points(T.ar,lamda,type='l',lwd=3,col=color)
   # points(T.ar,lamda.plus,type='l',lwd=2,lty=2,col=color1)
   # points(T.ar,lamda.minus,type='l',lwd=2,lty=2,col=color)
-  abline(h=1,lty=2)
+  abline(h=1,lty=1, lwd = 2)
   lines(c(176,176), c(-10,100), lwd=2, lty=3, col="gray20") #Pulse1
   lines(c(211,211), c(-10,100), lwd=2, lty=3, col="gray20") #Pulse2
   box()
-  #lines(c(223,223), c(-10,100), lwd=2, lty=2, col='gray20')
-  #col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
-  #rect(185,-2,190,15, col=col, border=NA)
+  lines(c(223,223), c(-10,100), lwd=2, lty=2, col='gray20')
+  col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
+  rect(185,-2,190,15, col=col, border=NA)
   
   # Create output list and return it
   Yyhat = matrix(c(T.ar,Y,yhat,vupdate),nr=(nobs-nl),nc=4)
@@ -547,7 +563,7 @@ nobs = length(x.full)
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
 nl =  1 # number of lags - vary to see lowest AICc 
-delta = 0.9 # 0<delta<1; see advice in functions
+delta = 0.94 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 mtext(side = 2, line = 3.2, 
@@ -556,15 +572,21 @@ mtext(side = 2, line = 2, 'Eigenvalues, Reference', cex = 11/12)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2))
 text(167, 1.2, 'D', font = 2)
 
-
 Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
 B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
 
+test.eig = EigenVals[,1]
+length(test.eig)
+Re(test.eig) # All real values (99) 
+Im(test.eig) # No imaginary 
+
 # Pulsed Intermediate 
 x.full = as.vector(algD$chla_10_30) 
 T.full = as.vector(algD$doy)
+
+x.full
 
 #title = c('Intermediate AR(1)', line = 1) #Title for the plot
 color= 'black' # this is the color for the eigenvalue line
@@ -575,7 +597,7 @@ nobs = length(x.full)
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
 nl = 1 # number of lags - vary to see lowest AICc
-delta = 0.9 # 0<delta<1; see advice in functions
+delta = 0.90 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = F)
@@ -586,11 +608,17 @@ EigenVals = ODL.out[[2]]
 B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
 
+test.eig = EigenVals[,1]
+length(test.eig)
+Re(test.eig) # All real values (99) 
+Im(test.eig) # No imaginary 
+
 mtext('Day of Year, 2020', side = 1, line = 2, cex = 11/12)
 
 # Pulsed High 
 x.full = as.vector(algE$chla_10_30) 
 T.full = as.vector(algE$doy)
+
 
 #title = c('High Coupling AR(1)', line = 1) #Title for the plot
 color= 'black' # this is the color for the eigenvalue line
@@ -601,7 +629,7 @@ nobs = length(x.full)
 # USER MUST INPUT: nl; delta; x.full; T.full; title
 
 nl = 1 # number of lags - vary to see lowest AICc
-delta = 0.9 # 0<delta<1; see advice in functions
+delta = 0.90 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 text(167, 1.2, 'F', font = 2)
@@ -612,6 +640,11 @@ Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
 B.ests = ODL.out[[3]]
 B.sd = ODL.out[[4]]
+
+test.eig = EigenVals[,1]
+length(test.eig)
+Re(test.eig) # All real values (99) 
+Im(test.eig) # No imaginary 
 
 #mtext('High Coupling', side = 3, line = 1, cex = 1.25)
 

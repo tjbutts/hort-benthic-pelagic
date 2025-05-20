@@ -1,5 +1,44 @@
 # Code used to generate tables and figures in Appendix S1 #======================
 
+# Pull nutrient data for Table 1 # 
+nut = hort_field %>% 
+  select(pond_id, doy, tp, srp, tn, nox, nhx) %>% 
+  mutate(pond_id = case_when(pond_id == "A" ~ 'INTpulse', 
+                             pond_id == "B" ~ 'LOWpulse',
+                             pond_id == "C" ~ 'HIGHpulse',
+                             pond_id == "D" ~ 'INTref', 
+                             pond_id == "E" ~ 'HIGHref',
+                             pond_id == "F" ~ 'LOWref')) %>% 
+  pivot_longer(cols = c(-pond_id, -doy), 
+               names_to = "variable",
+               values_to = "concentration") %>% 
+  pivot_wider(id_cols = c(doy, variable), 
+              names_from = pond_id, 
+              values_from = concentration) %>% 
+  select(doy, variable, LOWpulse, LOWref, INTpulse, INTref, HIGHpulse, HIGHref)
+nut
+
+# Pull fish lengths # 
+yep = hort_fish_bodysize %>% 
+  filter(spp == 'YEP')
+yep.m = yep %>% 
+  summarize(mean = mean(length, na.rm = T), 
+            sd = sd(length, na.rm = T))
+yep.m
+
+blg = hort_fish_bodysize %>% 
+  filter(spp == 'BLG')
+blg.m = blg %>% 
+  summarize(mean = mean(length, na.rm = T), 
+            sd = sd(length, na.rm = T))
+blg.m
+
+lmb = hort_fish_bodysize %>% 
+  filter(spp == 'LMB')
+lmb.m = lmb %>% 
+  summarize(mean = mean(length, na.rm = T), 
+            sd = sd(length, na.rm = T))
+lmb.m
 
 # Gastric Lavage Table #================== 
 diet = hort_fish_gaslav
@@ -150,6 +189,24 @@ par(mfrow =c(3,3), mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
 par(tcl = -0.25)
 par(mgp = c(2, 0.6, 0))
 
+# ========= PLOTTING COLORS ===== # 
+low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
+low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
+low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+transparent = rgb(255,255,255, max=255, alpha = 0)
+
+int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
+int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
+int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
+
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
+
 # Plot Zooplankton Biomass #===============
 boxplot(log(biomass)~treatment, data = low_zoop, ylim = c(log(0.01), log(800)), 
         yaxt = 'n', col=c(low_col_B, ref_col), 
@@ -166,6 +223,15 @@ axis(side=2,
                 '0.1', '', '', '', '', '', '', '', '','1', '', '', '', '', '', '', '', '', 
                 '10', '', '','','','','','','','100','','','','','','','800'),
      las=0)
+axis(side=2, 
+     at=c(log(1), log(10), log(100), log(800)),
+     labels = c('1', '10', '100','800'),
+     las=0)
+axis(side=2, 
+     at=c(log(800)),
+     labels = c('800'),
+     las=0)
+
 mtext(side = 2, line = 3.2, 
       expression('Zooplankton'), cex = 11/12)
 mtext(side = 2, line = 1.8, 
@@ -227,6 +293,11 @@ axis(side=2,
           log(2000), log(3000), log(4000), log(5000), log(6000), log(7000), log(8000), log(9000), log(10000), log(20000)), #Where the tick marks should be drawn
      labels = c('300','','','','','','','1000', '','','','','','','','','',''),
      las=0)
+axis(side=2,
+     at = c(log(1000), log(10000)),
+     labels = c('1000', '10000'),
+     las=0)
+
 mtext(side = 2, line = 3.5, 
       expression('Macroinvertebrate'), cex = 11/12)
 mtext(side = 2, line = 1.8, 
@@ -267,6 +338,7 @@ axis(side = 2,
      at = c(0, 0.1, 0.2, 0.3, 0.4), 
      labels = c('0', '0.1', '0.2', '0.3', '0.4'), 
      las=0)
+
 # Add data points # 
 stripchart(biomass_area~treatment, vertical = TRUE, data = low_peri, at = c(3,5), 
            method = 'jitter', add = TRUE, pch = 20, col = 'black', cex=1.5)
@@ -378,22 +450,6 @@ field_E_smooth = predict(field_E_loess, se = TRUE)
 # Window for checking plot 
 windows(height = 4, width = 5) 
 
-# ========= PLOTTING COLORS ===== # 
-low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
-low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
-low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
-ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
-black_col = rgb(0,0,0, max=255, alpha = 100) # Black
-transparent = rgb(255,255,255, max=255, alpha = 0)
-
-int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
-int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
-int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
-
-high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
-high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
-high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
-
 # Set dimensions for figure array # 
 par(mfrow =c(2,3), mar = c(1,1,1,0.5), oma = c(4,4,.5,.5))
 par(tcl = -0.25)
@@ -430,6 +486,8 @@ text(141, 90, 'A', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,500, col=col, border=NA)
 
 plot(fieldD$tp, x=fieldD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0,90), col = ref_col, col.axis = transparent)
@@ -452,6 +510,8 @@ text(141, 90, 'B', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,500, col=col, border=NA)
 
 plot(fieldE$tp, x=fieldE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0,90), col = ref_col, col.axis = transparent)
@@ -474,6 +534,8 @@ mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,500, col=col, border=NA)
 
 ## TN Final Plot ## ===========================
 # Total N # ========================
@@ -551,6 +613,8 @@ text(141, 1.2, 'D', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 plot(fieldD$tn, x=fieldD$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
      xlim=c(140, 245), ylim=c(0,1.2), col = ref_col, col.axis = transparent)
@@ -574,6 +638,8 @@ mtext('Day of Year, 2020', side = 1, cex = 11/12, line = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 axis(side = 2, at = c(0,0.2, 0.4,0.6,0.8,1.0,1.2), cex.axis = 1, labels = F)
 
 plot(fieldE$tn, x=fieldE$doy, type = 'p', pch = 20, cex=1.5, xlab ='', ylab = '',
@@ -596,6 +662,8 @@ text(141, 1.2, 'F', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 axis(side = 2, at = c(0,0.2, 0.4,0.6,0.8,1.0,1.2), cex.axis = 1, labels = F) 
 
 # Figure 3 with heat wave + derecho denoted # 
@@ -931,6 +999,15 @@ rect(185,-50,190,50, col=col, border=NA)
 
 ## RDA Sensitivity Analyses ##=========================
 
+# Read in the relevant data and packages
+# ========= PACKAGES ========== #
+if (!require(tidyverse)) install.packages('tidyverse')
+library(tidyverse)
+## Disturbhf - Walter et al. 2022 L&O  
+if (!require(disturbhf)) install.packages('remotes')
+remotes::install_github('jonathan-walter/disturbhf')
+library(disturbhf)
+
 ## 5 days ##==========================
 
 ### Chlorophyll-a #===================
@@ -1239,9 +1316,11 @@ int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
 int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
 int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
 
-high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
-high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
-high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
 
 ## ============ Plot Margins ================= ##
 # Window for checking plot 
@@ -1270,8 +1349,10 @@ text(141, 5.8, 'A', font = 2)
 mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1284,8 +1365,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1299,8 +1382,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1320,8 +1405,10 @@ mtext(side = 2, line = 3.2, 'GPP', cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 axis(side = 2, at=c(-2, 0, 2, 4, 6))
 
 #Add in the response and recovery thresholds 
@@ -1336,8 +1423,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 axis(side = 2, at = c(-2, 0, 2, 4, 6), labels = F)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1351,8 +1440,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 axis(side = 2, at=c(-2, 0,2,4,6), labels = F)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1371,8 +1462,10 @@ mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 5.8, 'G', font = 2)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1384,8 +1477,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent,
      lwd=3, col=int_col, data=rda_int3)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1398,8 +1493,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent,
      lwd=3, col=high_col, data=rda_high3)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1418,8 +1515,10 @@ mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 5.8, 'L', font = 2)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1432,8 +1531,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 1, line = 3.5, 'Last Day of Year in\n5-day rolling window', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1446,8 +1547,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      lwd=3, col=high_col, data=rda_high4)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1752,21 +1855,6 @@ rda_high4 = mwdistdiffz(testy = testy4_high, refy = refy4_high,
 
 #### Plot chl-a and GPP Response Detection Algorithm #=================
 
-# ========= PLOTTING COLORS ===== # 
-low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
-low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
-low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
-ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
-black_col = rgb(0,0,0, max=255, alpha = 100) # Black
-transparent = rgb(255,255,255, max=255, alpha = 0)
-
-int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
-int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
-int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
-
-high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
-high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
-high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
 
 ## ============ Plot Margins ================= ##
 # Window for checking plot 
@@ -1795,8 +1883,10 @@ text(141, 5.8, 'A', font = 2)
 mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1809,8 +1899,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1824,8 +1916,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1845,8 +1939,10 @@ mtext(side = 2, line = 3.2, 'GPP', cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 axis(side = 2, at=c(-2, 0, 2, 4, 6))
 
 #Add in the response and recovery thresholds 
@@ -1861,8 +1957,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 axis(side = 2, at = c(-2, 0, 2, 4, 6), labels = F)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1876,8 +1974,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 axis(side = 2, at=c(-2, 0,2,4,6), labels = F)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1896,8 +1996,10 @@ mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 5.8, 'G', font = 2)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1909,8 +2011,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent,
      lwd=3, col=int_col, data=rda_int3)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1923,8 +2027,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent,
      lwd=3, col=high_col, data=rda_high3)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1943,9 +2049,10 @@ mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 5.8, 'L', font = 2)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
 lines(x =c(176, 250), y = c(0.5, 0.5)) 
@@ -1957,8 +2064,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 1, line = 3.5, 'Last Day of Year in\n10-day rolling window', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1971,8 +2080,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      lwd=3, col=high_col, data=rda_high4)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1980,5 +2091,383 @@ lines(x =c(176, 250), y = c(0.5, 0.5))
 text(141, 5.8, 'L', font = 2)
 # Create plot in specified file path # 
 #dev.off()
+
+# Zooplankton and Macroinvertebrate Compositional Analysis # ==========================
+hort_zoop
+hort_mivdensity
+library(vegan)
+library(tidyverse)
+
+# Zoop nMDS Pre-nutrient Pulse; post nutrient pulse; total 
+hort_zoop_wide = hort_zoop %>% 
+  pivot_wider(id_cols = c(pond_id, doy), 
+              names_from = taxon, 
+              values_from = biomass)
+hort_zoop_wide
+
+# pre-pulse (pre DOY 176) 
+prep_hzp = hort_zoop_wide %>% 
+  filter(doy <= 175) # prior to first nutrient pulse
+
+# post-2nd pulse (post DOY 176)
+postp_hzp = hort_zoop_wide %>% 
+  filter(doy >= 211)
+
+# nMDS of zoops pre pulse # ===================
+prep_hzp = prep_hzp %>% 
+  mutate(group = case_when(pond_id == "B" | pond_id == "F" ~ 'low',
+                           pond_id == "A" | pond_id == "D" ~ 'intermediate',
+                           pond_id == "C" | pond_id == "E" ~ 'high')) %>% 
+  relocate(pond_id, doy, group)
+prep_hzp                     
+
+prep_hzp.matp = prep_hzp[,4:length(prep_hzp)]         
+prep_hzp.matp
+
+prep_hzp.matp <- prep_hzp.matp[, colSums(prep_hzp.matp) != 0] # remove columns that equal zero (species does not occur over time series)
+
+prep_hzp.m <- as.matrix(prep_hzp.matp) # make matrix 
+set.seed(55)
+
+# downweight rare species # 
+prep_hzp.m.hell <- decostand(prep_hzp.m, method = "hellinger")
+head(prep_hzp.m.hell)
+
+nmds = metaMDS(prep_hzp.m.hell, distance = 'bray')
+plot(nmds)
+
+data.scores = as.data.frame(scores(nmds)$sites)
+spp.scores = rownames_to_column(as.data.frame(scores(nmds)$species), var = "species")
+spp.scores
+
+# add explanatory columns # 
+data.scores$pond_id = prep_hzp$pond_id
+data.scores$group = factor(prep_hzp$group, levels = c("low", "intermediate", "high"))
+data.scores
+
+library(ggplot2)
+
+low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
+low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
+low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+transparent = rgb(255,255,255, max=255, alpha = 0)
+
+int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
+int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
+int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
+
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+# Select a subset of species to plot (e.g., top 5 based on some criteria, or specific ones of interest)
+hort_zoop_filt <- hort_zoop %>% 
+  filter(doy <= 175) %>% 
+  group_by(taxon) %>% 
+  summarize(mean = mean(biomass, na.rm = T)) %>% 
+  arrange(desc(mean))
+hort_zoop_filt # Top 5 highest average biomass: Calanoida, Daphnia, Cyclopoida, Nauplii, Chydorus 
+
+selected_species <- spp.scores[spp.scores$species %in% c("Calanoida", "Daphnia", "Cyclopoida", "Nauplii", "Chydorus"), ]
+
+# Overlay the species points and labels onto the existing plot
+
+xx2 <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +
+  # Add species points and text, combining into a single legend
+  geom_text(data = selected_species, aes(x = NMDS1, y = NMDS2, label = species, color = "Species Scores"),
+            color = "black", fontface = "bold", nudge_y = 0.08, nudge_x = -0.04) +
+  geom_point(data = selected_species, aes(x = NMDS1, y = NMDS2, color = "Species Scores"), size = 4) +
+  
+  # Add group points with a different legend label
+  geom_point(aes(shape = group), size = 2) +
+  
+  # Ellipses with group fill
+  stat_ellipse(aes(group = group, fill = group), alpha = 0.3, geom = "polygon", size = 2) +
+  
+  # Custom theme
+  theme(axis.text.y = element_text(colour = 'black', size = 12, face = 'bold'), 
+        axis.text.x = element_text(colour = "black", face = "bold", size = 12), 
+        legend.text = element_text(size = 12, face ="bold", colour ="black"), 
+        legend.position = "none", 
+        legend.title = element_text(size = 14, colour = "black", face = "bold"), 
+        panel.background = element_blank(), panel.border = element_rect(colour = "black", fill = NA, size = 1.2),
+        legend.key = element_blank()) + 
+  ylim(-1.5, 1.8) +
+  xlim(-1.5, 1.8) +
+  
+  # Custom labels for axes and legend
+  labs(x = "NMDS1", y = "NMDS2", color = "Data Type", shape = "Group", fill = "Group") +
+  annotate("text", x = -Inf, y = Inf, label = "A", hjust = -0.5, vjust = 1.2,
+           size = 6, fontface = "bold") + # Customizing position and style
+  
+  # Manual colors for fill (groups) and points/labels
+  scale_fill_manual(values = c(low_col, int_col, high_col)) +
+  scale_color_manual(values = c("Species Scores" = "firebrick"))  # Customize legend for species
+xx2
+
+
+# nMDS of zoops post second pulse # ==============================
+postp_hzp = postp_hzp %>% 
+  mutate(group = case_when(pond_id == "B" | pond_id == "F" ~ 'low',
+                           pond_id == "A" | pond_id == "D" ~ 'intermediate',
+                           pond_id == "C" | pond_id == "E" ~ 'high')) %>% 
+  relocate(pond_id, doy, group)
+postp_hzp                     
+
+postp_hzp.matp = postp_hzp[,4:length(postp_hzp)]         
+postp_hzp.matp
+
+postp_hzp.matp <- postp_hzp.matp[, colSums(postp_hzp.matp) != 0] # remove columns that equal zero (species does not occur over time series)
+
+postp_hzp.m <- as.matrix(postp_hzp.matp) # make matrix 
+set.seed(55)
+
+# downweight rare species # 
+postp_hzp.m.hell <- decostand(postp_hzp.m, method = "hellinger")
+head(postp_hzp.m.hell)
+
+nmds = metaMDS(postp_hzp.m.hell, distance = 'bray')
+plot(nmds)
+
+data.scores = as.data.frame(scores(nmds)$sites)
+spp.scores = rownames_to_column(as.data.frame(scores(nmds)$species), var = "species")
+spp.scores
+
+# add explanatory columns # 
+data.scores$pond_id = postp_hzp$pond_id
+data.scores$group = factor(postp_hzp$group, levels = c("low", "intermediate", "high"))
+data.scores
+
+library(ggplot2)
+
+
+# Select a subset of species to plot (e.g., top 5 based on some criteria, or specific ones of interest)
+hort_zoop_filt <- hort_zoop %>% 
+  filter(doy >= 211) %>% 
+  group_by(taxon) %>% 
+  summarize(mean = mean(biomass, na.rm = T)) %>% 
+  arrange(desc(mean))
+hort_zoop_filt # Top 5 highest average biomass: Calanoida, Daphnia, Cyclopoida, Nauplii, Chydorus 
+
+selected_species <- spp.scores[spp.scores$species %in% c("Polyarthra", "Nauplii", "Cyclopoida", "Keratella.cochlearis", "Platyias"), ]
+
+# Overlay the species points and labels onto the existing plot
+
+xx3 <- ggplot(data.scores, aes(x = NMDS1, y = NMDS2)) +
+  # Add species points and text, combining into a single legend
+  geom_text(data = selected_species, aes(x = NMDS1, y = NMDS2, label = species, color = "Species Scores"),
+            color = "black", fontface = "bold", nudge_y = 0.08, nudge_x = -0.04) +
+  geom_point(data = selected_species, aes(x = NMDS1, y = NMDS2, color = "Species Scores"), size = 4) +
+  
+  # Add group points with a different legend label
+  geom_point(aes(shape = group), size = 2) +
+  
+  # Ellipses with group fill
+  stat_ellipse(aes(group = group, fill = group), alpha = 0.3, geom = "polygon", size = 2) +
+  
+  # Custom theme
+  theme(axis.text.y = element_text(colour = 'black', size = 12, face = 'bold'), 
+        axis.text.x = element_text(colour = "black", face = "bold", size = 12), 
+        legend.text = element_text(size = 12, face ="bold", colour ="black"), 
+        legend.position = "right", 
+        legend.title = element_text(size = 14, colour = "black", face = "bold"), 
+        panel.background = element_blank(), panel.border = element_rect(colour = "black", fill = NA, size = 1.2),
+        legend.key = element_blank()) + 
+  ylim(-1.5, 1.8) +
+  xlim(-1.5, 1.8) +
+  
+  # Custom labels for axes and legend
+  labs(x = "NMDS1", y = "NMDS2", color = "Data Type", shape = "Group", fill = "Group") + 
+  annotate("text", x = -Inf, y = Inf, label = "B", hjust = -0.5, vjust = 1.2,
+           size = 6, fontface = "bold") + # Customizing position and style
+  
+  # Manual colors for fill (groups) and points/labels
+  scale_fill_manual(values = c(low_col, int_col, high_col)) +
+  scale_color_manual(values = c("Species Scores" = "firebrick"))  # Customize legend for species
+xx3
+
+
+windows(height = 4, width = 6)
+xx2
+
+windows(height = 4, width = 8)
+xx3
+
+# Initial nutrient means # =====================
+low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
+low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
+low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+transparent = rgb(255,255,255, max=255, alpha = 0)
+
+int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
+int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
+int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
+
+high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
+
+init_nut <- hort_field %>% 
+  select(pond_id, doy, tp, srp, tn, nox, nhx) %>% 
+  mutate(code = case_when(pond_id == "B" ~ "low-pulsed", 
+                          pond_id == "F" ~ "low-reference",
+                          pond_id == "A" ~ "int-pulsed",
+                          pond_id == "D" ~ "int-reference",
+                          pond_id == "C" ~ "high-pulsed",
+                          pond_id == "E" ~ "high-reference")) %>% 
+  filter(doy <= 175) %>% 
+  group_by(code) %>% 
+  summarize(mean.tp = mean(tp, na.rm = T), 
+            sd.tp = sd(tp, na.rm = T), 
+            
+            mean.tn = mean(tn, na.rm = T),
+            sd.tn = sd(tn, na.rm = T), 
+            
+            mean.srp = mean(srp, na.rm = T), 
+            sd.srp = sd(srp, na.rm = T), 
+            
+            mean.nox = mean(nox, na.rm = T), 
+            sd.nox = sd(nox, na.rm = T), 
+            
+            mean.nh4 = mean(nhx, na.rm = T), 
+            sd.nh4 = sd(nhx, na.rm = T))
+init_nut
+
+
+# YSI Sond Profiles - surface v. bottom temperature # ======================
+ysi_tb <- hort_ysi %>% 
+  select(doy, pond_id, temp, depth_m) %>% 
+  group_by(doy, pond_id) %>% 
+  mutate(pos = case_when(depth_m == max(depth_m, na.rm = T) ~ "bottom", 
+                         depth_m == min(depth_m, na.rm = T) ~ "top", 
+                         depth_m > min(depth_m, na.rm = T) | depth_m < max(depth_m, na.rm = T) ~ "mid")) %>% 
+  ungroup() %>% 
+  filter(pos == "top" | pos == "bottom") %>% 
+  distinct() # sometimes multiple top or bottom values; sometimes top value is negative (just means it's 0) # 
+ysi_tb
+
+ysi_tb_clean <- ysi_tb %>% 
+  group_by(doy, pond_id, pos) %>% 
+  slice_head(n = 1) %>% 
+  select(-depth_m)
+ysi_tb_clean
+
+ysi_tb_wide <- ysi_tb_clean %>% 
+  pivot_wider(id_cols = c(doy, pond_id), 
+              names_from = pos, 
+              values_from = temp)
+ysi_tb_wide
+
+# Plot by pond # 
+low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
+low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
+low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+transparent = rgb(255,255,255, max=255, alpha = 0)
+
+int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
+int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
+int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
+
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
+
+# B 
+ysi_b <- ysi_tb_wide %>% 
+  filter(pond_id == "B")
+ysi_b
+ysi_f <- ysi_tb_wide %>% 
+  filter(pond_id == "F")
+ysi_a <- ysi_tb_wide %>% 
+  filter(pond_id == "A")
+ysi_d <- ysi_tb_wide %>% 
+  filter(pond_id == "D")
+ysi_c <- ysi_tb_wide %>% 
+  filter(pond_id == "C")
+ysi_e <- ysi_tb_wide %>% 
+  filter(pond_id == "E")
+
+windows(height = 4, width = 6) 
+
+# Will create plot in whatever file path you set  
+#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure5.pdf", 
+#   height = 4, 
+#  width = 6)
+
+# Set dimensions for figure array # 
+par(mfrow =c(2,3),  mar = c(0.5,1,1,0.5), oma = c(4,4,1,.5))
+par(tcl = -0.25)
+par(mgp = c(2, 0.6, 0)) 
+
+# Low Complexity  
+plot(top ~ doy, data = ysi_b, type = "l", lwd = 2, col = low_col_B, ylim = c(15, 30))
+points(bottom ~ doy, data = ysi_b, type = "l", lwd = 2, col = "gray40")
+mtext(side = 2, "Water Temperature (C)", line = 1.8, cex = 0.8)
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
+text(143, 30, "A", font = 2)
+mtext(side = 2, "Pulsed", line = 3, cex = 0.8)
+mtext(side = 3, "Low Complexity", line = 0.2, cex = 0.8)
+
+plot(top ~ doy, data = ysi_a, type = "l", lwd = 2, col = int_col_A, ylim = c(15, 30))
+points(bottom ~ doy, data = ysi_a, type = "l", lwd = 2, col = "gray40")
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
+text(143, 30, "B", font = 2)
+mtext(side = 3, "Intermediate", line = 0.2, cex = 0.8)
+
+plot(top ~ doy, data = ysi_c, type = "l", lwd = 2, col = high_col_C, ylim = c(15, 30))
+points(bottom ~ doy, data = ysi_c, type = "l", lwd = 2, col = "gray40")
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
+text(143, 30, "C", font = 2)
+mtext(side = 3, "High Complexity", line = 0.2, cex = 0.8)
+
+plot(top ~ doy, data = ysi_f, type = "l", lwd = 2, col = low_col_F, ylim = c(15, 30))
+points(bottom ~ doy, data = ysi_f, type = "l", lwd = 2, col = "gray40")
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
+mtext(side = 2, "Water Temperature (C)", line = 1.8, cex = 0.8)
+text(143, 30, "D", font = 2)
+mtext(side = 2, "Reference", line = 3, cex = 0.8)
+
+plot(top ~ doy, data = ysi_d, type = "l", lwd = 2, col = int_col_D, ylim = c(15, 30))
+points(bottom ~ doy, data = ysi_d, type = "l", lwd = 2, col = "gray40")
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
+mtext(side = 1, "Day of Year, 2020", line = 1.8, cex = 0.8)
+text(143, 30, "E", font = 2)
+
+plot(top ~ doy, data = ysi_e, type = "l", lwd = 2, col = high_col_E, ylim = c(15, 30))
+points(bottom ~ doy, data = ysi_e, type = "l", lwd = 2, col = "gray40")
+#Add in the nutrient pulse dates to the graph
+lines(c(176,176), c(-10,700), lty = 3)
+lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
+text(143, 30, "F", font = 2)
 
 

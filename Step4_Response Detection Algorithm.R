@@ -322,9 +322,11 @@ int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
 int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
 int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
 
-high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
-high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
-high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
 
 ## ============ Plot Margins ================= ##
 # Window for checking plot 
@@ -355,6 +357,8 @@ mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -369,6 +373,8 @@ mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -384,6 +390,9 @@ mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,0), lty = 2, lwd = 2)
+lines(c(223,223), c(1.7,20000), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -405,6 +414,8 @@ mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 axis(side = 2, at=c(-2, 0, 2, 4, 6))
 
 #Add in the response and recovery thresholds 
@@ -421,6 +432,8 @@ axis(side = 2, at = c(-2, 0, 2, 4, 6), labels = F)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -436,6 +449,8 @@ axis(side = 2, at=c(-2, 0,2,4,6), labels = F)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -456,6 +471,8 @@ text(141, 5.8, 'G', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -469,6 +486,8 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -483,6 +502,8 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent,
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -503,6 +524,8 @@ text(141, 5.8, 'J', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -517,6 +540,8 @@ mtext(side = 1, line = 3, 'Last Day of Year in\n7-day rolling window', cex = 11/
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -531,6 +556,8 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,20000), lty = 3)
 lines(c(211,211), c(-10,20000), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-5,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -539,3 +566,498 @@ text(141, 5.8, 'L', font = 2)
 # Create plot in specified file path # 
 #dev.off()
 
+# Pull Day of Years for Response and Recovery # 
+
+# Summary Figure for Response, Recovery Option 2 #===================================
+# Data pulled from: 
+  # rda = chlorophyll-a
+  # rda2 = GPP 
+  # rda3 = Respiration
+  # rda4 = NEP 
+hort_rdasum # NA here is no response detected or no recovery detected after response 
+hort_rdasum.filt = hort_rdasum %>% filter(treatment != "high")
+hort_rdasum.filt # no responses detected in high so don't plot 
+
+# ========= PLOTTING COLORS ===== # 
+low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
+low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
+low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+transparent = rgb(255,255,255, max=255, alpha = 0)
+
+int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
+int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
+int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
+
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
+
+# Window for checking plot 
+windows(height = 4, width = 6) 
+
+# Will create plot in whatever file path you set  
+#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure4.pdf", 
+#   height = 4, 
+#    width = 6)
+
+# Set dimensions for figure array # 
+par(mfrow =c(2,3), mar = c(0.5,1,1,0.5), oma = c(4,4,.5,.5))
+par(tcl = -0.25)
+par(mgp = c(2, 0.6, 0)) 
+
+## chlorophyll-a Response # ==================
+chl_rda = hort_rdasum %>% 
+  filter(variable == "chla")
+chl_rda$treatment <- factor(chl_rda$treatment, levels = c("low", "int"))
+
+# shape data into matrix 
+matrix_chl <- with(chl_rda, tapply(response_d, list(treatment, pulse), sum, na.rm = TRUE))
+
+colnames(matrix_chl) <- c("Post First Pulse", "Post Second Pulse")
+
+  # Create the barplot
+barplot(matrix_chl, beside = TRUE, col = c(low_col, int_col), 
+        ylim = c(0, 25), xaxt = 'n', 
+        xlab = "", ylab = "Days")
+box()
+text(6, 24, 'A', font = 2)
+ 
+
+mtext(side = 3, expression('Chlorophyll-'~italic(a)))  
+axis(side = 1, at = c(2, 5), tick = T, labels = F)
+mtext(side = 2, line = 3, "Time to Response")
+mtext(side = 2, line = 1.9, "(Days)")
+
+## GPP Response #========================
+gpp_rda = hort_rdasum %>% 
+  filter(variable == "gpp")
+gpp_rda$treatment <- factor(gpp_rda$treatment, levels = c("low", "int"))
+
+# shape data into matrix 
+matrix_gpp <- with(gpp_rda, tapply(response_d, list(treatment, pulse), sum, na.rm = TRUE))
+
+colnames(matrix_gpp) <- c("Post First Pulse", "Post Second Pulse")
+
+# Create the barplot
+barplot(matrix_gpp, beside = TRUE, col = c(low_col, int_col), 
+        ylim = c(0, 25),  xaxt = 'n', 
+        xlab = "", ylab = "Days")
+box()
+text(6, 24, 'B', font = 2)
+
+# get bar positions info 
+text(x = 1.4, y = 0, labels = "n.d.", pos = 3, col = "black", cex = 1.5)
+text(x = 4.4, y = 0, labels = "n.d.", pos = 3, col = "black", cex = 1.5)
+
+mtext(side = 3, "GPP")
+axis(side = 1, at = c(2, 5), tick = T, labels = F)
+
+## R Response #==============================
+r_rda = hort_rdasum %>% 
+  filter(variable == "r")
+r_rda$treatment <- factor(r_rda$treatment, levels = c("low", "int"))
+
+# shape data into matrix 
+matrix_r <- with(r_rda, tapply(response_d, list(treatment, pulse), sum, na.rm = TRUE))
+
+colnames(matrix_r) <- c("Post First Pulse", "Post Second Pulse")
+
+# Create the barplot
+barplot(matrix_r, beside = TRUE, col = c(low_col, int_col), 
+        ylim = c(0, 25),  xaxt = 'n', 
+        xlab = "", ylab = "Days")
+box()
+text(6, 24, 'C', font = 2)
+# get bar positions info 
+axis(side = 1, at = c(2, 5), tick = T, labels = F)
+text(x = 1.5, y = 0, labels = "n.d.", pos = 3, col = "black", cex = 1.5)
+text(x = 2.5, y = 0, labels = "n.d.", pos = 3, col = "black", cex = 1.5)
+text(x = 4.5, y = 0, labels = "n.d.", pos = 3, col = "black", cex = 1.5)
+mtext(side = 3, "R")
+
+# Chlorophyll-a Recovery #======================
+
+# shape data into matrix 
+matrix_chl <- with(chl_rda, tapply(recovery_d, list(treatment, pulse), sum, na.rm = TRUE))
+
+colnames(matrix_chl) <- c("Post First Pulse", "Post Second Pulse")
+
+# Create the barplot
+barplot(matrix_chl, beside = TRUE, col = c(low_col, int_col), 
+        ylim = c(0, 25),  xaxt = 'n', 
+        xlab = "", ylab = "Days")
+box()
+
+# get bar positions info 
+text(x = 5.5, y = 0, labels = "n.d", pos = 3, col = "black", cex = 1.5)
+mtext(side = 2, line = 3, "Time to Recovery")
+mtext(side = 2, line = 1.9, "(Days)") 
+axis(side = 1, at = c(2, 5), tick = T, labels = c("Post 1st Pulse", "Post 2nd Pulse"))
+text(6, 24, 'D', font = 2)
+
+## Gross Primary Production #========================== 
+
+# shape data into matrix 
+matrix_gpp <- with(gpp_rda, tapply(recovery_d, list(treatment, pulse), sum, na.rm = TRUE))
+
+colnames(matrix_gpp) <- c("Post 1st Pulse", "Post 2nd Pulse")
+
+# Create the barplot
+barplot(matrix_gpp, beside = TRUE, col = c(low_col, int_col), 
+        ylim = c(0, 25), xaxt = 'n',
+        xlab = "", ylab = "Days")
+box()
+text(6, 24, 'E', font = 2)
+
+# get bar positions info 
+text(x = 1.4, y = 0, labels = "NA", pos = 3, col = "black", cex = 1.5)
+text(x = 4.4, y = 0, labels = "NA", pos = 3, col = "black", cex = 1.5)
+axis(side = 1, at = c(2, 5), tick = T, labels = c("Post 1st Pulse", "Post 2nd Pulse"))
+
+## Respiration #===============================
+
+
+# shape data into matrix 
+matrix_r <- with(r_rda, tapply(recovery_d, list(treatment, pulse), sum, na.rm = TRUE))
+
+colnames(matrix_r) <- c("Post First Pulse", "Post Second Pulse")
+
+# Create the barplot
+barplot(matrix_r, beside = TRUE, col = c(low_col, int_col), 
+        ylim = c(0, 25), xaxt = 'n',
+        xlab = "", ylab = "Days")
+box()
+text(6, 24, 'F', font = 2)
+
+# get bar positions info 
+text(x = 1.5, y = 0, labels = "NA", pos = 3, col = "black", cex = 1.5)
+text(x = 2.5, y = 0, labels = "NA", pos = 3, col = "black", cex = 1.5)
+text(x = 4.5, y = 0, labels = "NA", pos = 3, col = "black", cex = 1.5)
+axis(side = 1, at = c(2, 5), tick = T, labels = c("Post 1st Pulse", "Post 2nd Pulse"))
+
+legend("topleft", legend = c('low', 'intermediate'), 
+       col = c(low_col, int_col), pch = 15, cex = 1.5, pt.cex = 2, bty = 'n')
+
+# Summary Figure for Response, Recovery Option 1 #===================================
+# Data pulled from: 
+# rda = chlorophyll-a
+# rda2 = GPP 
+# rda3 = Respiration
+# rda4 = NEP 
+hort_rdasum # NA here is no response detected or no recovery detected after response 
+hort_rdasum.filt = hort_rdasum %>% filter(treatment != "high")
+hort_rdasum.filt # no responses detected in high so don't plot 
+
+# ========= PLOTTING COLORS ===== # 
+low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
+low_col_F = rgb(74, 166, 81, max = 255, alpha = 100) #Pond B, Pond F
+low_col = rgb(74, 166, 81, max = 255, alpha = 255) #Pond B, Pond F
+ref_col = rgb(155, 155, 155, max=255, alpha = 100) # Reference
+black_col = rgb(0,0,0, max=255, alpha = 100) # Black
+transparent = rgb(255,255,255, max=255, alpha = 0)
+
+int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
+int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
+int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
+
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
+
+windows(height = 8, width = 7) 
+# Will create plot in whatever file path you set  
+#pdf(file = "C:/Users/tjbut/Box Sync/Butts_Dissertation/Hort Chapter/Figures/Hort_Figure4.pdf", 
+#   height = 4, 
+#    width = 6)
+
+# Set dimensions for figure array # 
+par(mfrow =c(3,3), mar = c(1.5,1.5,1,0.1), oma = c(4,3,1,1))
+par(tcl = -0.25)
+par(mgp = c(2, 0.6, 0))
+
+# Put together 3x3 plot for summary figure # 
+hort_rdasum
+chl.low <- hort_rdasum %>% 
+  filter(treatment == "low") %>% 
+  filter(variable == "chla") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+chl.low
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(chl.low[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(low_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  cex.names = 1.2,
+  xlab = "Days", 
+  xlim = c(0, 45)
+)
+box()
+mtext(side = 2, expression('Chlorophyll-'~italic(a)), line = 1.5)
+text(12.2, 1.55, "Persistence", font = 2, cex = 1.5)
+text(19, 0.35, "Resilience", font = 2, col = "white", cex = 1.5)
+mtext(side = 3, "Low Complexity", line = 0.1)
+text(43, 2.4, "A", font = 2, cex = 1.2)
+#legend("topright", legend = rownames(bar_data), fill = c(low_col, "gray50"))
+
+chl.int <- hort_rdasum %>% 
+  filter(treatment == "int") %>% 
+  filter(variable == "chla") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+chl.int
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(chl.int[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(int_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  cex.names = 1.2,
+  xlab = "Days", 
+  xlim = c(0, 45)
+)
+box()
+text(24, 0.6, "NA", font = 2, col = "gray50", cex = 2)
+mtext(side = 3, "Intermediate", line = 0.1)
+
+#mtext(side = 2, expression('Chlorophyll-'~italic(a)), line = 1.5)
+text(43, 2.4, "B", font = 2, cex = 1.2)
+
+chl.hi <- hort_rdasum %>% 
+  filter(treatment == "high") %>% 
+  filter(variable == "chla") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+chl.hi
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(chl.hi[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(high_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  cex.names = 1.2,
+  xlab = "Days", 
+  xlim = c(0, 45)
+)
+box()
+text(6, 0.8, "n.d.", font = 2, col = high_col, cex = 2)
+text(6, 2, "n.d.", font = 2, col = high_col, cex = 2)
+mtext(side = 3, "High Complexity")
+
+#mtext(side = 2, expression('Chlorophyll-'~italic(a)), line = 1.5)
+text(43, 2.4, "C", font = 2, cex = 1.2)
+
+## GPP ## 
+gpp.low <- hort_rdasum %>% 
+  filter(treatment == "low") %>% 
+  filter(variable == "gpp") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+gpp.low
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(gpp.low[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(low_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  xlab = "Days", 
+  cex.names = 1.2,
+  xlim = c(0, 45)
+)
+box()
+mtext(side = 2, "GPP", line = 1.5)
+#mtext(side = 1, "Days", line = 1.8)
+#text(23.5, 0.6, "NA", font = 2, col = "gray50", cex = 2)
+#mtext(side = 3, "Intermediate", line = 0.1)
+text(43, 2.4, "D", font = 2, cex = 1.2)
+text(6, 0.8, "n.d.", font = 2, col = low_col, cex = 2)
+text(6, 2, "n.d.", font = 2, col = low_col, cex = 2)
+
+gpp.int <- hort_rdasum %>% 
+  filter(treatment == "int") %>% 
+  filter(variable == "gpp") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+gpp.int
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(gpp.int[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(int_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  xlab = "Days", 
+  cex.names = 1.2,
+  xlim = c(0, 45)
+)
+box()
+
+#text(23.5, 0.6, "NA", font = 2, col = "gray50", cex = 2)
+#mtext(side = 3, "Intermediate", line = 0.1)
+text(43, 2.4, "E", font = 2, cex = 1.2)
+
+gpp.hi <- hort_rdasum %>% 
+  filter(treatment == "high") %>% 
+  filter(variable == "gpp") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+gpp.hi
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(gpp.hi[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(high_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  cex.names = 1.2,
+  xlab = "Days", 
+  xlim = c(0, 45)
+)
+box()
+text(6, 0.8, "n.d.", font = 2, col = high_col, cex = 2)
+text(6, 2, "n.d.", font = 2, col = high_col, cex = 2)
+
+#mtext(side = 2, expression('Chlorophyll-'~italic(a)), line = 1.5)
+text(43, 2.4, "F", font = 2, cex = 1.2)
+
+## R ## 
+r.low <- hort_rdasum %>% 
+  filter(treatment == "low") %>% 
+  filter(variable == "r") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+r.low
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(r.low[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(low_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  cex.names = 1.2,
+  xlab = "Days", 
+  xlim = c(0, 45)
+)
+box()
+mtext(side = 2, "R", line = 1.5)
+mtext(side = 1, "Days", line = 1.8)
+text(6, 0.8, "n.d.", font = 2, col = low_col, cex = 2)
+text(6, 2, "n.d.", font = 2, col = low_col, cex = 2)
+text(43, 2.4, "G", font = 2, cex = 1.2)
+#legend("topright", legend = rownames(bar_data), fill = c(low_col, "gray50"))
+
+r.int <- hort_rdasum %>% 
+  filter(treatment == "int") %>% 
+  filter(variable == "r") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+r.int
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(r.int[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(int_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  cex.names = 1.2,
+  xlab = "Days", 
+  xlim = c(0, 45)
+)
+box()
+
+mtext(side = 1, "Days", line = 1.8)
+text(5, 2, "n.d.", cex = 2, col = int_col, font =2)
+#text(23.5, 0.6, "NA", font = 2, col = "gray50", cex = 2)
+#mtext(side = 3, "Intermediate", line = 0.1)
+text(43, 2.4, "H", font = 2, cex = 1.2)
+
+r.high <- hort_rdasum %>% 
+  filter(treatment == "high") %>% 
+  filter(variable == "r") %>% 
+  mutate(pulse = factor(pulse, levels = c("post_first", "post_second")))
+r.high
+
+# Transpose data for stacking
+bar_data <- t(as.matrix(r.high[, c("response_d", "recovery_d")]))
+rownames(bar_data) <- c("Response", "Recovery")
+bar_data <- bar_data[, c(2,1)]
+
+# Create stacked horizontal bar plot
+barplot(
+  bar_data,
+  horiz = TRUE,
+  beside = FALSE,
+  col = c(high_col, "gray50"),
+  border = NA,
+  names.arg = c("Second Pulse", "First Pulse"),
+  cex.names = 1.2,
+  xlab = "Days", 
+  xlim = c(0, 45)
+)
+box()
+
+mtext(side = 1, "Days", line = 1.8)
+text(5, 2, "n.d.", cex = 2, col = high_col, font =2)
+text(5, 0.8, "n.d.", cex = 2, col = high_col, font =2)
+#text(23.5, 0.6, "NA", font = 2, col = "gray50", cex = 2)
+#mtext(side = 3, "highermediate", line = 0.1)
+text(43, 2.4, "I", font = 2, cex = 1.2)

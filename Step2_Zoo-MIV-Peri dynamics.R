@@ -46,6 +46,21 @@ high_zoop = daily_zp_biomass %>%
     pond_id == 'E' ~ 'reference'))
 high_zoop
 
+# Initial community biomass # 
+check = daily_zp_biomass %>% filter(doy < 176) %>%  mutate(pond_id = case_when(pond_id == "A" ~ 'INTpulse', 
+                                                                               pond_id == "B" ~ 'LOWpulse',
+                                                                               pond_id == "C" ~ 'HIGHpulse',
+                                                                               pond_id == "D" ~ 'INTref', 
+                                                                               pond_id == "E" ~ 'HIGHref',
+                                                                               pond_id == "F" ~ 'LOWref'))
+check
+
+g.check = check %>% 
+  group_by(pond_id) %>% 
+  summarize(mean.b = mean(biomass, na.rm = T), 
+            sd.b = sd(biomass, na.rm = T))
+g.check
+
 # Macroinvertebrate biomass #=======================
 hort_mivdensity
 
@@ -80,6 +95,19 @@ high_miv = daily_miv_density %>%
     pond_id == 'E' ~ 'reference'))
 high_miv
 
+check = daily_miv_density %>% filter(doy < 176) %>%  mutate(pond_id = case_when(pond_id == "A" ~ 'INTpulse', 
+                                                                               pond_id == "B" ~ 'LOWpulse',
+                                                                               pond_id == "C" ~ 'HIGHpulse',
+                                                                               pond_id == "D" ~ 'INTref', 
+                                                                               pond_id == "E" ~ 'HIGHref',
+                                                                               pond_id == "F" ~ 'LOWref'))
+check
+
+g.check = check %>% 
+  group_by(pond_id) %>% 
+  summarize(mean.d = mean(density, na.rm = T), 
+            sd.d = sd(density, na.rm = T))
+g.check
 
 # ========= PLOTTING COLORS ===== # 
 low_col_B = rgb(74, 166, 81, max = 255, alpha = 180) #Pond B, Pond F
@@ -93,9 +121,15 @@ int_col_A = rgb(44, 127, 184, max = 255, alpha = 180) #Pond A, pond D
 int_col_D = rgb(44, 127, 184, max = 255, alpha = 100) #Pond A, pond D
 int_col = rgb(44, 127, 184, max = 255, alpha = 255) #Pond A, pond D
 
-high_col_C = rgb(8, 29, 88, max = 255, alpha = 180) #Pond C, Pond E
-high_col_E = rgb(8, 29, 88, max = 255, alpha = 100) #Pond C, Pond E
-high_col = rgb(8, 29, 88, max = 255, alpha = 255) #Pond C, Pond E
+high_col_C = rgb(75, 31, 110, max = 255, alpha = 180) #Pond C, Pond E
+high_col_E = rgb(75, 31, 110, max = 255, alpha = 100) #Pond C, Pond E
+high_col = rgb(75, 31, 110, max = 255, alpha = 255) #Pond C, Pond E
+
+col=rgb(255,48,48, max=255, alpha=75, names= 'firebrick1') # Extended heat period 
+
+# =============== OTHER DISTURBANCES ========================= # 
+# lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+# rect(185,-2,190,50, col=col, border=NA)
 
 # LOESS regression of zooplankton for pattern - not analysis ##==========================
 # Separate to single pond measurements # 
@@ -140,7 +174,7 @@ axis(side=2,
            log(1),log(2),log(3),log(4),log(5),log(6),log(7),log(8),log(9),log(10),
            log(20),log(30),log(40),log(50),log(60),log(70),log(80),log(90),log(100), 
            log(200),log(300),log(400),log(500),log(600),log(700),log(800)), #Where the tick marks should be drawn
-     labels = c('0.1', '', '', '', '', '', '', '', '', '0.1', '', '', '', '', '', '', '', '',
+     labels = c('0.01', '', '', '', '', '', '', '', '', '0.1', '', '', '', '', '', '', '', '',
                 '1', '', '', '', '', '', '', '', '', 
                 '10', '', '','','','','','','','100','','','','','','','800'),
      las=0, cex.axis=1.2)
@@ -155,10 +189,21 @@ mtext(side = 2, line = 3.2,
 mtext(side = 2, line = 2, 
       expression('Biomass' ~"("*mu*g~L^-1*")"), cex = 11/12)
 text(141, log(800), 'A', font = 2)
+axis(side=2,
+     at=c(log(10), log(800)), #Where the tick marks should be drawn
+     labels = c('10', '800'),
+     las=0, cex.axis=1.2)
+axis(side=2,
+     at=c(log(1)), #Where the tick marks should be drawn
+     labels = c('1'),
+     las=0, cex.axis=1.2)
 
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,log(0.001),190,log(10000), col=col, border=NA)
+
 
 # Intermediate #
 plot(log(zpD$biomass), x=zpD$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
@@ -184,6 +229,8 @@ text(141, log(800), 'B', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,log(0.001),190,log(10000), col=col, border=NA)
 
 # High # 
 plot(log(zpE$biomass), x=zpE$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
@@ -209,6 +256,8 @@ text(141, log(800), 'C', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,log(0.001),190,log(10000), col=col, border=NA)
 
 # MIV # 
 mivB = low_miv %>% #pulse, low 
@@ -233,7 +282,7 @@ axis(side=2,
      at=c(log(300),log(400),log(500),log(600),log(700),log(800), log(900), log(1000),
           log(2000), log(3000), log(4000), log(5000), log(6000), log(7000), log(8000)), #Where the tick marks should be drawn
      labels = c('300','','','','','','','1000', '','','','','','',''),
-     las=0)
+     las=0, cex = 1.2)
 
 par(new=T) # add new smooth to same plot 
 
@@ -245,9 +294,16 @@ mtext(side = 2, line = 1.6,
       expression('Density' ~"("~`#`~m^-2*")"), cex = 11/12)
 text(141, log(8000), 'D', font = 2)
 
+axis(side=2,
+     at=c(log(1000), log(8000)), #Where the tick marks should be drawn
+     labels = c('1000', '8000'),
+     las=0, cex = 1.2)
+
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,log(10),190,log(10000), col=col, border=NA)
 
 # Intermediate #
 plot(log(mivD$density), x=mivD$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
@@ -267,6 +323,8 @@ text(141, log(8000), 'E', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,log(10),190,log(10000), col=col, border=NA)
 
 # High # 
 plot(log(mivE$density), x=mivE$doy, type = 'o', pch = 20, cex=1.5, xlab = '', col.axis = transparent, lwd = 3,
@@ -287,6 +345,8 @@ text(141, log(8000), 'F', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,log(10),190,log(10000), col=col, border=NA)
 
 # Periphyton # 
 hort_periphy
@@ -358,6 +418,8 @@ text(141, 0.4, 'G', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-2,190,1, col=col, border=NA)
 
 # Intermediate #
 plot(periD$biomass_area, x=periD$collect, type = 'o', pch = 20, cex=1.5, xlab = '',  lwd = 3,
@@ -377,6 +439,8 @@ text(141, 0.4, 'H', font = 2)
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
 mtext(side = 1, 'Day of Year, 2020', line = 2)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-2,190,1, col=col, border=NA)
 
 # High # 
 plot(periE$biomass_area, x=periE$collect, type = 'o', pch = 20, cex=1.5, xlab = '', lwd = 3,
@@ -396,3 +460,5 @@ text(141, 0.4, 'I', font = 2)
 #Add in the nutrient pulse dates to the graph
 lines(c(176,176), c(-10,700), lty = 3)
 lines(c(211,211), c(-10,700), lty = 3)
+lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
+rect(185,-2,190,1, col=col, border=NA)
