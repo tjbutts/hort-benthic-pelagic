@@ -218,7 +218,7 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
   lamda.plus = lamda+lamda.sd
   lamda.minus = lamda-lamda.sd
   yrange = range(lamda.plus,lamda.minus,0,1)
-  plot(T.ar,lamda,type='l',lwd=2,col=color,ylim=c(0, 1.2),
+  plot(T.ar,lamda,type='l',lwd=2,col=color,ylim=c(0,1.5),
        xlab='',ylab='', cex=1, cex.axis=1.2, xlim=c(165,245), col.axis = transparent, 
        yaxt = 'n')
   polygon(c(T.ar, rev(T.ar)), c(lamda.plus, rev(lamda.minus)), col=color1, border=NA)
@@ -226,10 +226,10 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
   # points(T.ar,lamda.plus,type='l',lwd=2,lty=2,col=color1)
   # points(T.ar,lamda.minus,type='l',lwd=2,lty=2,col=color)
   abline(h=1,lty=1, lwd = 2)
-  lines(c(176,176), c(-10,100), lwd=2, lty=3, col="gray20") #Pulse1
-  lines(c(211,211), c(-10,100), lwd=2, lty=3, col="gray20") #Pulse2
+  lines(c(176,176), c(-10,700), lwd=2, lty=2, col="gray20") #Pulse1
+  lines(c(211,211), c(-10,700), lwd=2, lty=2, col="gray20") #Pulse2
   box()
-  lines(c(223,223), c(-10,100), lwd=2, lty=2, col='gray20')
+  lines(c(223,223), c(-10,100), lwd=1, lty=3, col='gray20')
   col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
   rect(185,-2,190,15, col=col, border=NA)
   
@@ -331,11 +331,11 @@ nl = 2 # number of lags - vary to see lowest AICc
 delta = 0.9 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
-axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2))
+axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4))
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Eigenvalues, Pulsed', cex = 11/12)
-text(167, 1.2, 'A', font = 2)
+text(167, 1.5, 'A', font = 2)
 mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 Yyhat = ODL.out[[1]]
@@ -366,9 +366,9 @@ nl = 1 # number of lags - vary to see lowest AICc
 delta = 0.90 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
-axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = FALSE)
+axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4), labels = F)
 mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
-text(167, 1.2, 'B', font = 2)
+text(167, 1.5, 'B', font = 2)
 Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
 B.ests = ODL.out[[3]]
@@ -397,9 +397,9 @@ nl = 1 # number of lags - vary to see lowest AICc
 delta = 0.90 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
-axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = FALSE)
+axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4), labels = FALSE)
 mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
-text(167, 1.2, 'C', font = 2)
+text(167, 1.5, 'C', font = 2)
 
 Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
@@ -526,7 +526,7 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
   lamda.plus = lamda+lamda.sd
   lamda.minus = lamda-lamda.sd
   yrange = range(lamda.plus,lamda.minus,0,1)
-  plot(T.ar,lamda,type='l',lwd=2,col=color,ylim=c(0, 1.2),
+  plot(T.ar,lamda,type='l',lwd=2,col=color,ylim=c(0,1.5),
        xlab='',ylab='', cex=1, cex.axis=1.2, xlim=c(165,245), 
        yaxt = 'n')
   polygon(c(T.ar, rev(T.ar)), c(lamda.plus, rev(lamda.minus)), col=color1, border=NA)
@@ -534,10 +534,10 @@ ODLMAR = function(nl,delta,x.full,T.full,title) {
   # points(T.ar,lamda.plus,type='l',lwd=2,lty=2,col=color1)
   # points(T.ar,lamda.minus,type='l',lwd=2,lty=2,col=color)
   abline(h=1,lty=1, lwd = 2)
-  lines(c(176,176), c(-10,100), lwd=2, lty=3, col="gray20") #Pulse1
-  lines(c(211,211), c(-10,100), lwd=2, lty=3, col="gray20") #Pulse2
+  lines(c(176,176), c(-10,700), lwd=2, lty=2, col="gray20") #Pulse1
+  lines(c(211,211), c(-10,100), lwd=2, lty=2, col="gray20") #Pulse2
   box()
-  lines(c(223,223), c(-10,100), lwd=2, lty=2, col='gray20')
+  lines(c(223,223), c(-10,100), lwd=1, lty=3, col='gray20')
   col=rgb(255,48,48, max=255, alpha=125, names= 'firebrick1')
   rect(185,-2,190,15, col=col, border=NA)
   
@@ -569,8 +569,8 @@ ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
 mtext(side = 2, line = 3.2, 
       expression('Chlorophyll-'~italic(a)), cex = 11/12)
 mtext(side = 2, line = 2, 'Eigenvalues, Reference', cex = 11/12)
-axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2))
-text(167, 1.2, 'D', font = 2)
+axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4))
+text(167, 1.5, 'D', font = 2)
 
 Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
@@ -586,8 +586,6 @@ Im(test.eig) # No imaginary
 x.full = as.vector(algD$chla_10_30) 
 T.full = as.vector(algD$doy)
 
-x.full
-
 #title = c('Intermediate AR(1)', line = 1) #Title for the plot
 color= 'black' # this is the color for the eigenvalue line
 color1= 'gray88' #this is the color for the error polygon 
@@ -600,8 +598,8 @@ nl = 1 # number of lags - vary to see lowest AICc
 delta = 0.90 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
-axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = F)
-text(167, 1.2, 'E', font = 2)
+axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4), labels = F)
+text(167, 1.5, 'E', font = 2)
 
 Yyhat = ODL.out[[1]]
 EigenVals = ODL.out[[2]]
@@ -632,8 +630,8 @@ nl = 1 # number of lags - vary to see lowest AICc
 delta = 0.90 # 0<delta<1; see advice in functions
 
 ODL.out = ODLMAR(nl,delta,x.full,T.full,title)
-text(167, 1.2, 'F', font = 2)
-axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2), labels = F)
+text(167, 1.5, 'F', font = 2)
+axis(side = 2, at = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4), labels = F)
 
 
 Yyhat = ODL.out[[1]]

@@ -355,10 +355,10 @@ text(141, 5.8, 'A', font = 2)
 mtext(side = 3, line = 0.1, 'Low Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -371,10 +371,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 3, line = 0.1, 'Intermediate', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -388,11 +388,11 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 3, line = 0.1, 'High Complexity', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,0), lty = 2, lwd = 2)
-lines(c(223,223), c(1.7,20000), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,0), lty = 3, lwd = 1)
+lines(c(223,223), c(1.7,20000), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -412,10 +412,10 @@ mtext(side = 2, line = 3.2, 'GPP', cex = 11/12)
 mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 axis(side = 2, at=c(-2, 0, 2, 4, 6))
 
 #Add in the response and recovery thresholds 
@@ -430,10 +430,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 axis(side = 2, at = c(-2, 0, 2, 4, 6), labels = F)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -447,10 +447,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 axis(side = 2, at=c(-2, 0,2,4,6), labels = F)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -469,10 +469,10 @@ mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 5.8, 'G', font = 2)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -484,10 +484,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent,
      lwd=3, col=int_col, data=rda_int3)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -500,10 +500,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6), col.axis = transparent,
      lwd=3, col=high_col, data=rda_high3)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -522,10 +522,10 @@ mtext(side = 2, line = 2, 'Z-scores', cex = 11/12)
 text(141, 5.8, 'J', font = 2)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -538,10 +538,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
 mtext(side = 1, line = 3, 'Last Day of Year in\n7-day rolling window', cex = 11/12)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -554,10 +554,10 @@ plot(zz~wright, type='l', xlim=c(140,245), ylim=c(-2,6),
      lwd=3, col=high_col, data=rda_high4)
 
 #Add in the nutrient pulse dates to the graph
-lines(c(176,176), c(-10,20000), lty = 3)
-lines(c(211,211), c(-10,20000), lty = 3)
-lines(c(223,223), c(-10,700), lty = 2, lwd = 2)
-rect(185,-5,190,50, col=col, border=NA)
+lines(c(176,176), c(-10,700), lty = 2, lwd = 2)
+lines(c(211,211), c(-10,700), lty = 2, lwd = 2)
+lines(c(223,223), c(-10,700), lty = 3, lwd = 1)
+rect(185,-10,190,50, col=col, border=NA)
 
 #Add in the response and recovery thresholds 
 abline(h=2, lwd=2) 
@@ -1061,3 +1061,4 @@ text(5, 0.8, "n.d.", cex = 2, col = high_col, font =2)
 #text(23.5, 0.6, "NA", font = 2, col = "gray50", cex = 2)
 #mtext(side = 3, "highermediate", line = 0.1)
 text(43, 2.4, "I", font = 2, cex = 1.2)
+
