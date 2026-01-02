@@ -94,7 +94,6 @@ high_zoop
 hort_mivdensity
 
 daily_miv_density = hort_mivdensity %>%
-  filter(gear == 'HS') %>%
   group_by(pond_id, doy) %>%
   summarize(density = sum(density)) %>%
   ungroup()

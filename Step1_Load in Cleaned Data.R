@@ -25,28 +25,36 @@ if (!require(mgcv)) install.packages('mgcv')
 library(mgcv)
 if (!require(here)) install.packages('here')
 library(here)
-# Set working directory to the R Project folder 
+# If EDIutilsAddons requires installation, follow the line of code below # 
+remotes::install_github("bmcafee/EDIutilsAddons") # Install EDIutilsAddons package for easy EDI data download
+library(EDIutilsAddons)
 
-# Data sets # 
+# Data is stored in EDI Data Repository. If using this data cite the Scripts on Zenoda as well as the data: 
+# Butts, T.J., E.A. Albright, Q.K. Shingai, R.A. Johnson, and G.M. Wilkinson. 2026. 
+#   Summer water chemistry, high frequency sensors, zooplankton and benthic macroinvertebrate 
+#   community composition, periphyton, fish, and macrophyte biomass, along with lake metabolism 
+#   and greenhouse gas dynamics in six experimental ponds in central Iowa, USA (2020) ver 1. 
+#   Environmental Data Initiative. https://doi.org/10.6073/pasta/c5b157a1b0f294404627494dfc1587e7 (Accessed 2026-01-02).
 
-# Sonde profile data - average between 10 - 30 cm depth + surface nutrients 
-hort_field = read_csv('surface_nutrients_chla.csv') # same name 
+# Load in EDI Data Sets # 
+hort_field = get_data("edi.2238.1", filenum = 13) # Surface nutrients and algal concentration 
 hort_field
 
-hort_ysi = read_csv('profiles_daily_deepsite.csv') # same name 
+hort_ysi = get_data("edi.2238.1", filenum = 2) # Sonde Profiles 
 hort_ysi
 
 # Load in metabolism data from Robert 
-metab = read_csv('daily-metabolism_data_robertcorrected.csv') %>% # daily_metabolism.csv
-  filter(flag == 0)
-metab  
+metab = get_data("edi.2238.1", filenum = 8) %>% # Ecosystem metabolism 
+  filter(is.na(flag))
+metab
 
 ## Food Web Data ## 
-hort_fish_bodysize = read_csv('fish_length_weight.csv') # fish size | same name 
-hort_fish_gaslav = read_csv('gaslav_clean.csv') # fish diet (gastric lavage) | fish_gaslav.csv
-hort_periphy = read_csv('periphy_clean.csv') # periphyton | periphyton.csv
-hort_zoop = read_csv('hort_zp_clean_72622.csv') # zooplankton | zooplankton_biomass.csv
-hort_mivdensity = read_csv('hort_mivdensity.csv') # macroinvertebrates | macroinvert_density.csv
+hort_fish_bodysize = get_data('edi.2238.1', filenum = 18) # fish size 
+hort_fish_gaslav = get_data('edi.2238.1', filenum = 19) # fish diet (gastric lavage) 
+hort_periphy = get_data('edi.2238.1', filenum = 14) # periphyton 
+hort_zoop = get_data('edi.2238.1', filenum = 17) # zooplankton 
+hort_mivdensity = get_data('edi.2238.1', filenum = 16) # macroinvertebrates 
 
-## Summary Statistics ## 
-hort_rdasum = read_csv('rdalgo_summarystats.csv') # Response Detection Algorithm Summary Stats 
+# The following can be pulled from the data generated in Step 4, however, for convenience it is archived in 
+# the published Zenodo script release for ease. Download from the Zenodo DOI and set working directory to load in this .csv 
+hort_rdasum = read_csv("rdalgo_summarystats.csv")
