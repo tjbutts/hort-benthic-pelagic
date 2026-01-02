@@ -30,23 +30,23 @@ library(here)
 # Data sets # 
 
 # Sonde profile data - average between 10 - 30 cm depth + surface nutrients 
-hort_field = read_csv('surface_nutrients_chla.csv')
+hort_field = read_csv('surface_nutrients_chla.csv') # same name 
 hort_field
 
-hort_ysi = read_csv('profiles_daily_deepsite.csv')
+hort_ysi = read_csv('profiles_daily_deepsite.csv') # same name 
 hort_ysi
 
 # Load in metabolism data from Robert 
-metab = read_csv('daily-metabolism_data_robertcorrected.csv') %>% 
+metab = read_csv('daily-metabolism_data_robertcorrected.csv') %>% # daily_metabolism.csv
   filter(flag == 0)
 metab  
 
 ## Food Web Data ## 
-hort_fish_bodysize = read_csv('fish_length_weight.csv') # fish size 
-hort_fish_gaslav = read_csv('gaslav_clean.csv') # fish diet (gastric lavage)
-hort_periphy = read_csv('periphy_clean.csv') # periphyton
-hort_zoop = read_csv('hort_zp_clean_72622.csv') # zooplankton 
-hort_mivdensity = read_csv('hort_mivdensity.csv') # macroinvertebrates 
+hort_fish_bodysize = read_csv('fish_length_weight.csv') # fish size | same name 
+hort_fish_gaslav = read_csv('gaslav_clean.csv') # fish diet (gastric lavage) | fish_gaslav.csv
+hort_periphy = read_csv('periphy_clean.csv') # periphyton | periphyton.csv
+hort_zoop = read_csv('hort_zp_clean_72622.csv') # zooplankton | zooplankton_biomass.csv
+hort_mivdensity = read_csv('hort_mivdensity.csv') # macroinvertebrates | macroinvert_density.csv
 
 ## Summary Statistics ## 
 hort_rdasum = read_csv('rdalgo_summarystats.csv') # Response Detection Algorithm Summary Stats 
