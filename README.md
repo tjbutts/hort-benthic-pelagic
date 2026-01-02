@@ -1,18 +1,18 @@
-# carp-foodweb-change: Scripts designed to analyze data and generate figures for the manuscript "Investigating changes to food web structure after fish removal using size spectra analysis"
+ hort-benthic-pelagic: Scripts designed to analyze data and generate figures for the manuscript "Food web complexity alters phytoplankton persistence and resilience to nutrient pulses in experimental ecosystems"
 
 #### Authors:          Tyler J. Butts
 #### Point of contact: Tyler J. Butts (tyler.james.butts@gmail.com)
 #### Repository Type:  Formal _R_ language 
-#### Year of Origin:   2025 (original publication)
-#### Year of Version:  2025
+#### Year of Origin:   2026 (original publication)
+#### Year of Version:  2026
 #### Version:          1.0.0 
 
 ***
 
 _Suggested Citation:_
 
-Butts, T.J., 2025, 
-tjbutts/carp-foodweb-change: Investigating changes to food web structure after fish removal using size spectra analysis (v1.0.0)
+Butts, T.J., 2026, 
+tjbutts/hort-benthic-pelagic: Food web complexity alters phytoplankton persistence and resilience to nutrient pulses in experimental ecosystems (v1.0.0)
 Zenodo
 
 _Authors' [ORCID](https://orcid.org) nos.:_
@@ -22,15 +22,26 @@ _Authors' [ORCID](https://orcid.org) nos.:_
 ***
 ***
 
-`carp-foodweb-change` is an series of `R` scripts (R Core Team 2022) providing analyses, 
-figures, and tables for the manuscript "Investigating changes to food web structure after fish removal using size spectra analysis"
-published in Ecosphere 
+`hort-benthic-pelagic` is an series of `R` scripts (R Core Team 2022, version 4.4.3 "Trophy Case") providing analyses, 
+figures, and tables for the manuscript "Food web complexity alters phytoplankton persistence and resilience to nutrient pulses in experimental ecosystems"
+published in Limnology and Oceanography
 
 The purpose of the package is to recreate figures and tables presented in the main text 
-and appendix of the manuscript "Investigating changes to food web structure after fish removal using size spectra analysis"
+and appendix of the manuscript "Food web complexity alters phytoplankton persistence and resilience to nutrient pulses in experimental ecosystems"
 Data is pulled in the scripts from the Environmental Data Initiative where data is archived. 
 
-If there are any issues please contact the author, Tyler Butts (tyler.james.butts@gmail.com) with the subject line 'carp-foodweb-change issue - please help'. Thank you! 
+If there are any issues please contact the author, Tyler Butts (tyler.james.butts@gmail.com) with the subject line 'hort-benthic-pelagic issue - please help'. Thank you! 
+
+***
+***
+
+# Project Summary 
+Food webs have long been recognized as influential in shaping ecosystem responses to disturbance. Yet, our empirical understanding of the relationship between food web structure and ecosystem response to disturbances remains underdeveloped. Improving our understanding is crucial, particularly as pulse disturbances are predicted to increase in frequency and intensity as global climate change accelerates. We quantified differences in the persistence (the number of days it took to deviate significantly from reference conditions) and resilience (the number of days it took to return to baseline conditions) of primary production in response to discrete disturbances (i.e., pulse additions of nutrients) among three food web structures in shallow ponds. We demonstrate greater food web complexity confers greater persistence and resilience of phytoplankton to repeated pulses of nutrient loading using food webs common to many shallow lakes significantly advancing shallow lake and food web ecology.
+
+In aquatic ecosystems, greater food web complexity is theorized to increase persistence and resilience of primary production to pulse disturbances, yet experimental evidence is limited. We simulated two storm-induced pulse disturbances by adding nutrients (~3 to 5% increase in ambient concentrations) to three ponds with low, intermediate, and high food web complexity and compared to reference ponds. We evaluated the ecological stability of primary production by quantifying persistence as the number of days it took chlorophyll-a or ecosystem metabolism to deviate significantly from reference conditions and resilience as the time to recover to reference conditions (resilience) following each disturbance. We also evaluated if a critical transition occurred following the disturbance. The high complexity pond did not significantly deviate from reference conditions following either nutrient pulse suggesting high ecological stability. The intermediate complexity pond had lower stability, with persistence relatively consistent at 18 and 24 days after each nutrient pulse, and resilience trending towards a substantial increase from 23 days to less than a week before the experiment concluded. Stability was lowest in the low complexity pond where persistence decreased from 24 days to just eight days and resilience decreased from five to 22 days. There was also evidence of a critical transition after the first pulse in the low complexity pond, but not for higher complexity ponds. This experiment provides strong support that food web connectivity and food chain length can aid in buffering aquatic ecosystems against increasing and intensifying by influencing persistence and resilience to repeated nutrient pulses.  
+
+***
+***
 
 # Repository Files
 This repository contains
@@ -39,44 +50,40 @@ the following files:
 - `README.md` is this file.
 - `.gitignore` is a file telling git which files to not track  
 - `.git` is a folder generated by git connecting the R project file to GitHub 
-- `Step1_Size Spectra Analysis` describes generating the Ordinary Least Squares size spectra 
-	- Figure 2 - Example size spectra 
-	- Figure S5 - Plots of size spectra fits for each lake and year 
-	- Figure S11 - Plots of size spectra fits for each lake and year only using summer zooplankton data (July - August)
-	- Table S3 - Slopes of size spectra fits and Adjusted slopes using fits for only summer zooplankton data 
-	- Table S4 - Minimum and Maximum size bins for the size spectra analysis 
-- `Step2_Slope-Height Analyses` describes a series of analyses investigating changes in slope and height with a variety of parameters 
-	- Figure 3 - Plot of size spectra slope and height changes by lake and year 
-	- Figure 4 - Size spectra slope and height changes with fish harvest 
-	- Figure S6 - Correlation analysis confirming the independence of slope and height 
-	- Figure S7 -  Size spectra slope and height changes with cumulative fish harvest in lakes 
-	- Table 2 -  Summary statistics of ANCOVA analysis 
-	- Table S8 - Summary statistics of ANCOVA model contrasts 
-	- Table S9 - Summary statistics of weighted regression of height
-	- Table S10 - Model information for slope and height v. total cumulative harvest 
-- `Step3_Zooplankton Community Composition` describes generating stacked bar plots for zooplankton biomass and percent biomass for each lake and year 
-	- Figure 5 - Zooplankton community composition 
-	- Figure S8 - Zooplankton community expressed as a percentage 
-- `Step4_Macroinvertebrate Community Composition` describes generating stacked bar plots for macroinvertebrate biomass and percent biomass for each lake and year 
-	- Figure 6 - Macroinvertebrate community composition 
-	- Figure S9 - Macroinvertebrate community composition expressed as a percentage 
-- `Step5_PERMANOVA Analysis` describes a permanova analysis of zooplankton community composition across years within lakes 
-	- Table S11 - PERMANOVA analysis for zooplankton 
-	- Table S12 - Summary statistics for pairwise zooplankton 
-- `Step6_MLE estimations of size spectra` describes maximum likelihood methods for fitting size spectra 
-	- Figure S3 - Maximum Likelihood Estimation slope fits 
-	- Figure S4 - Ordinary Least Squares Regression v. Maximum Likelihood Estimation slopes 
-- `Step7_Other Supplemental Figures` describes remaining supplemental figures present in the manuscript 
-	- Figure S1 - Schnabel estimates of common carp and bigmouth buffalo over time and lake 
-	- Figure S10 - Comparing chlorophyll-a concentrations with size spectra height 
+- `Step1_Load in Cleaned Data` describes loading in the necessary datasets from the EDI Data Repository 
+
+- `Step2_Zoo-MIV-Peri dynamics` Plots zooplankton, macroinvertebrate, and periphyton biomass over time in each experimental pond 
+	- Figure 2 - Time series of zooplankton, macroinvertebrate, and periphyton biomass 
+
+- `Step3_Primary Production Dynamics` Plots dynamics of chlorophyll-a, gross primary production, respiration, and net ecosystem production in each experimental pond 
+	- Figure 3 - Time series of chlorophyll-a, gross primary production, respiration, and net ecosystem production in each experimental pond  
+
+- `Step4_Response Detection Algorithm` Uses a Response Detection Algorithm to quantify significant response and recovery of state variables between pulsed and reference paired experimental ponds 
+	- Figure 4 - Time series of Z-scores used to determine significant response and recovery from nutrient pulses in experimental ponds 
+
+- `Step5_ODLM` Uses Online Dynamic Linear Modeling to determine whether a critical transition occurred within the chlorophyll-a time series in each pond  
+	- Figure 5 - DLM modeling of chlorophyll-a in each experimental pond 
+
+- `Step6_Summarize Nutrients` Scripts to summarize nutrient concentration data  
+	- Table 1 - Mean concentrations of nutrients prior to the first nutrient pulse and over the course of the whole experiment (partially, added fish biomass is also included in Table 1)
+- `Step7_Supplemental` describes remaining supplemental figures present in the manuscript 
+	- Table S2 - AICc of online dynamic linear models 
+    - Table S3 - Number of individuals identified in stomach contents of fishes following the experiment 
+    - Table S4 - Summary data of Response Detection Algorithm results using different rolling windows 
+    - Figure S1 - Boxplot summaries of zooplankton, macroinvertebrate, and periphyton data 
+    - Figure S2 - nMDS plots of zooplankton community composition averaged before the first nutrient pulse or after the second nutrient pulse 
+    - Figure S3 - Time series nutrient dyanmics in each experimental pond 
+    - Figure S4 - Visual summary plot of the Response Detection Algorithm plots 
+    - Figure S5, 6, 7 - Plots of Response Detection Algorithm at different rolling windows (5 -6) or main figure RDA plot but with full y-axis dimensions for every panel  
 	
 - `.gitignore` is a file telling git which files to not track.
 - `.Rbuildignore` is a file telling R what files to exclude.
 
 # Acknowledgments
 
-This research was funded by the Iowa Department of Natural Resources and 
-the National Science Foundation Graduate Research Fellowship Program 
+This research was funded by the Iowa Water Center,
+the National Science Foundation Graduate Research Fellowship Program,
+and the National Science Foundation CAREER Grant  
 
 # References
 
